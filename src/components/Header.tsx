@@ -1,7 +1,12 @@
 import { BookOpen, ChevronDown } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-const Header = () => {
+
+interface HeaderProps {
+  onLogout?: () => void;
+}
+
+const Header = ({ onLogout }: HeaderProps) => {
   return <header className="h-16 bg-card border-b border-border flex items-center justify-between px-6 sticky top-0 z-50 shadow-sm">
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
@@ -31,7 +36,10 @@ const Header = () => {
           <DropdownMenuItem className="cursor-pointer hover:bg-muted">Profile Settings</DropdownMenuItem>
           <DropdownMenuItem className="cursor-pointer hover:bg-muted">Preferences</DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem className="cursor-pointer hover:bg-muted text-destructive">
+          <DropdownMenuItem 
+            className="cursor-pointer hover:bg-muted text-destructive"
+            onClick={onLogout}
+          >
             Logout
           </DropdownMenuItem>
         </DropdownMenuContent>

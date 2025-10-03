@@ -44,6 +44,11 @@ const TeacherDashboard = () => {
     }
   }, [navigate]);
 
+  const handleLogout = () => {
+    localStorage.removeItem("userRole");
+    navigate("/");
+  };
+
   if (selectedSubject) {
     const subject = subjects.find((s) => s.id === selectedSubject);
     return (
@@ -56,7 +61,7 @@ const TeacherDashboard = () => {
 
   return (
     <div className="h-screen flex flex-col bg-background">
-      <Header />
+      <Header onLogout={handleLogout} />
 
       <div className="flex flex-1 overflow-hidden">
         <Sidebar activeMenu={activeMenu} onMenuChange={setActiveMenu} />
