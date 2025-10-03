@@ -1,11 +1,11 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { LoginForm } from "@/components/LoginForm";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="flex min-h-screen items-center justify-center bg-gradient-subtle p-4">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
+      <div className="relative">
+        <LoginForm />
       </div>
     </div>
   );
