@@ -4,9 +4,10 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 
 interface HeaderProps {
   onLogout?: () => void;
+  role?: "teacher" | "student";
 }
 
-const Header = ({ onLogout }: HeaderProps) => {
+const Header = ({ onLogout, role = "teacher" }: HeaderProps) => {
   return <header className="h-16 bg-card border-b border-border flex items-center justify-between px-6 sticky top-0 z-50 shadow-sm">
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
@@ -14,7 +15,7 @@ const Header = ({ onLogout }: HeaderProps) => {
         </div>
         <div>
           <h1 className="text-xl font-bold text-foreground">Ignite</h1>
-          <p className="text-xs text-muted-foreground">Teacher Portal</p>
+          <p className="text-xs text-muted-foreground">{role === "teacher" ? "Teacher" : "Student"} Portal</p>
         </div>
       </div>
 

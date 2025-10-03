@@ -61,7 +61,7 @@ const StudentDashboard = () => {
 
   return (
     <div className="h-screen flex flex-col bg-background">
-      <Header onLogout={handleLogout} />
+      <Header onLogout={handleLogout} role="student" />
 
       <div className="flex flex-1 overflow-hidden">
         <Sidebar activeMenu={activeMenu} onMenuChange={setActiveMenu} />
