@@ -55,7 +55,7 @@ const Login = () => {
               <BookOpen className="h-10 w-10 text-primary" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-foreground">Welcome Back</h1>
+          <h1 className="text-3xl font-bold text-foreground">Login to Ignite</h1>
           <p className="text-muted-foreground">
             Sign in to access your dashboard
           </p>
