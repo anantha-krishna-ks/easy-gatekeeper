@@ -46,7 +46,7 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="h-screen flex flex-col bg-background">
       <Header />
 
       <div className="flex flex-1 overflow-hidden">
