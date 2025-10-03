@@ -27,7 +27,7 @@ const Header = ({ onLogout, role = "teacher" }: HeaderProps) => {
           </Avatar>
           <div className="text-left hidden md:block">
             <p className="text-sm font-medium text-foreground">Ms. Sarah Johnson</p>
-            <p className="text-xs text-muted-foreground">Mathematics Teacher</p>
+            <p className="text-xs text-muted-foreground">Class 6</p>
           </div>
           <ChevronDown className="w-4 h-4 text-muted-foreground" />
         </DropdownMenuTrigger>
