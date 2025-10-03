@@ -135,13 +135,13 @@ const StudentDashboard = () => {
             </div>
           )}
 
-          {activeMenu === "lesson-plans" && (
+          {activeMenu === "learning-resources" && (
             <div className="p-8">
               <h2 className="text-3xl font-bold text-foreground mb-4">
-                Study Materials
+                Learning Resources
               </h2>
               <p className="text-muted-foreground">
-                Access study materials and lesson notes.
+                Access study materials and learning resources.
               </p>
             </div>
           )}

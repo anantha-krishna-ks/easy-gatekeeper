@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FileText, ClipboardList, BookOpen, ChevronLeft } from "lucide-react";
+import { FileText, ClipboardList, BookOpen, ChevronLeft, LayoutDashboard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -9,10 +9,10 @@ interface SidebarProps {
 }
 
 const menuItems = [
-  { id: "dashboard", label: "Dashboard", icon: BookOpen },
-  { id: "reports", label: "Reports", icon: FileText },
+  { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { id: "learning-resources", label: "Learning Resources", icon: BookOpen },
   { id: "assessments", label: "Assessments", icon: ClipboardList },
-  { id: "lesson-plans", label: "Lesson Plans", icon: BookOpen },
+  { id: "reports", label: "Reports", icon: FileText },
 ];
 
 const Sidebar = ({ activeMenu, onMenuChange }: SidebarProps) => {
