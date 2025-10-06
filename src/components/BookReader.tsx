@@ -362,7 +362,7 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
           <div className="w-96 bg-card border-l border-border overflow-y-auto">
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-bold text-foreground">Learning Resources</h3>
+                <h3 className="text-lg font-bold text-foreground">Resources</h3>
                 <Button
                   variant="ghost"
                   size="icon"
@@ -372,48 +372,84 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
                 </Button>
               </div>
 
-              <div className="mb-4">
-                <label className="text-sm font-medium text-foreground mb-2 block">
-                  Filter by Chapter
-                </label>
-                <Select value={selectedChapter} onValueChange={setSelectedChapter}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select chapter" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Chapters</SelectItem>
-                    <SelectItem value="1">Chapter 1</SelectItem>
-                    <SelectItem value="2">Chapter 2</SelectItem>
-                    <SelectItem value="3">Chapter 3</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              <div className="space-y-3">
-                {filteredResources.map((resource) => (
-                  <Card
-                    key={resource.id}
-                    className="cursor-pointer hover:shadow-md hover:border-primary transition-all"
-                    onClick={() => setSelectedResource(resource)}
-                  >
-                    <CardContent className="p-4 flex items-center gap-3">
-                      {resource.type === "video" ? (
-                        <Video className="w-5 h-5 text-primary" />
-                      ) : (
-                        <FileText className="w-5 h-5 text-secondary" />
-                      )}
-                      <div>
-                        <p className="font-medium text-foreground text-sm">
-                          {resource.title}
-                        </p>
-                        <p className="text-xs text-muted-foreground">
-                          Click to preview
-                        </p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+              <Tabs defaultValue="worksheets" className="mt-4">
+                <TabsList className="grid w-full grid-cols-2 bg-muted">
+                  <TabsTrigger value="worksheets">Worksheets</TabsTrigger>
+                  <TabsTrigger value="answer-keys">Answer Keys</TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="worksheets" className="mt-4">
+                  <Accordion type="single" collapsible className="w-full">
+                    {chapters.map((chapter) => {
+                      const chapterWorksheets = mockWorksheets.filter(
+                        (w) => w.chapterId === chapter.id
+                      );
+                      if (chapterWorksheets.length === 0) return null;
+                      return (
+                        <AccordionItem key={chapter.id} value={`chapter-${chapter.id}`}>
+                          <AccordionTrigger className="text-sm hover:no-underline">
+                            Ch{chapter.id}: {chapter.name}
+                          </AccordionTrigger>
+                          <AccordionContent>
+                            <div className="space-y-2">
+                              {chapterWorksheets.map((worksheet) => (
+                                <div
+                                  key={worksheet.id}
+                                  onClick={() =>
+                                    setSelectedResource({ ...worksheet, type: "pdf" })
+                                  }
+                                  className="p-3 rounded-lg hover:bg-muted cursor-pointer transition-colors border border-border flex items-center gap-2"
+                                >
+                                  <FileText className="w-4 h-4 text-primary" />
+                                  <p className="text-sm text-foreground">
+                                    {worksheet.title}
+                                  </p>
+                                </div>
+                              ))}
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
+                      );
+                    })}
+                  </Accordion>
+                </TabsContent>
+
+                <TabsContent value="answer-keys" className="mt-4">
+                  <Accordion type="single" collapsible className="w-full">
+                    {chapters.map((chapter) => {
+                      const chapterAnswerKeys = mockAnswerKeys.filter(
+                        (a) => a.chapterId === chapter.id
+                      );
+                      if (chapterAnswerKeys.length === 0) return null;
+                      return (
+                        <AccordionItem key={chapter.id} value={`chapter-${chapter.id}`}>
+                          <AccordionTrigger className="text-sm hover:no-underline">
+                            Ch{chapter.id}: {chapter.name}
+                          </AccordionTrigger>
+                          <AccordionContent>
+                            <div className="space-y-2">
+                              {chapterAnswerKeys.map((answerKey) => (
+                                <div
+                                  key={answerKey.id}
+                                  onClick={() =>
+                                    setSelectedResource({ ...answerKey, type: "pdf" })
+                                  }
+                                  className="p-3 rounded-lg hover:bg-muted cursor-pointer transition-colors border border-border flex items-center gap-2"
+                                >
+                                  <FileText className="w-4 h-4 text-primary" />
+                                  <p className="text-sm text-foreground">
+                                    {answerKey.title}
+                                  </p>
+                                </div>
+                              ))}
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
+                      );
+                    })}
+                  </Accordion>
+                </TabsContent>
+              </Tabs>
             </div>
           </div>
         )}
