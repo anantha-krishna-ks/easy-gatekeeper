@@ -14,6 +14,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import scienceImg from "@/assets/science-subject.png";
 import mathImg from "@/assets/mathematics-subject.png";
 import englishImg from "@/assets/english-subject.png";
@@ -55,6 +61,8 @@ const TeacherDashboard = () => {
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
   const [assessmentClass, setAssessmentClass] = useState("class-1");
   const [assessmentSubject, setAssessmentSubject] = useState("english");
+  const [lessonPlanDialog, setLessonPlanDialog] = useState(false);
+  const [selectedLessonPlan, setSelectedLessonPlan] = useState<{ subject: string; number: string } | null>(null);
 
   useEffect(() => {
     const userRole = localStorage.getItem("userRole");
@@ -323,7 +331,14 @@ const TeacherDashboard = () => {
                             <span className="font-medium text-foreground">
                               {subject.title} - Lesson Plan 1.{num}
                             </span>
-                            <Button size="sm" variant="outline">
+                            <Button 
+                              size="sm" 
+                              variant="outline"
+                              onClick={() => {
+                                setSelectedLessonPlan({ subject: subject.title, number: `1.${num}` });
+                                setLessonPlanDialog(true);
+                              }}
+                            >
                               Preview
                             </Button>
                           </div>
@@ -337,6 +352,71 @@ const TeacherDashboard = () => {
           )}
         </main>
       </div>
+
+      {/* Lesson Plan Preview Dialog */}
+      <Dialog open={lessonPlanDialog} onOpenChange={setLessonPlanDialog}>
+        <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl">
+              {selectedLessonPlan?.subject} - Lesson Plan {selectedLessonPlan?.number}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-6 py-4">
+            <div>
+              <h3 className="font-semibold text-lg mb-2">Objective</h3>
+              <p className="text-muted-foreground">
+                Students will be able to understand and apply key concepts related to {selectedLessonPlan?.subject}.
+              </p>
+            </div>
+            
+            <div>
+              <h3 className="font-semibold text-lg mb-2">Duration</h3>
+              <p className="text-muted-foreground">45 minutes</p>
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-lg mb-2">Materials Needed</h3>
+              <ul className="list-disc list-inside text-muted-foreground space-y-1">
+                <li>Textbook</li>
+                <li>Worksheets</li>
+                <li>Whiteboard and markers</li>
+                <li>Interactive activities</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-lg mb-2">Lesson Flow</h3>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-medium mb-1">Introduction (10 minutes)</h4>
+                  <p className="text-muted-foreground">
+                    Begin with a warm-up activity to engage students and introduce the topic.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-medium mb-1">Main Activity (25 minutes)</h4>
+                  <p className="text-muted-foreground">
+                    Interactive lesson with examples, guided practice, and student participation.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-medium mb-1">Conclusion (10 minutes)</h4>
+                  <p className="text-muted-foreground">
+                    Review key concepts, answer questions, and assign homework.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="font-semibold text-lg mb-2">Assessment</h3>
+              <p className="text-muted-foreground">
+                Monitor student participation and understanding through questioning and observation.
+              </p>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
