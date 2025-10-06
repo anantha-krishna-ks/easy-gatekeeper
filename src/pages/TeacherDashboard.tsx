@@ -251,12 +251,68 @@ const TeacherDashboard = () => {
 
           {activeMenu === "lesson-plans" && (
             <div className="p-8">
-              <h2 className="text-3xl font-bold text-foreground mb-4">
+              <h2 className="text-3xl font-bold text-foreground mb-6">
                 Lesson Plans
               </h2>
-              <p className="text-muted-foreground">
-                Access and organize your lesson plans.
-              </p>
+
+              {/* Class Dropdown */}
+              <div className="w-48 mb-8">
+                <label className="text-sm font-medium text-foreground mb-2 block">
+                  Class
+                </label>
+                <Select value={selectedClass} onValueChange={setSelectedClass}>
+                  <SelectTrigger className="bg-card border-border">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="bg-popover border-border">
+                    {classes.map((cls) => (
+                      <SelectItem key={cls.id} value={cls.id}>
+                        {cls.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Total Lesson Plans Widget */}
+              <Card className="mb-8 max-w-sm">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">Total Lesson Plans</CardTitle>
+                  <FileText className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">16</div>
+                  <p className="text-xs text-muted-foreground">Available for {classes.find((c) => c.id === selectedClass)?.name}</p>
+                </CardContent>
+              </Card>
+
+              {/* Lesson Plans List */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Lesson Plans</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {subjects.map((subject) => (
+                      <>
+                        {[1, 2, 3, 4].map((num) => (
+                          <div
+                            key={`${subject.id}-${num}`}
+                            className="flex items-center justify-between p-4 rounded-lg border border-border hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors"
+                          >
+                            <span className="font-medium text-foreground">
+                              {subject.title} - Lesson Plan 1.{num}
+                            </span>
+                            <Button size="sm" variant="outline">
+                              Preview
+                            </Button>
+                          </div>
+                        ))}
+                      </>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           )}
         </main>
