@@ -1,4 +1,5 @@
 import { BookOpen, ChevronDown } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
@@ -8,6 +9,8 @@ interface HeaderProps {
 }
 
 const Header = ({ onLogout, role = "teacher" }: HeaderProps) => {
+  const navigate = useNavigate();
+  
   return <header className="h-16 bg-card border-b border-border flex items-center justify-between px-6 sticky top-0 z-50 shadow-sm">
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
@@ -34,7 +37,12 @@ const Header = ({ onLogout, role = "teacher" }: HeaderProps) => {
         <DropdownMenuContent align="end" className="w-56 bg-popover border-border">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem className="cursor-pointer hover:bg-muted">Profile Settings</DropdownMenuItem>
+          <DropdownMenuItem 
+            className="cursor-pointer hover:bg-muted"
+            onClick={() => navigate("/profile-settings")}
+          >
+            Profile Settings
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem 
             className="cursor-pointer hover:bg-muted text-destructive"
