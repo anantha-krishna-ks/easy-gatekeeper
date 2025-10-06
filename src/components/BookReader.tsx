@@ -1,11 +1,17 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, X, FileText, Video, BookOpen } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, FileText, Video, BookOpen, ZoomIn, ZoomOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import ResourceViewer from "./ResourceViewer";
+import { Document, Page, pdfjs } from 'react-pdf';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import 'react-pdf/dist/esm/Page/TextLayer.css';
+
+// Set up the worker for react-pdf
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 interface BookReaderProps {
   subject: string;
@@ -117,12 +123,18 @@ const mockAssessments = [
 ];
 
 const BookReader = ({ subject, onClose }: BookReaderProps) => {
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [numPages, setNumPages] = useState<number>(0);
+  const [scale, setScale] = useState(1.2);
   const [selectedResource, setSelectedResource] = useState<any>(null);
   const [showResources, setShowResources] = useState(false);
   const [showLessonPlans, setShowLessonPlans] = useState(false);
   const [selectedChapter, setSelectedChapter] = useState<string>("all");
   const [selectedClass, setSelectedClass] = useState<string>("6");
+
+  const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
+    setNumPages(numPages);
+  };
 
   const page = mockPages[currentPage];
 
@@ -247,63 +259,81 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
 
       {/* Body */}
       <div className="flex-1 flex overflow-hidden">
-        {/* Main Content - Book View */}
+        {/* Main Content - PDF View */}
         <div className="flex-1 overflow-y-auto bg-muted/30">
-          <div className="max-w-5xl mx-auto p-12">
-            {/* Book Page Container */}
-            <div className="bg-card shadow-2xl rounded-lg min-h-[600px] p-12 border border-border">
-              {/* Chapter and Title */}
-              <div className="flex items-start gap-8 mb-8">
-                <div className="flex-shrink-0 w-48 border-2 border-primary/20 p-6 rounded-lg bg-primary/5">
-                  <h3 className="text-4xl font-bold text-primary mb-2">
-                    Chapter
-                  </h3>
-                  <div className="text-6xl font-bold text-primary">
-                    {currentPage + 1}
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <h2 className="text-3xl font-bold text-foreground mb-6 border-b-2 border-primary pb-2">
-                    {page.title}
-                  </h2>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="prose prose-lg max-w-none">
-                {renderContentWithAnnotations()}
-              </div>
-
-              {/* Page Number */}
-              <div className="mt-12 pt-6 border-t border-border flex justify-center">
-                <span className="text-sm text-muted-foreground font-medium">
-                  {currentPage + 1}/{mockPages.length}
+          <div className="max-w-6xl mx-auto p-8">
+            {/* PDF Controls */}
+            <div className="flex justify-between items-center mb-6 bg-card p-4 rounded-lg border border-border">
+              <div className="flex items-center gap-4">
+                <Button
+                  onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                  disabled={currentPage === 1}
+                  size="sm"
+                  variant="outline"
+                  className="flex items-center gap-2"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                  Previous
+                </Button>
+                <span className="text-sm text-foreground font-medium">
+                  Page {currentPage} of {numPages}
                 </span>
+                <Button
+                  onClick={() => setCurrentPage(Math.min(numPages, currentPage + 1))}
+                  disabled={currentPage === numPages}
+                  size="sm"
+                  variant="outline"
+                  className="flex items-center gap-2"
+                >
+                  Next
+                  <ChevronRight className="w-4 h-4" />
+                </Button>
+              </div>
+              
+              <div className="flex items-center gap-2">
+                <Button
+                  onClick={() => setScale(Math.max(0.5, scale - 0.2))}
+                  size="sm"
+                  variant="outline"
+                >
+                  <ZoomOut className="w-4 h-4" />
+                </Button>
+                <span className="text-sm text-muted-foreground min-w-[60px] text-center">
+                  {Math.round(scale * 100)}%
+                </span>
+                <Button
+                  onClick={() => setScale(Math.min(2, scale + 0.2))}
+                  size="sm"
+                  variant="outline"
+                >
+                  <ZoomIn className="w-4 h-4" />
+                </Button>
               </div>
             </div>
 
-            {/* Navigation */}
-            <div className="flex justify-between items-center mt-8">
-              <Button
-                onClick={() => setCurrentPage(Math.max(0, currentPage - 1))}
-                disabled={currentPage === 0}
-                size="lg"
-                className="flex items-center gap-2"
-              >
-                <ChevronLeft className="w-5 h-5" />
-                Previous Page
-              </Button>
-              <Button
-                onClick={() =>
-                  setCurrentPage(Math.min(mockPages.length - 1, currentPage + 1))
+            {/* PDF Document */}
+            <div className="bg-card shadow-2xl rounded-lg border border-border p-8 flex justify-center">
+              <Document
+                file="/english-grade1-chapter.pdf"
+                onLoadSuccess={onDocumentLoadSuccess}
+                loading={
+                  <div className="flex items-center justify-center min-h-[600px]">
+                    <div className="text-muted-foreground">Loading PDF...</div>
+                  </div>
                 }
-                disabled={currentPage === mockPages.length - 1}
-                size="lg"
-                className="flex items-center gap-2"
+                error={
+                  <div className="flex items-center justify-center min-h-[600px]">
+                    <div className="text-destructive">Error loading PDF. Please try again.</div>
+                  </div>
+                }
               >
-                Next Page
-                <ChevronRight className="w-5 h-5" />
-              </Button>
+                <Page 
+                  pageNumber={currentPage} 
+                  scale={scale}
+                  renderTextLayer={true}
+                  renderAnnotationLayer={true}
+                />
+              </Document>
             </div>
           </div>
         </div>
