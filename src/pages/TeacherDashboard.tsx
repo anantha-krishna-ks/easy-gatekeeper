@@ -242,10 +242,10 @@ const TeacherDashboard = () => {
                     {activities.map((activity) => (
                       <div
                         key={activity.id}
-                        className="flex items-center justify-between p-4 rounded-lg border border-border hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors"
+                        className="group flex items-center justify-between p-5 rounded-xl bg-gradient-to-r from-background via-background to-muted/20 border border-border shadow-lg hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:scale-[1.02] hover:border-primary/50"
                       >
-                        <span className="font-medium text-foreground">{activity.name}</span>
-                        <Button size="sm" variant="outline">
+                        <span className="font-medium text-foreground group-hover:text-primary transition-colors">{activity.name}</span>
+                        <Button size="sm" variant="outline" className="shadow-md hover:shadow-lg transition-shadow">
                           <Download className="h-4 w-4 mr-2" />
                           Download
                         </Button>
