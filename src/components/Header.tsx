@@ -35,7 +35,6 @@ const Header = ({ onLogout, role = "teacher" }: HeaderProps) => {
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem className="cursor-pointer hover:bg-muted">Profile Settings</DropdownMenuItem>
-          <DropdownMenuItem className="cursor-pointer hover:bg-muted">Preferences</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem 
             className="cursor-pointer hover:bg-muted text-destructive"
