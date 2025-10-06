@@ -6,7 +6,7 @@ import SubjectCard from "@/components/SubjectCard";
 import BookReader from "@/components/BookReader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Download, FileText, Activity, Calculator } from "lucide-react";
+import { Download, FileText, Activity, Calculator, Eye } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -340,6 +340,7 @@ const TeacherDashboard = () => {
                                 setLessonPlanDialog(true);
                               }}
                             >
+                              <Eye className="h-4 w-4 mr-2" />
                               Preview
                             </Button>
                           </div>
