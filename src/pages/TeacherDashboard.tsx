@@ -164,10 +164,10 @@ const TeacherDashboard = () => {
                     Class
                   </label>
                   <Select value={assessmentClass} onValueChange={setAssessmentClass}>
-                    <SelectTrigger>
+                    <SelectTrigger className="bg-white dark:bg-white text-foreground">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-white dark:bg-white">
                       {assessmentClasses.map((cls) => (
                         <SelectItem key={cls.id} value={cls.id}>
                           {cls.name}
@@ -182,10 +182,10 @@ const TeacherDashboard = () => {
                     Subject
                   </label>
                   <Select value={assessmentSubject} onValueChange={setAssessmentSubject}>
-                    <SelectTrigger>
+                    <SelectTrigger className="bg-white dark:bg-white text-foreground">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-white dark:bg-white">
                       {subjects.map((subject) => (
                         <SelectItem key={subject.id} value={subject.id}>
                           {subject.title}
