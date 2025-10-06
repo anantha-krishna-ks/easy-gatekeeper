@@ -87,9 +87,14 @@ const classes = [
 ];
 
 const chapters = [
-  { id: 1, name: "Locating Places on the Earth" },
-  { id: 2, name: "Oceans and Continents" },
-  { id: 3, name: "Landforms and Life" },
+  { id: 1, name: "Fun with Words" },
+  { id: 2, name: "Jo Jo Laali (A jogula)" },
+  { id: 3, name: "Kamala's First Day at School" },
+  { id: 4, name: "Friends" },
+  { id: 5, name: "A Little Clock" },
+  { id: 6, name: "Let's Play Hide-and-Seek!" },
+  { id: 7, name: "Healthy Habits" },
+  { id: 8, name: "Four Seasons" },
 ];
 
 const mockWorksheets = [
@@ -129,7 +134,7 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
   const [selectedResource, setSelectedResource] = useState<any>(null);
   const [showResources, setShowResources] = useState(false);
   const [showLessonPlans, setShowLessonPlans] = useState(false);
-  const [selectedChapter, setSelectedChapter] = useState<string>("all");
+  const [selectedChapter, setSelectedChapter] = useState<string>("1");
   const [selectedClass, setSelectedClass] = useState<string>("6");
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
@@ -225,6 +230,22 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
             <BookOpen className="w-5 h-5" />
             {subject} - Book
           </h2>
+          
+          {/* Chapter Dropdown */}
+          <div className="ml-4">
+            <Select value={selectedChapter} onValueChange={setSelectedChapter}>
+              <SelectTrigger className="w-[280px]">
+                <SelectValue placeholder="Select chapter" />
+              </SelectTrigger>
+              <SelectContent>
+                {chapters.map((chapter) => (
+                  <SelectItem key={chapter.id} value={chapter.id.toString()}>
+                    {chapter.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         </div>
         <div className="flex items-center gap-4">
           <Button
@@ -252,7 +273,7 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
             Lesson Plans & Assessments
           </Button>
           <span className="text-sm text-muted-foreground">
-            {currentPage + 1} / {mockPages.length}
+            {currentPage} / {numPages}
           </span>
         </div>
       </div>
