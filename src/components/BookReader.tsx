@@ -141,12 +141,14 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
     setNumPages(numPages);
   };
 
-  const page = mockPages[currentPage];
+  // Get the page data, using modulo to cycle through mock pages safely
+  const pageIndex = ((currentPage - 1) % mockPages.length);
+  const page = mockPages[pageIndex] || mockPages[0];
 
   // Filter resources based on selected chapter
   const filteredResources = selectedChapter === "all" 
-    ? page.resources 
-    : page.resources.filter(r => r.id === parseInt(selectedChapter));
+    ? (page?.resources || [])
+    : (page?.resources || []).filter(r => r.id === parseInt(selectedChapter));
 
   // Filter lesson plans based on selected chapter
   const filteredLessonPlans = selectedChapter === "all"
