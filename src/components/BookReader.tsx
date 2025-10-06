@@ -269,10 +269,10 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
               setShowResources(false);
             }}
             className="flex items-center gap-2 shrink-0"
-            title="Lesson Plans & Assessments"
+            title="Assessments"
           >
             <FileText className="w-4 h-4" />
-            <span className="hidden lg:inline">Lesson Plans & Assessments</span>
+            <span className="hidden lg:inline">Assessments</span>
           </Button>
           <span className="text-xs md:text-sm text-muted-foreground shrink-0">
             {currentPage} / {numPages}
