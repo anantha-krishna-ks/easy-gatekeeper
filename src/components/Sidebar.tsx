@@ -13,8 +13,8 @@ const menuItems = [
   { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
   { id: "learning-resources", label: "Learning Resources", icon: BookOpen },
   { id: "assessments", label: "Assessments", icon: ClipboardList },
-  { id: "reports", label: "Reports", icon: FileText },
   { id: "lesson-plans", label: "Lesson Plans", icon: BookMarked },
+  { id: "reports", label: "Reports", icon: FileText },
 ];
 
 const Sidebar = ({ activeMenu, onMenuChange, role = "student" }: SidebarProps) => {
