@@ -230,24 +230,22 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
             <BookOpen className="w-5 h-5" />
             {subject} - Book
           </h2>
-          
-          {/* Chapter Dropdown */}
-          <div className="ml-4">
-            <Select value={selectedChapter} onValueChange={setSelectedChapter}>
-              <SelectTrigger className="w-[280px]">
-                <SelectValue placeholder="Select chapter" />
-              </SelectTrigger>
-              <SelectContent>
-                {chapters.map((chapter) => (
-                  <SelectItem key={chapter.id} value={chapter.id.toString()}>
-                    {chapter.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
         </div>
         <div className="flex items-center gap-4">
+          {/* Chapter Dropdown */}
+          <Select value={selectedChapter} onValueChange={setSelectedChapter}>
+            <SelectTrigger className="w-[280px]">
+              <SelectValue placeholder="Select chapter" />
+            </SelectTrigger>
+            <SelectContent>
+              {chapters.map((chapter) => (
+                <SelectItem key={chapter.id} value={chapter.id.toString()}>
+                  {chapter.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          
           <Button
             variant="outline"
             size="sm"
