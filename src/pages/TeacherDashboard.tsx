@@ -24,6 +24,7 @@ import scienceImg from "@/assets/science-subject.png";
 import mathImg from "@/assets/mathematics-subject.png";
 import englishImg from "@/assets/english-subject.png";
 import hindiImg from "@/assets/hindi-subject.png";
+import comingSoonImage from "@/assets/coming-soon.png";
 
 const classes = [
   { id: "class-1", name: "Class 1" },
@@ -143,11 +144,18 @@ const TeacherDashboard = () => {
           )}
 
           {activeMenu === "reports" && (
-            <div className="p-8">
-              <h2 className="text-3xl font-bold text-foreground mb-4">Reports</h2>
-              <p className="text-muted-foreground">
-                View and generate reports for student performance and class analytics.
-              </p>
+            <div className="p-8 flex items-center justify-center min-h-[80vh]">
+              <div className="max-w-2xl text-center">
+                <img 
+                  src={comingSoonImage} 
+                  alt="Coming Soon - Reports feature launching soon" 
+                  className="w-full h-auto mb-8 animate-fade-in"
+                />
+                <h2 className="text-3xl font-bold text-foreground mb-4">Reports Coming Soon</h2>
+                <p className="text-muted-foreground text-lg">
+                  We're working on powerful analytics and reporting features. Stay tuned for student performance insights and class analytics!
+                </p>
+              </div>
             </div>
           )}
 
