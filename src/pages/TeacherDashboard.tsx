@@ -6,7 +6,7 @@ import SubjectCard from "@/components/SubjectCard";
 import BookReader from "@/components/BookReader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Download, FileText, Activity, Calculator, Eye } from "lucide-react";
+import { Download, FileText, Activity, Calculator, Eye, Video, FileIcon, Layers } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -55,6 +55,24 @@ const activities = [
   { id: 5, name: "Activity on Sentence Formation" },
 ];
 
+const chapters = [
+  { id: "chapter-1", name: "Chapter 1" },
+  { id: "chapter-2", name: "Chapter 2" },
+  { id: "chapter-3", name: "Chapter 3" },
+  { id: "chapter-4", name: "Chapter 4" },
+];
+
+const learningResources = [
+  { id: 1, name: "Introduction to Alphabets", type: "video", icon: Video },
+  { id: 2, name: "Grammar Basics PDF", type: "pdf", icon: FileIcon },
+  { id: 3, name: "Phonics Interactive Exercise", type: "interactive", icon: Layers },
+  { id: 4, name: "Reading Comprehension Video", type: "video", icon: Video },
+  { id: 5, name: "Writing Practice Sheet", type: "pdf", icon: FileIcon },
+  { id: 6, name: "Vocabulary Building Game", type: "interactive", icon: Layers },
+  { id: 7, name: "Story Reading Session", type: "video", icon: Video },
+  { id: 8, name: "Grammar Worksheets", type: "pdf", icon: FileIcon },
+];
+
 const TeacherDashboard = () => {
   const navigate = useNavigate();
   const [activeMenu, setActiveMenu] = useState("dashboard");
@@ -62,6 +80,9 @@ const TeacherDashboard = () => {
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
   const [assessmentClass, setAssessmentClass] = useState("class-1");
   const [assessmentSubject, setAssessmentSubject] = useState("english");
+  const [resourceClass, setResourceClass] = useState("class-1");
+  const [resourceSubject, setResourceSubject] = useState("english");
+  const [resourceChapter, setResourceChapter] = useState("chapter-1");
   const [lessonPlanDialog, setLessonPlanDialog] = useState(false);
   const [selectedLessonPlan, setSelectedLessonPlan] = useState<{ subject: string; number: string } | null>(null);
 
@@ -140,6 +161,159 @@ const TeacherDashboard = () => {
                   ))}
                 </div>
               </div>
+            </div>
+          )}
+
+          {activeMenu === "learning-resources" && (
+            <div className="p-4 md:p-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 md:mb-6">
+                Learning Resources
+              </h2>
+
+              {/* Dropdowns */}
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-6 md:mb-8">
+                <div className="w-full sm:w-48">
+                  <label className="text-sm font-medium text-foreground mb-2 block">
+                    Class
+                  </label>
+                  <Select value={resourceClass} onValueChange={setResourceClass}>
+                    <SelectTrigger className="bg-card border-border">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent className="bg-popover border-border">
+                      {classes.map((cls) => (
+                        <SelectItem key={cls.id} value={cls.id}>
+                          {cls.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="w-full sm:w-48">
+                  <label className="text-sm font-medium text-foreground mb-2 block">
+                    Subject
+                  </label>
+                  <Select value={resourceSubject} onValueChange={setResourceSubject}>
+                    <SelectTrigger className="bg-card border-border">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent className="bg-popover border-border">
+                      {subjects.map((subject) => (
+                        <SelectItem key={subject.id} value={subject.id}>
+                          {subject.title}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="w-full sm:w-48">
+                  <label className="text-sm font-medium text-foreground mb-2 block">
+                    Chapter
+                  </label>
+                  <Select value={resourceChapter} onValueChange={setResourceChapter}>
+                    <SelectTrigger className="bg-card border-border">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent className="bg-popover border-border">
+                      {chapters.map((chapter) => (
+                        <SelectItem key={chapter.id} value={chapter.id}>
+                          {chapter.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              {/* Count Widgets */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
+                <Card>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">Videos</CardTitle>
+                    <Video className="h-4 w-4 text-muted-foreground" />
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold">
+                      {learningResources.filter(r => r.type === "video").length}
+                    </div>
+                    <p className="text-xs text-muted-foreground">Video resources</p>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">PDFs</CardTitle>
+                    <FileIcon className="h-4 w-4 text-muted-foreground" />
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold">
+                      {learningResources.filter(r => r.type === "pdf").length}
+                    </div>
+                    <p className="text-xs text-muted-foreground">PDF documents</p>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">Interactivities</CardTitle>
+                    <Layers className="h-4 w-4 text-muted-foreground" />
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold">
+                      {learningResources.filter(r => r.type === "interactive").length}
+                    </div>
+                    <p className="text-xs text-muted-foreground">Interactive exercises</p>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">Total</CardTitle>
+                    <Calculator className="h-4 w-4 text-muted-foreground" />
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold">{learningResources.length}</div>
+                    <p className="text-xs text-muted-foreground">Total resources</p>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Resources List */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Available Resources</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {learningResources.map((resource) => {
+                      const Icon = resource.icon;
+                      return (
+                        <div
+                          key={resource.id}
+                          className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4 md:p-5 rounded-xl bg-gradient-to-r from-background via-background to-muted/20 border border-border shadow-sm hover:shadow-md hover:shadow-primary/5 transition-all duration-300 hover:scale-[1.02] hover:border-primary/50"
+                        >
+                          <div className="flex items-center gap-3">
+                            <Icon className="h-5 w-5 text-primary" />
+                            <span className="font-medium text-foreground group-hover:text-primary transition-colors text-sm md:text-base">
+                              {resource.name}
+                            </span>
+                          </div>
+                          <Button 
+                            size="sm" 
+                            variant="outline" 
+                            className="shadow-sm hover:shadow transition-shadow w-full sm:w-auto"
+                          >
+                            <Eye className="h-4 w-4 mr-2" />
+                            Preview
+                          </Button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           )}
 
