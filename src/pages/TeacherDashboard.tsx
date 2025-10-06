@@ -97,7 +97,7 @@ const TeacherDashboard = () => {
           {activeMenu === "dashboard" && (
             <div className="p-8">
               <div className="mb-8">
-                <h2 className="text-2xl font-light text-foreground tracking-wide mb-2">
+                <h2 className="text-3xl font-bold text-foreground mb-2">
                   Welcome Back, Teacher
                 </h2>
                 <p className="text-muted-foreground">
