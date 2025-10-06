@@ -235,7 +235,7 @@ const TeacherDashboard = () => {
                     {activities.map((activity) => (
                       <div
                         key={activity.id}
-                        className="flex items-center justify-between p-4 rounded-lg border border-border hover:bg-muted/20 transition-colors"
+                        className="flex items-center justify-between p-4 rounded-lg border border-border hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors"
                       >
                         <span className="font-medium text-foreground">{activity.name}</span>
                         <Button size="sm" variant="outline">
