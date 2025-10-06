@@ -64,7 +64,7 @@ const TeacherDashboard = () => {
       <Header onLogout={handleLogout} />
 
       <div className="flex flex-1 overflow-hidden">
-        <Sidebar activeMenu={activeMenu} onMenuChange={setActiveMenu} />
+        <Sidebar activeMenu={activeMenu} onMenuChange={setActiveMenu} role="teacher" />
 
         <main className="flex-1 overflow-y-auto">
           {activeMenu === "dashboard" && (

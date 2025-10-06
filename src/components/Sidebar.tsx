@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 interface SidebarProps {
   activeMenu: string;
   onMenuChange: (menu: string) => void;
+  role?: "student" | "teacher";
 }
 
 const menuItems = [
@@ -16,8 +17,12 @@ const menuItems = [
   { id: "lesson-plans", label: "Lesson Plans", icon: BookMarked },
 ];
 
-const Sidebar = ({ activeMenu, onMenuChange }: SidebarProps) => {
+const Sidebar = ({ activeMenu, onMenuChange, role = "student" }: SidebarProps) => {
   const [collapsed, setCollapsed] = useState(false);
+
+  const filteredMenuItems = role === "teacher" 
+    ? menuItems 
+    : menuItems.filter(item => item.id !== "lesson-plans");
 
   return (
     <aside
@@ -43,7 +48,7 @@ const Sidebar = ({ activeMenu, onMenuChange }: SidebarProps) => {
       </div>
 
       <nav className="flex-1 px-3 space-y-2">
-        {menuItems.map((item) => {
+        {filteredMenuItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeMenu === item.id;
 
