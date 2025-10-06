@@ -255,23 +255,43 @@ const TeacherDashboard = () => {
                 Lesson Plans
               </h2>
 
-              {/* Class Dropdown */}
-              <div className="w-48 mb-8">
-                <label className="text-sm font-medium text-foreground mb-2 block">
-                  Class
-                </label>
-                <Select value={selectedClass} onValueChange={setSelectedClass}>
-                  <SelectTrigger className="bg-card border-border">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent className="bg-popover border-border">
-                    {classes.map((cls) => (
-                      <SelectItem key={cls.id} value={cls.id}>
-                        {cls.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+              {/* Dropdowns */}
+              <div className="flex gap-4 mb-8">
+                <div className="w-48">
+                  <label className="text-sm font-medium text-foreground mb-2 block">
+                    Class
+                  </label>
+                  <Select value={selectedClass} onValueChange={setSelectedClass}>
+                    <SelectTrigger className="bg-card border-border">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent className="bg-popover border-border">
+                      {classes.map((cls) => (
+                        <SelectItem key={cls.id} value={cls.id}>
+                          {cls.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="w-48">
+                  <label className="text-sm font-medium text-foreground mb-2 block">
+                    Subject
+                  </label>
+                  <Select value={assessmentSubject} onValueChange={setAssessmentSubject}>
+                    <SelectTrigger className="bg-card border-border">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent className="bg-popover border-border">
+                      {subjects.map((subject) => (
+                        <SelectItem key={subject.id} value={subject.id}>
+                          {subject.title}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
 
               {/* Total Lesson Plans Widget */}
