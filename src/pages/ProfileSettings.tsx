@@ -13,6 +13,11 @@ const ProfileSettings = () => {
   const navigate = useNavigate();
   const userRole = localStorage.getItem("userRole");
   
+  const handleBack = () => {
+    const dashboardRoute = userRole === "teacher" ? "/teacher-dashboard" : "/student-dashboard";
+    navigate(dashboardRoute);
+  };
+  
   const [formData, setFormData] = useState({
     firstName: "Sarah",
     lastName: "Johnson",
@@ -47,7 +52,7 @@ const ProfileSettings = () => {
         <Button
           variant="ghost"
           size="icon"
-          onClick={() => navigate(-1)}
+          onClick={handleBack}
           className="mr-4"
         >
           <ArrowLeft className="h-5 w-5" />
@@ -243,7 +248,7 @@ const ProfileSettings = () => {
 
         {/* Action Buttons */}
         <div className="flex justify-end gap-4">
-          <Button variant="outline" onClick={() => navigate(-1)}>
+          <Button variant="outline" onClick={handleBack}>
             Cancel
           </Button>
           <Button onClick={handleSave}>
