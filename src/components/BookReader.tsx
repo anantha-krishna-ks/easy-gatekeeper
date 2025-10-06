@@ -216,25 +216,25 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
   return (
     <div className="fixed inset-0 bg-background z-50 flex flex-col">
       {/* Header */}
-      <div className="h-16 bg-card border-b border-border flex items-center justify-between px-6">
-        <div className="flex items-center gap-4">
+      <div className="h-auto md:h-16 bg-card border-b border-border flex flex-col md:flex-row items-start md:items-center justify-between px-4 md:px-6 py-3 md:py-0 gap-3 md:gap-4">
+        <div className="flex items-center gap-2 md:gap-4 w-full md:w-auto">
           <Button
             variant="ghost"
             size="icon"
             onClick={onClose}
-            className="hover:bg-muted"
+            className="hover:bg-muted shrink-0"
           >
             <X className="w-5 h-5" />
           </Button>
-          <h2 className="text-xl font-bold text-foreground flex items-center gap-2">
-            <BookOpen className="w-5 h-5" />
-            {subject} - Book
+          <h2 className="text-base md:text-xl font-bold text-foreground flex items-center gap-2 truncate">
+            <BookOpen className="w-4 h-4 md:w-5 md:h-5 shrink-0" />
+            <span className="truncate">{subject} - Book</span>
           </h2>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 md:gap-4 w-full md:w-auto flex-wrap md:flex-nowrap">
           {/* Chapter Dropdown */}
           <Select value={selectedChapter} onValueChange={setSelectedChapter}>
-            <SelectTrigger className="w-[280px]">
+            <SelectTrigger className="w-full sm:w-[200px] md:w-[280px]">
               <SelectValue placeholder="Select chapter" />
             </SelectTrigger>
             <SelectContent>
@@ -253,10 +253,11 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
               setShowResources(!showResources);
               setShowLessonPlans(false);
             }}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 shrink-0"
+            title="Learning Resources"
           >
             <Video className="w-4 h-4" />
-            Learning Resources
+            <span className="hidden lg:inline">Learning Resources</span>
           </Button>
           <Button
             variant="outline"
@@ -265,12 +266,13 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
               setShowLessonPlans(!showLessonPlans);
               setShowResources(false);
             }}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 shrink-0"
+            title="Lesson Plans & Assessments"
           >
             <FileText className="w-4 h-4" />
-            Lesson Plans & Assessments
+            <span className="hidden lg:inline">Lesson Plans & Assessments</span>
           </Button>
-          <span className="text-sm text-muted-foreground">
+          <span className="text-xs md:text-sm text-muted-foreground shrink-0">
             {currentPage} / {numPages}
           </span>
         </div>
