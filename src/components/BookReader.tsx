@@ -473,23 +473,6 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
                 </Button>
               </div>
 
-              <div className="mb-4">
-                <label className="text-sm font-medium text-foreground mb-2 block">
-                  Select Class
-                </label>
-                <Select value={selectedClass} onValueChange={setSelectedClass}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select class" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {classes.map((cls) => (
-                      <SelectItem key={cls.id} value={cls.id}>
-                        {cls.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
 
               <Tabs defaultValue="worksheets" className="mt-6">
                 <TabsList className="grid w-full grid-cols-2">
