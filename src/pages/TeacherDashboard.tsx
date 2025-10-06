@@ -326,14 +326,15 @@ const TeacherDashboard = () => {
                         {[1, 2, 3, 4].map((num) => (
                           <div
                             key={`${subject.id}-${num}`}
-                            className="flex items-center justify-between p-4 rounded-lg border border-border hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors"
+                            className="group flex items-center justify-between p-5 rounded-xl bg-gradient-to-r from-background via-background to-muted/20 border border-border shadow-sm hover:shadow-md hover:shadow-primary/5 transition-all duration-300 hover:scale-[1.02] hover:border-primary/50"
                           >
-                            <span className="font-medium text-foreground">
+                            <span className="font-medium text-foreground group-hover:text-primary transition-colors">
                               {subject.title} - Lesson Plan 1.{num}
                             </span>
                             <Button 
                               size="sm" 
                               variant="outline"
+                              className="shadow-sm hover:shadow transition-shadow"
                               onClick={() => {
                                 setSelectedLessonPlan({ subject: subject.title, number: `1.${num}` });
                                 setLessonPlanDialog(true);
