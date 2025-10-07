@@ -133,16 +133,29 @@ const StudentDashboard = () => {
 
           {activeMenu === "reports" && (
             <div className="p-8">
-              <h2 className="text-3xl font-bold text-foreground mb-6">My Progress</h2>
-              <div className="flex flex-col items-center justify-center py-12">
-                <img 
-                  src={comingSoonImg} 
-                  alt="Coming Soon" 
-                  className="w-64 h-64 object-contain mb-6"
-                />
-                <p className="text-xl text-muted-foreground">
-                  Progress reports coming soon!
-                </p>
+              <h2 className="text-3xl font-bold text-foreground mb-6 animate-fade-in">My Progress</h2>
+              <div className="flex flex-col items-center justify-center py-12 min-h-[60vh]">
+                <div className="relative animate-fade-in">
+                  <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
+                  <img 
+                    src={comingSoonImg} 
+                    alt="Coming Soon" 
+                    className="w-64 h-64 object-contain mb-6 relative z-10 animate-scale-in hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+                <div className="text-center space-y-4 animate-fade-in">
+                  <p className="text-2xl font-semibold text-foreground">
+                    Progress Reports Coming Soon!
+                  </p>
+                  <p className="text-lg text-muted-foreground max-w-md">
+                    We're working on bringing you detailed insights into your learning journey
+                  </p>
+                  <div className="flex gap-2 justify-center mt-6">
+                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
+                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
+                  </div>
+                </div>
               </div>
             </div>
           )}
