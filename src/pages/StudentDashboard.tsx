@@ -248,6 +248,9 @@ const StudentDashboard = () => {
                 <h3 className="text-xl font-semibold text-foreground mb-6">
                   Your Subjects
                 </h3>
+                <p className="text-muted-foreground mb-6">
+                  Select a subject to know more
+                </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   {subjects.map((subject) => (
                     <SubjectCard
