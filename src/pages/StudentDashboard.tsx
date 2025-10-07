@@ -265,7 +265,7 @@ const StudentDashboard = () => {
               </h2>
 
               {/* Dropdowns */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div>
                   <label className="text-sm font-medium text-foreground mb-2 block">
                     Class
@@ -298,22 +298,6 @@ const StudentDashboard = () => {
                           {subj.label}
                         </SelectItem>
                       ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div>
-                  <label className="text-sm font-medium text-foreground mb-2 block">
-                    Filter by Type
-                  </label>
-                  <Select value={assessmentTypeFilter} onValueChange={setAssessmentTypeFilter}>
-                    <SelectTrigger className="w-full bg-white dark:bg-gray-800">
-                      <SelectValue placeholder="Filter by type" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-white dark:bg-gray-800 z-50">
-                      <SelectItem value="all">All Types</SelectItem>
-                      <SelectItem value="Worksheet">Worksheets</SelectItem>
-                      <SelectItem value="Activity">Activities</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -353,7 +337,21 @@ const StudentDashboard = () => {
               {/* Activities List */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Assigned Assessments</CardTitle>
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <CardTitle>Assigned Assessments</CardTitle>
+                    <div className="w-full sm:w-48">
+                      <Select value={assessmentTypeFilter} onValueChange={setAssessmentTypeFilter}>
+                        <SelectTrigger className="w-full bg-white dark:bg-gray-800">
+                          <SelectValue placeholder="Filter by type" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-white dark:bg-gray-800 z-50">
+                          <SelectItem value="all">All Types</SelectItem>
+                          <SelectItem value="Worksheet">Worksheets</SelectItem>
+                          <SelectItem value="Activity">Activities</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
