@@ -160,10 +160,10 @@ const StudentDashboard = () => {
                     Class
                   </label>
                   <Select value={assessmentClass} onValueChange={setAssessmentClass}>
-                    <SelectTrigger className="w-full bg-background">
+                    <SelectTrigger className="w-full bg-white dark:bg-gray-800">
                       <SelectValue placeholder="Select class" />
                     </SelectTrigger>
-                    <SelectContent className="bg-background z-50">
+                    <SelectContent className="bg-white dark:bg-gray-800 z-50">
                       {studentClasses.map((cls) => (
                         <SelectItem key={cls.value} value={cls.value}>
                           {cls.label}
@@ -178,10 +178,10 @@ const StudentDashboard = () => {
                     Subject
                   </label>
                   <Select value={assessmentSubject} onValueChange={setAssessmentSubject}>
-                    <SelectTrigger className="w-full bg-background">
+                    <SelectTrigger className="w-full bg-white dark:bg-gray-800">
                       <SelectValue placeholder="Select subject" />
                     </SelectTrigger>
-                    <SelectContent className="bg-background z-50">
+                    <SelectContent className="bg-white dark:bg-gray-800 z-50">
                       {studentSubjects.map((subj) => (
                         <SelectItem key={subj.value} value={subj.value}>
                           {subj.label}
@@ -270,10 +270,10 @@ const StudentDashboard = () => {
                     Class
                   </label>
                   <Select value={resourceClass} onValueChange={setResourceClass}>
-                    <SelectTrigger className="w-full bg-background">
+                    <SelectTrigger className="w-full bg-white dark:bg-gray-800">
                       <SelectValue placeholder="Select class" />
                     </SelectTrigger>
-                    <SelectContent className="bg-background z-50">
+                    <SelectContent className="bg-white dark:bg-gray-800 z-50">
                       {studentClasses.map((cls) => (
                         <SelectItem key={cls.value} value={cls.value}>
                           {cls.label}
@@ -288,10 +288,10 @@ const StudentDashboard = () => {
                     Subject
                   </label>
                   <Select value={resourceSubject} onValueChange={setResourceSubject}>
-                    <SelectTrigger className="w-full bg-background">
+                    <SelectTrigger className="w-full bg-white dark:bg-gray-800">
                       <SelectValue placeholder="Select subject" />
                     </SelectTrigger>
-                    <SelectContent className="bg-background z-50">
+                    <SelectContent className="bg-white dark:bg-gray-800 z-50">
                       {studentSubjects.map((subj) => (
                         <SelectItem key={subj.value} value={subj.value}>
                           {subj.label}
@@ -306,10 +306,10 @@ const StudentDashboard = () => {
                     Chapter
                   </label>
                   <Select value={resourceChapter} onValueChange={setResourceChapter}>
-                    <SelectTrigger className="w-full bg-background">
+                    <SelectTrigger className="w-full bg-white dark:bg-gray-800">
                       <SelectValue placeholder="Select chapter" />
                     </SelectTrigger>
-                    <SelectContent className="bg-background z-50">
+                    <SelectContent className="bg-white dark:bg-gray-800 z-50">
                       {studentChapters.map((chap) => (
                         <SelectItem key={chap.value} value={chap.value}>
                           {chap.label}
