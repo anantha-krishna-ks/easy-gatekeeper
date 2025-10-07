@@ -6,7 +6,9 @@ import SubjectCard from "@/components/SubjectCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Video, FileText, Layers, Download } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Video, FileText, Layers, Download, Menu, LayoutDashboard, BookOpen, ClipboardList, BookMarked } from "lucide-react";
+import { cn } from "@/lib/utils";
 import scienceImg from "@/assets/science-subject.png";
 import mathImg from "@/assets/mathematics-subject.png";
 import englishImg from "@/assets/english-subject.png";
@@ -65,6 +67,7 @@ const StudentDashboard = () => {
   const [resourceChapter, setResourceChapter] = useState("chapter1");
   const [assessmentClass, setAssessmentClass] = useState("grade1");
   const [assessmentSubject, setAssessmentSubject] = useState("english");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const userRole = localStorage.getItem("userRole");
@@ -87,6 +90,58 @@ const StudentDashboard = () => {
       <Header onLogout={handleLogout} role="student" />
 
       <div className="flex flex-1 overflow-hidden">
+        {/* Mobile Menu */}
+        <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+          <SheetTrigger asChild>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="md:hidden fixed top-16 left-4 z-50 bg-card border border-border shadow-md"
+            >
+              <Menu className="h-5 w-5" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="w-64 p-0">
+            <nav className="flex flex-col p-4 space-y-2 mt-8">
+              {(activeMenu === "dashboard" ? [
+                { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
+                { id: "learning-resources", label: "Learning Resources", icon: BookOpen },
+                { id: "assessments", label: "Assessments", icon: ClipboardList },
+                { id: "reports", label: "Reports", icon: FileText },
+              ] : [
+                { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
+                { id: "learning-resources", label: "Learning Resources", icon: BookOpen },
+                { id: "assessments", label: "Assessments", icon: ClipboardList },
+                { id: "lesson-plans", label: "Lesson Plans", icon: BookMarked },
+                { id: "reports", label: "Reports", icon: FileText },
+              ]).map((item) => {
+                const Icon = item.icon;
+                const isActive = activeMenu === item.id;
+
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => {
+                      setActiveMenu(item.id);
+                      setMobileMenuOpen(false);
+                    }}
+                    className={cn(
+                      "w-full flex items-center gap-3 px-3 py-3 rounded-lg transition-all duration-200",
+                      isActive
+                        ? "bg-primary text-primary-foreground shadow-md"
+                        : "hover:bg-muted text-foreground"
+                    )}
+                  >
+                    <Icon className="w-5 h-5 flex-shrink-0" />
+                    <span className="font-medium text-sm">{item.label}</span>
+                  </button>
+                );
+              })}
+            </nav>
+          </SheetContent>
+        </Sheet>
+
+        {/* Desktop Sidebar */}
         <Sidebar activeMenu={activeMenu} onMenuChange={setActiveMenu} role="student" />
 
         <main className="flex-1 overflow-y-auto">

@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { FileText, ClipboardList, BookOpen, ChevronLeft, LayoutDashboard, BookMarked } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { FileText, ClipboardList, BookOpen, LayoutDashboard, BookMarked } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
 interface SidebarProps {
@@ -18,59 +17,41 @@ const menuItems = [
 ];
 
 const Sidebar = ({ activeMenu, onMenuChange, role = "student" }: SidebarProps) => {
-  const [collapsed, setCollapsed] = useState(false);
-
   const filteredMenuItems = role === "teacher" 
     ? menuItems 
     : menuItems.filter(item => item.id !== "lesson-plans");
 
   return (
-    <aside
-      className={cn(
-        "bg-card border-r border-border transition-all duration-300 flex flex-col h-full",
-        collapsed ? "w-16" : "w-64"
-      )}
-    >
-      <div className="p-4 flex justify-end">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => setCollapsed(!collapsed)}
-          className="hover:bg-muted"
-        >
-          <ChevronLeft
-            className={cn(
-              "w-5 h-5 transition-transform duration-300",
-              collapsed && "rotate-180"
-            )}
-          />
-        </Button>
-      </div>
+    <aside className="hidden md:flex bg-card border-r border-border flex-col h-full w-16">
+      <TooltipProvider delayDuration={0}>
+        <nav className="flex-1 px-2 py-4 space-y-2">
+          {filteredMenuItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = activeMenu === item.id;
 
-      <nav className="flex-1 px-3 space-y-2">
-        {filteredMenuItems.map((item) => {
-          const Icon = item.icon;
-          const isActive = activeMenu === item.id;
-
-          return (
-            <button
-              key={item.id}
-              onClick={() => onMenuChange(item.id)}
-              className={cn(
-                "w-full flex items-center gap-3 px-3 py-3 rounded-lg transition-all duration-200",
-                isActive
-                  ? "bg-primary text-primary-foreground shadow-md"
-                  : "hover:bg-muted text-foreground"
-              )}
-            >
-              <Icon className="w-5 h-5 flex-shrink-0" />
-              {!collapsed && (
-                <span className="font-medium text-sm">{item.label}</span>
-              )}
-            </button>
-          );
-        })}
-      </nav>
+            return (
+              <Tooltip key={item.id}>
+                <TooltipTrigger asChild>
+                  <button
+                    onClick={() => onMenuChange(item.id)}
+                    className={cn(
+                      "w-full flex items-center justify-center p-3 rounded-lg transition-all duration-200",
+                      isActive
+                        ? "bg-primary text-primary-foreground shadow-md"
+                        : "hover:bg-muted text-foreground"
+                    )}
+                  >
+                    <Icon className="w-5 h-5" />
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent side="right">
+                  <p>{item.label}</p>
+                </TooltipContent>
+              </Tooltip>
+            );
+          })}
+        </nav>
+      </TooltipProvider>
     </aside>
   );
 };
