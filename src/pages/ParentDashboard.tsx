@@ -186,29 +186,47 @@ const ParentDashboard = () => {
               </Button>
             </div>
 
-            <div className="text-center space-y-2">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-                {wards.find((w) => w.id === selectedWard)?.name}
-              </h2>
-              <p className="text-muted-foreground text-lg">
-                {wards.find((w) => w.id === selectedWard)?.class} • Section{" "}
-                {wards.find((w) => w.id === selectedWard)?.section}
-              </p>
-            </div>
-
-            <div className="flex justify-center items-center gap-3">
-              <label className="text-base font-semibold text-foreground">Subject:</label>
-              <Select value={selectedSubject} onValueChange={setSelectedSubject}>
-                <SelectTrigger className="w-[280px] bg-white dark:bg-white text-foreground border-border">
-                  <SelectValue placeholder="Select a subject" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="english">English</SelectItem>
-                  <SelectItem value="mathematics">Mathematics</SelectItem>
-                  <SelectItem value="hindi">Hindi</SelectItem>
-                  <SelectItem value="science">Science</SelectItem>
-                </SelectContent>
-              </Select>
+            <div className="text-center space-y-6">
+              <Card className="max-w-2xl mx-auto border-2 bg-gradient-to-br from-primary/5 to-primary/10">
+                <CardContent className="p-8">
+                  <div className="flex items-center justify-center gap-4 mb-4">
+                    <div className="p-4 bg-primary/10 rounded-full">
+                      <User className="h-8 w-8 text-primary" />
+                    </div>
+                    <div>
+                      <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+                        {wards.find((w) => w.id === selectedWard)?.name}
+                      </h2>
+                      <div className="flex items-center justify-center gap-2 mt-2">
+                        <span className="text-base font-semibold text-primary">
+                          {wards.find((w) => w.id === selectedWard)?.class}
+                        </span>
+                        <span className="text-muted-foreground">•</span>
+                        <span className="text-base font-semibold text-primary">
+                          Section {wards.find((w) => w.id === selectedWard)?.section}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-6 pt-6 border-t border-border">
+                    <div className="flex justify-center items-center gap-4">
+                      <label className="text-lg font-semibold text-foreground">Subject:</label>
+                      <Select value={selectedSubject} onValueChange={setSelectedSubject}>
+                        <SelectTrigger className="w-[280px] bg-white dark:bg-white text-foreground border-2 border-primary/20 hover:border-primary/40 transition-colors shadow-sm">
+                          <SelectValue placeholder="Select a subject" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="english">English</SelectItem>
+                          <SelectItem value="mathematics">Mathematics</SelectItem>
+                          <SelectItem value="hindi">Hindi</SelectItem>
+                          <SelectItem value="science">Science</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
 
             <div className="text-center mb-8">
