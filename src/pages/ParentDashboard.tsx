@@ -54,6 +54,19 @@ const ParentDashboard = () => {
     if (userRole !== "parent") {
       navigate("/parent-login");
     }
+    
+    // Restore ward selection if coming back from resource view
+    const storedWard = localStorage.getItem("parentViewingWard");
+    if (storedWard) {
+      const ward = JSON.parse(storedWard);
+      setSelectedWard(ward.id);
+    }
+    
+    // Restore subject selection if available
+    const storedSubject = localStorage.getItem("parentSelectedSubject");
+    if (storedSubject) {
+      setSelectedSubject(storedSubject);
+    }
   }, [navigate]);
 
   const handleLogout = () => {

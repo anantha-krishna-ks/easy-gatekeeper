@@ -137,7 +137,9 @@ const StudentDashboard = () => {
   };
 
   const handleBackToParent = () => {
+    // Keep the ward selected, only remove the resource
     localStorage.removeItem("parentViewingResource");
+    localStorage.removeItem("parentSelectedSubject");
     navigate("/parent-dashboard");
   };
 
