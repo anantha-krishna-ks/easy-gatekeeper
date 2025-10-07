@@ -248,24 +248,24 @@ const StudentDashboard = () => {
                 </div>
 
                 {/* Main content */}
-                <div className="relative z-10 flex flex-col items-center space-y-10 animate-fade-in">
+                <div className="relative z-10 flex flex-col items-center space-y-6 animate-fade-in">
                   {/* 3D Card Icon */}
                   <div 
-                    className="relative w-44 h-44 rounded-3xl flex items-center justify-center shadow-2xl animate-scale-in"
+                    className="relative w-28 h-28 rounded-2xl flex items-center justify-center shadow-xl animate-scale-in"
                     style={{
                       background: "linear-gradient(135deg, hsl(260, 80%, 60%) 0%, hsl(240, 75%, 55%) 100%)",
                       transform: "perspective(1000px) rotateY(-8deg) rotateX(8deg)",
                       animation: "scale-in 0.6s ease-out, float 3s ease-in-out infinite",
                     }}
                   >
-                    <div className="absolute inset-0 rounded-3xl bg-white/10 backdrop-blur-sm" />
-                    <FileText className="w-20 h-20 text-white relative z-10" strokeWidth={2} />
+                    <div className="absolute inset-0 rounded-2xl bg-white/10 backdrop-blur-sm" />
+                    <FileText className="w-12 h-12 text-white relative z-10" strokeWidth={2} />
                   </div>
 
                   {/* Text content */}
-                  <div className="text-center space-y-6 max-w-2xl px-4">
+                  <div className="text-center space-y-3 max-w-lg px-4">
                     <h1 
-                      className="text-5xl md:text-6xl font-bold animate-fade-in"
+                      className="text-3xl md:text-4xl font-bold animate-fade-in"
                       style={{ 
                         background: "linear-gradient(135deg, hsl(260, 80%, 60%) 0%, hsl(240, 75%, 55%) 100%)",
                         WebkitBackgroundClip: "text",
@@ -277,15 +277,15 @@ const StudentDashboard = () => {
                       Coming Soon
                     </h1>
                     
-                    <h2 className="text-2xl md:text-3xl font-bold text-foreground animate-fade-in" style={{ animationDelay: "0.3s" }}>
+                    <h2 className="text-lg md:text-xl font-bold text-foreground animate-fade-in" style={{ animationDelay: "0.3s" }}>
                       Something Amazing is Being Built
                     </h2>
                     
-                    <div className="space-y-2 animate-fade-in" style={{ animationDelay: "0.4s" }}>
-                      <p className="text-base md:text-lg text-muted-foreground">
+                    <div className="space-y-1 animate-fade-in" style={{ animationDelay: "0.4s" }}>
+                      <p className="text-sm md:text-base text-muted-foreground">
                         We're working hard to bring you something incredible.
                       </p>
-                      <p className="text-base md:text-lg text-muted-foreground">
+                      <p className="text-sm md:text-base text-muted-foreground">
                         This feature will be available soon!
                       </p>
                     </div>
@@ -294,23 +294,23 @@ const StudentDashboard = () => {
                   {/* Go Back Button */}
                   <Button
                     variant="outline"
-                    size="lg"
+                    size="default"
                     onClick={() => setActiveMenu("dashboard")}
-                    className="mt-8 px-8 py-6 text-base font-medium bg-card hover:bg-muted shadow-lg animate-fade-in"
+                    className="mt-4 px-6 py-2 text-sm font-medium bg-card hover:bg-muted shadow-md animate-fade-in"
                     style={{ animationDelay: "0.5s" }}
                   >
-                    <Clock className="w-5 h-5 mr-2" />
+                    <Clock className="w-4 h-4 mr-2" />
                     Go Back
                   </Button>
 
                   {/* Bottom dots and text */}
-                  <div className="flex flex-col items-center gap-4 mt-12 animate-fade-in" style={{ animationDelay: "0.6s" }}>
-                    <div className="flex gap-2">
-                      <div className="w-2.5 h-2.5 bg-purple-400 rounded-full" />
-                      <div className="w-2.5 h-2.5 bg-pink-400 rounded-full" />
-                      <div className="w-2.5 h-2.5 bg-blue-400 rounded-full" />
+                  <div className="flex flex-col items-center gap-2 mt-6 animate-fade-in" style={{ animationDelay: "0.6s" }}>
+                    <div className="flex gap-1.5">
+                      <div className="w-2 h-2 bg-purple-400 rounded-full" />
+                      <div className="w-2 h-2 bg-pink-400 rounded-full" />
+                      <div className="w-2 h-2 bg-blue-400 rounded-full" />
                     </div>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-xs text-muted-foreground">
                       Stay tuned for updates
                     </p>
                   </div>
