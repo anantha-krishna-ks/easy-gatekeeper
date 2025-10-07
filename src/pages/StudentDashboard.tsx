@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import SubjectCard from "@/components/SubjectCard";
+import BookReader from "@/components/BookReader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -84,6 +85,16 @@ const StudentDashboard = () => {
   const handleSubjectClick = (subjectId: string) => {
     setSelectedSubject(subjectId);
   };
+
+  if (selectedSubject) {
+    const subject = subjects.find((s) => s.id === selectedSubject);
+    return (
+      <BookReader
+        subject={subject?.title || ""}
+        onClose={() => setSelectedSubject(null)}
+      />
+    );
+  }
 
   return (
     <div className="h-screen flex flex-col bg-background">
@@ -172,17 +183,6 @@ const StudentDashboard = () => {
                   ))}
                 </div>
               </div>
-
-              {selectedSubject && (
-                <div className="mt-8 p-6 bg-card border border-border rounded-lg">
-                  <h3 className="text-2xl font-bold text-foreground mb-4">
-                    {subjects.find((s) => s.id === selectedSubject)?.title}
-                  </h3>
-                  <p className="text-muted-foreground">
-                    Content for {subjects.find((s) => s.id === selectedSubject)?.title} will be displayed here.
-                  </p>
-                </div>
-              )}
             </div>
           )}
 
