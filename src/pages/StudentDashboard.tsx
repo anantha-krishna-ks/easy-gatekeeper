@@ -367,8 +367,8 @@ const StudentDashboard = () => {
                           </Button>
                         </div>
                         <div className="flex flex-col sm:flex-row gap-3 text-xs">
-                          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-primary/5 border border-primary/10">
-                            <Calendar className="w-3.5 h-3.5 text-primary" />
+                          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-blue-500/10 border border-blue-500/20">
+                            <Calendar className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
                             <div className="flex items-center gap-1.5">
                               <span className="text-muted-foreground font-medium">Assigned</span>
                               <span className="text-foreground font-semibold">
@@ -386,8 +386,8 @@ const StudentDashboard = () => {
                               </span>
                             </div>
                           </div>
-                          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-primary/5 border border-primary/10">
-                            <Calendar className="w-3.5 h-3.5 text-primary" />
+                          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-amber-500/10 border border-amber-500/20">
+                            <Calendar className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
                             <div className="flex items-center gap-1.5">
                               <span className="text-muted-foreground font-medium">Due</span>
                               <span className="text-foreground font-semibold">
