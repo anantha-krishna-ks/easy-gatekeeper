@@ -355,25 +355,7 @@ const StudentDashboard = () => {
               </h2>
 
               {/* Dropdowns */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <div>
-                  <label className="text-sm font-medium text-foreground mb-2 block">
-                    Class
-                  </label>
-                  <Select value={resourceClass} onValueChange={setResourceClass}>
-                    <SelectTrigger className="w-full bg-white dark:bg-gray-800">
-                      <SelectValue placeholder="Select class" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-white dark:bg-gray-800 z-50">
-                      {studentClasses.map((cls) => (
-                        <SelectItem key={cls.value} value={cls.value}>
-                          {cls.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div>
                   <label className="text-sm font-medium text-foreground mb-2 block">
                     Subject
