@@ -132,87 +132,46 @@ const StudentDashboard = () => {
           )}
 
           {activeMenu === "reports" && (
-            <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-background via-primary/5 to-background">
-              {/* Animated background orbs */}
-              <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1.5s" }}></div>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-accent/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "3s" }}></div>
-              </div>
-
-              <div className="relative z-10 container mx-auto px-4 py-16">
-                {/* Hero Section */}
-                <div className="text-center mb-16 animate-fade-in">
-                  <div className="inline-block mb-6">
-                    <div className="relative">
-                      <img 
-                        src={comingSoonImg} 
-                        alt="Coming Soon" 
-                        className="w-56 h-56 md:w-72 md:h-72 object-contain animate-float drop-shadow-2xl"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent rounded-full blur-2xl"></div>
-                    </div>
-                  </div>
-                  
-                  <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-primary animate-fade-in" style={{ animationDelay: "0.2s" }}>
-                    Progress Reports
-                  </h1>
-                  
-                  <div className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 rounded-full mb-6 animate-fade-in" style={{ animationDelay: "0.4s" }}>
-                    <div className="flex gap-1">
-                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
-                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
-                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
-                    </div>
-                    <span className="text-lg font-semibold text-primary">Coming Soon</span>
-                  </div>
-                  
-                  <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: "0.6s" }}>
-                    Get ready for comprehensive insights into your learning journey with beautiful visualizations and personalized analytics
-                  </p>
+            <div className="p-8">
+              <div className="flex flex-col items-center justify-center min-h-[70vh]">
+                {/* Animated background gradient */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                  <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+                  <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }}></div>
                 </div>
 
-                {/* Feature Preview Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                  <Card className="relative overflow-hidden border-2 hover:border-primary/50 transition-all duration-300 animate-fade-in group hover:shadow-xl hover:scale-105" style={{ animationDelay: "0.8s" }}>
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <CardContent className="p-6 relative z-10">
-                      <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <Video className="w-6 h-6 text-primary" />
-                      </div>
-                      <h3 className="text-xl font-bold text-foreground mb-2">Performance Tracking</h3>
-                      <p className="text-muted-foreground">Monitor your scores, completion rates, and progress across all subjects</p>
-                    </CardContent>
-                  </Card>
+                {/* Main content */}
+                <div className="relative z-10 flex flex-col items-center space-y-8 animate-fade-in">
+                  {/* Image with floating animation */}
+                  <div className="relative">
+                    <img 
+                      src={comingSoonImg} 
+                      alt="Coming Soon" 
+                      className="w-48 h-48 md:w-64 md:h-64 object-contain animate-scale-in"
+                      style={{ animation: "scale-in 0.6s ease-out, float 3s ease-in-out infinite" }}
+                    />
+                  </div>
 
-                  <Card className="relative overflow-hidden border-2 hover:border-secondary/50 transition-all duration-300 animate-fade-in group hover:shadow-xl hover:scale-105" style={{ animationDelay: "1s" }}>
-                    <div className="absolute inset-0 bg-gradient-to-br from-secondary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <CardContent className="p-6 relative z-10">
-                      <div className="w-12 h-12 bg-secondary/20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <Layers className="w-6 h-6 text-secondary" />
-                      </div>
-                      <h3 className="text-xl font-bold text-foreground mb-2">Visual Analytics</h3>
-                      <p className="text-muted-foreground">Beautiful charts and graphs to visualize your learning patterns</p>
-                    </CardContent>
-                  </Card>
+                  {/* Text content */}
+                  <div className="text-center space-y-4 max-w-lg px-4">
+                    <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+                      Progress Reports
+                    </h2>
+                    <div className="space-y-2">
+                      <p className="text-xl md:text-2xl font-semibold text-primary animate-fade-in" style={{ animationDelay: "0.2s" }}>
+                        Coming Soon
+                      </p>
+                      <p className="text-base md:text-lg text-muted-foreground animate-fade-in" style={{ animationDelay: "0.4s" }}>
+                        Track your learning journey with detailed insights and personalized progress analytics
+                      </p>
+                    </div>
+                  </div>
 
-                  <Card className="relative overflow-hidden border-2 hover:border-accent/50 transition-all duration-300 animate-fade-in group hover:shadow-xl hover:scale-105" style={{ animationDelay: "1.2s" }}>
-                    <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <CardContent className="p-6 relative z-10">
-                      <div className="w-12 h-12 bg-accent/20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <FileText className="w-6 h-6 text-accent" />
-                      </div>
-                      <h3 className="text-xl font-bold text-foreground mb-2">Personalized Insights</h3>
-                      <p className="text-muted-foreground">Get tailored recommendations to improve your learning experience</p>
-                    </CardContent>
-                  </Card>
-                </div>
-
-                {/* Coming Soon Timeline */}
-                <div className="mt-16 text-center animate-fade-in" style={{ animationDelay: "1.4s" }}>
-                  <div className="inline-block px-8 py-4 bg-card border-2 border-border rounded-2xl shadow-lg">
-                    <p className="text-sm text-muted-foreground mb-2">Expected Launch</p>
-                    <p className="text-2xl font-bold text-primary">Stay Tuned!</p>
+                  {/* Animated dots */}
+                  <div className="flex gap-2 mt-8 animate-fade-in" style={{ animationDelay: "0.6s" }}>
+                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
+                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
                   </div>
                 </div>
               </div>
