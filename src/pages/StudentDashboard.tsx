@@ -255,36 +255,41 @@ const StudentDashboard = () => {
               </div>
 
               {/* Activities List */}
-              <div>
-                <h3 className="text-xl font-semibold text-foreground mb-4">
-                  Available Assessments
-                </h3>
-                <div className="space-y-3">
-                  {studentActivities.map((activity) => (
-                    <Card key={activity.id}>
-                      <CardContent className="p-4 flex items-center justify-between">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Available Assessments</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {studentActivities.map((activity) => (
+                      <div
+                        key={activity.id}
+                        className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4 md:p-5 rounded-xl bg-gradient-to-r from-background via-background to-muted/20 border border-border shadow-sm hover:shadow-md hover:shadow-primary/5 transition-all duration-300 hover:scale-[1.02] hover:border-primary/50"
+                      >
                         <div className="flex items-center gap-3">
-                          <div className="p-2 bg-primary/10 rounded-lg">
-                            <FileText className="w-5 h-5 text-primary" />
-                          </div>
+                          <FileText className="h-5 w-5 text-primary" />
                           <div>
-                            <p className="font-medium text-foreground">
+                            <span className="font-medium text-foreground group-hover:text-primary transition-colors text-sm md:text-base block">
                               {activity.name}
-                            </p>
-                            <p className="text-sm text-muted-foreground">
+                            </span>
+                            <span className="text-sm text-muted-foreground">
                               {activity.type}
-                            </p>
+                            </span>
                           </div>
                         </div>
-                        <Button variant="outline" size="sm">
+                        <Button 
+                          size="sm" 
+                          variant="outline" 
+                          className="shadow-sm hover:shadow transition-shadow w-full sm:w-auto"
+                        >
                           <Download className="w-4 h-4 mr-2" />
                           Download
                         </Button>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           )}
 
