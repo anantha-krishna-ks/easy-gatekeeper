@@ -17,9 +17,9 @@ import hindiImg from "@/assets/hindi-subject.png";
 import comingSoonImg from "@/assets/coming-soon.png";
 
 const subjects = [
-  { id: "science", title: "Science", image: scienceImg, color: "bg-blue-500" },
-  { id: "mathematics", title: "Mathematics", image: mathImg, color: "bg-purple-500" },
   { id: "english", title: "English", image: englishImg, color: "bg-green-500" },
+  { id: "mathematics", title: "Mathematics", image: mathImg, color: "bg-purple-500" },
+  { id: "science", title: "Science", image: scienceImg, color: "bg-blue-500" },
   { id: "hindi", title: "Hindi", image: hindiImg, color: "bg-orange-500" },
 ];
 
