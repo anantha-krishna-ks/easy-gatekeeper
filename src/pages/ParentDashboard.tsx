@@ -182,9 +182,10 @@ const ParentDashboard = () => {
               </p>
             </div>
 
-            <div className="flex justify-center">
+            <div className="flex justify-center items-center gap-3">
+              <label className="text-base font-semibold text-foreground">Subject:</label>
               <Select value={selectedSubject} onValueChange={setSelectedSubject}>
-                <SelectTrigger className="w-[280px]">
+                <SelectTrigger className="w-[280px] bg-white dark:bg-white text-foreground border-border">
                   <SelectValue placeholder="Select a subject" />
                 </SelectTrigger>
                 <SelectContent>
