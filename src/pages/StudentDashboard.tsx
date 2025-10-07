@@ -53,10 +53,34 @@ const studentResources = [
 ];
 
 const studentActivities = [
-  { id: "1", name: "Math Quiz - Addition & Subtraction", type: "Worksheet" },
-  { id: "2", name: "Science Lab Activity", type: "Activity" },
-  { id: "3", name: "English Comprehension Test", type: "Worksheet" },
-  { id: "4", name: "Creative Writing Exercise", type: "Activity" },
+  { 
+    id: "1", 
+    name: "Math Quiz - Addition & Subtraction", 
+    type: "Worksheet",
+    assignedDate: "2025-10-05T09:00:00",
+    dueDate: "2025-10-12T23:59:00"
+  },
+  { 
+    id: "2", 
+    name: "Science Lab Activity", 
+    type: "Activity",
+    assignedDate: "2025-10-06T10:30:00",
+    dueDate: "2025-10-13T17:00:00"
+  },
+  { 
+    id: "3", 
+    name: "English Comprehension Test", 
+    type: "Worksheet",
+    assignedDate: "2025-10-04T08:00:00",
+    dueDate: "2025-10-11T23:59:00"
+  },
+  { 
+    id: "4", 
+    name: "Creative Writing Exercise", 
+    type: "Activity",
+    assignedDate: "2025-10-07T11:00:00",
+    dueDate: "2025-10-14T18:00:00"
+  },
 ];
 
 const StudentDashboard = () => {
@@ -319,27 +343,57 @@ const StudentDashboard = () => {
                     {studentActivities.map((activity) => (
                       <div
                         key={activity.id}
-                        className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4 md:p-5 rounded-xl bg-gradient-to-r from-background via-background to-muted/20 border border-border shadow-sm hover:shadow-md hover:shadow-primary/5 transition-all duration-300 hover:scale-[1.02] hover:border-primary/50"
+                        className="group flex flex-col gap-4 p-4 md:p-5 rounded-xl bg-gradient-to-r from-background via-background to-muted/20 border border-border shadow-sm hover:shadow-md hover:shadow-primary/5 transition-all duration-300 hover:scale-[1.02] hover:border-primary/50"
                       >
-                        <div className="flex items-center gap-3">
-                          <FileText className="h-5 w-5 text-primary" />
-                          <div>
-                            <span className="font-medium text-foreground group-hover:text-primary transition-colors text-sm md:text-base block">
-                              {activity.name}
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                          <div className="flex items-center gap-3">
+                            <FileText className="h-5 w-5 text-primary flex-shrink-0" />
+                            <div>
+                              <span className="font-medium text-foreground group-hover:text-primary transition-colors text-sm md:text-base block">
+                                {activity.name}
+                              </span>
+                              <span className="text-sm text-muted-foreground">
+                                {activity.type}
+                              </span>
+                            </div>
+                          </div>
+                          <Button 
+                            size="sm" 
+                            variant="outline" 
+                            className="shadow-sm hover:shadow transition-shadow w-full sm:w-auto"
+                          >
+                            <Download className="w-4 h-4 mr-2" />
+                            Download
+                          </Button>
+                        </div>
+                        <div className="flex flex-col sm:flex-row gap-4 text-sm pl-8">
+                          <div className="flex items-center gap-2">
+                            <span className="text-muted-foreground font-medium">Assigned:</span>
+                            <span className="text-foreground">
+                              {new Date(activity.assignedDate).toLocaleDateString('en-US', { 
+                                month: 'short', 
+                                day: 'numeric', 
+                                year: 'numeric' 
+                              })} at {new Date(activity.assignedDate).toLocaleTimeString('en-US', { 
+                                hour: '2-digit', 
+                                minute: '2-digit' 
+                              })}
                             </span>
-                            <span className="text-sm text-muted-foreground">
-                              {activity.type}
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-muted-foreground font-medium">Due:</span>
+                            <span className="text-foreground">
+                              {new Date(activity.dueDate).toLocaleDateString('en-US', { 
+                                month: 'short', 
+                                day: 'numeric', 
+                                year: 'numeric' 
+                              })} at {new Date(activity.dueDate).toLocaleTimeString('en-US', { 
+                                hour: '2-digit', 
+                                minute: '2-digit' 
+                              })}
                             </span>
                           </div>
                         </div>
-                        <Button 
-                          size="sm" 
-                          variant="outline" 
-                          className="shadow-sm hover:shadow transition-shadow w-full sm:w-auto"
-                        >
-                          <Download className="w-4 h-4 mr-2" />
-                          Download
-                        </Button>
                       </div>
                     ))}
                   </div>
