@@ -217,102 +217,45 @@ const StudentDashboard = () => {
 
           {activeMenu === "reports" && (
             <div className="p-8">
-              <div className="flex flex-col items-center justify-center min-h-[70vh] relative overflow-hidden">
-                {/* Gradient circle background */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div 
-                    className="w-[500px] h-[500px] rounded-full opacity-30"
-                    style={{
-                      background: "linear-gradient(135deg, hsl(250, 80%, 70%) 0%, hsl(280, 70%, 65%) 100%)",
-                    }}
-                  />
-                </div>
-
-                {/* Floating decorative elements */}
-                <div className="absolute inset-0 pointer-events-none">
-                  {/* Yellow dot - top left */}
-                  <div className="absolute top-[15%] left-[30%] w-8 h-8 bg-yellow-400 rounded-full animate-bounce" style={{ animationDuration: "3s" }} />
-                  
-                  {/* Pink dot - top right */}
-                  <div className="absolute top-[20%] right-[35%] w-6 h-6 bg-pink-400 rounded-full animate-pulse" style={{ animationDuration: "2s" }} />
-                  
-                  {/* Green dot - left middle */}
-                  <div className="absolute top-[45%] left-[25%] w-7 h-7 bg-green-400 rounded-full animate-pulse" style={{ animationDuration: "2.5s" }} />
-                  
-                  {/* Blue dot - bottom right */}
-                  <div className="absolute bottom-[30%] right-[30%] w-6 h-6 bg-blue-400 rounded-full animate-bounce" style={{ animationDuration: "3.5s" }} />
-                  
-                  {/* Sparkle icons */}
-                  <Clock className="absolute top-[18%] right-[28%] w-5 h-5 text-yellow-300 animate-pulse" style={{ animationDuration: "1.8s" }} />
-                  <Clock className="absolute bottom-[35%] left-[32%] w-4 h-4 text-pink-300 animate-pulse" style={{ animationDuration: "2.2s" }} />
+              <div className="flex flex-col items-center justify-center min-h-[70vh]">
+                {/* Animated background gradient */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                  <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+                  <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }}></div>
                 </div>
 
                 {/* Main content */}
-                <div className="relative z-10 flex flex-col items-center space-y-6 animate-fade-in">
-                  {/* 3D Card Icon */}
-                  <div 
-                    className="relative w-28 h-28 rounded-2xl flex items-center justify-center shadow-xl animate-scale-in"
-                    style={{
-                      background: "linear-gradient(135deg, hsl(260, 80%, 60%) 0%, hsl(240, 75%, 55%) 100%)",
-                      transform: "perspective(1000px) rotateY(-8deg) rotateX(8deg)",
-                      animation: "scale-in 0.6s ease-out, float 3s ease-in-out infinite",
-                    }}
-                  >
-                    <div className="absolute inset-0 rounded-2xl bg-white/10 backdrop-blur-sm" />
-                    <FileText className="w-12 h-12 text-white relative z-10" strokeWidth={2} />
+                <div className="relative z-10 flex flex-col items-center space-y-8 animate-fade-in">
+                  {/* Image with floating animation */}
+                  <div className="relative">
+                    <img 
+                      src={comingSoonImg} 
+                      alt="Coming Soon" 
+                      className="w-48 h-48 md:w-64 md:h-64 object-contain animate-scale-in"
+                      style={{ animation: "scale-in 0.6s ease-out, float 3s ease-in-out infinite" }}
+                    />
                   </div>
 
                   {/* Text content */}
-                  <div className="text-center space-y-3 max-w-lg px-4">
-                    <h1 
-                      className="text-3xl md:text-4xl font-bold animate-fade-in"
-                      style={{ 
-                        background: "linear-gradient(135deg, hsl(260, 80%, 60%) 0%, hsl(240, 75%, 55%) 100%)",
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                        backgroundClip: "text",
-                        animationDelay: "0.2s"
-                      }}
-                    >
-                      Coming Soon
-                    </h1>
-                    
-                    <h2 className="text-lg md:text-xl font-bold text-foreground animate-fade-in" style={{ animationDelay: "0.3s" }}>
-                      Something Amazing is Being Built
+                  <div className="text-center space-y-4 max-w-lg px-4">
+                    <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+                      Progress Reports
                     </h2>
-                    
-                    <div className="space-y-1 animate-fade-in" style={{ animationDelay: "0.4s" }}>
-                      <p className="text-sm md:text-base text-muted-foreground">
-                        We're working hard to bring you something incredible.
+                    <div className="space-y-2">
+                      <p className="text-xl md:text-2xl font-semibold text-primary animate-fade-in" style={{ animationDelay: "0.2s" }}>
+                        Coming Soon
                       </p>
-                      <p className="text-sm md:text-base text-muted-foreground">
-                        This feature will be available soon!
+                      <p className="text-base md:text-lg text-muted-foreground animate-fade-in" style={{ animationDelay: "0.4s" }}>
+                        Track your learning journey with detailed insights and personalized progress analytics
                       </p>
                     </div>
                   </div>
 
-                  {/* Go Back Button */}
-                  <Button
-                    variant="outline"
-                    size="default"
-                    onClick={() => setActiveMenu("dashboard")}
-                    className="mt-4 px-6 py-2 text-sm font-medium bg-card hover:bg-muted shadow-md animate-fade-in"
-                    style={{ animationDelay: "0.5s" }}
-                  >
-                    <Clock className="w-4 h-4 mr-2" />
-                    Go Back
-                  </Button>
-
-                  {/* Bottom dots and text */}
-                  <div className="flex flex-col items-center gap-2 mt-6 animate-fade-in" style={{ animationDelay: "0.6s" }}>
-                    <div className="flex gap-1.5">
-                      <div className="w-2 h-2 bg-purple-400 rounded-full" />
-                      <div className="w-2 h-2 bg-pink-400 rounded-full" />
-                      <div className="w-2 h-2 bg-blue-400 rounded-full" />
-                    </div>
-                    <p className="text-xs text-muted-foreground">
-                      Stay tuned for updates
-                    </p>
+                  {/* Animated dots */}
+                  <div className="flex gap-2 mt-8 animate-fade-in" style={{ animationDelay: "0.6s" }}>
+                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
+                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
                   </div>
                 </div>
               </div>
