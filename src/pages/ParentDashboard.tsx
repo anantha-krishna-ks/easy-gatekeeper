@@ -67,10 +67,11 @@ const ParentDashboard = () => {
     if (ward) {
       localStorage.setItem("parentViewingWard", JSON.stringify(ward));
       localStorage.setItem("parentViewingResource", resourceId);
+      localStorage.setItem("parentSelectedSubject", selectedSubject);
     }
     
-    // Navigate to student dashboard with the resource pre-selected
-    navigate(`/student-dashboard?view=${resourceId}&parent=true`);
+    // Navigate to student dashboard with the resource pre-selected in parent-only mode
+    navigate(`/student-dashboard?view=${resourceId}&parent=true&parentOnly=true`);
   };
 
   const handleBackToWards = () => {

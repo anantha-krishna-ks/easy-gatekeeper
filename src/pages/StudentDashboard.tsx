@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Video, FileText, Layers, Download, Menu, LayoutDashboard, BookOpen, ClipboardList, BookMarked, Calendar, Clock } from "lucide-react";
+import { Video, FileText, Layers, Download, Menu, LayoutDashboard, BookOpen, ClipboardList, BookMarked, Calendar, Clock, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import scienceImg from "@/assets/science-subject.png";
 import mathImg from "@/assets/mathematics-subject.png";
@@ -99,15 +99,20 @@ const StudentDashboard = () => {
   const [assessmentTypeFilter, setAssessmentTypeFilter] = useState<string>("all");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isParentView, setIsParentView] = useState(false);
+  const [isParentOnlyView, setIsParentOnlyView] = useState(false);
 
   useEffect(() => {
     const userRole = localStorage.getItem("userRole");
     const urlParams = new URLSearchParams(window.location.search);
     const parentParam = urlParams.get("parent");
+    const parentOnlyParam = urlParams.get("parentOnly");
     const viewParam = urlParams.get("view");
     
     if (parentParam === "true") {
       setIsParentView(true);
+      if (parentOnlyParam === "true") {
+        setIsParentOnlyView(true);
+      }
       if (viewParam) {
         setActiveMenu(viewParam === "ebook" ? "dashboard" : viewParam);
         if (viewParam === "ebook") {
@@ -123,11 +128,17 @@ const StudentDashboard = () => {
     if (isParentView) {
       localStorage.removeItem("parentViewingWard");
       localStorage.removeItem("parentViewingResource");
+      localStorage.removeItem("parentSelectedSubject");
       navigate("/parent-dashboard");
     } else {
       localStorage.removeItem("userRole");
       navigate("/");
     }
+  };
+
+  const handleBackToParent = () => {
+    localStorage.removeItem("parentViewingResource");
+    navigate("/parent-dashboard");
   };
 
   const handleSubjectClick = (subjectId: string) => {
@@ -146,10 +157,11 @@ const StudentDashboard = () => {
 
   return (
     <div className="h-screen flex flex-col bg-background">
-      <Header onLogout={handleLogout} role="student" />
+      {!isParentOnlyView && <Header onLogout={handleLogout} role="student" />}
 
       <div className="flex flex-1 overflow-hidden">
         {/* Mobile Menu */}
+        {!isParentOnlyView && (
         <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
           <SheetTrigger asChild>
             <Button 
@@ -199,11 +211,26 @@ const StudentDashboard = () => {
             </nav>
           </SheetContent>
         </Sheet>
+        )}
 
         {/* Desktop Sidebar */}
-        <Sidebar activeMenu={activeMenu} onMenuChange={setActiveMenu} role="student" />
+        {!isParentOnlyView && <Sidebar activeMenu={activeMenu} onMenuChange={setActiveMenu} role="student" />}
 
         <main className="flex-1 overflow-y-auto">
+          {/* Parent Back Navigation */}
+          {isParentOnlyView && (
+            <div className="sticky top-0 z-10 bg-card border-b border-border px-6 py-4">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleBackToParent}
+                className="gap-2"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                Back to Parent Dashboard
+              </Button>
+            </div>
+          )}
           {activeMenu === "dashboard" && (
             <div className="p-8">
               <div className="mb-8">
