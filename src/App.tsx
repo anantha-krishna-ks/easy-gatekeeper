@@ -4,6 +4,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
+import ParentLogin from "./pages/ParentLogin";
+import ParentDashboard from "./pages/ParentDashboard";
 import TeacherDashboard from "./pages/TeacherDashboard";
 import StudentDashboard from "./pages/StudentDashboard";
 import ProfileSettings from "./pages/ProfileSettings";
@@ -19,6 +21,8 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="/parent-login" element={<ParentLogin />} />
+          <Route path="/parent-dashboard" element={<ParentDashboard />} />
           <Route path="/teacher-dashboard" element={<TeacherDashboard />} />
           <Route path="/student-dashboard" element={<StudentDashboard />} />
           <Route path="/profile-settings" element={<ProfileSettings />} />

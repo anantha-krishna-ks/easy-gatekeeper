@@ -7,13 +7,13 @@ import { Card } from "@/components/ui/card";
 import { BookOpen, Eye, EyeOff, Users } from "lucide-react";
 import { toast } from "sonner";
 
-// Predefined credentials
-const CREDENTIALS = {
-  teacher: { username: "teacher", password: "teacher123" },
-  student: { username: "student", password: "student123" },
+// Predefined parent credentials
+const PARENT_CREDENTIALS = {
+  username: "parent",
+  password: "parent123",
 };
 
-const Login = () => {
+const ParentLogin = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -26,19 +26,12 @@ const Login = () => {
 
     setTimeout(() => {
       if (
-        username === CREDENTIALS.teacher.username &&
-        password === CREDENTIALS.teacher.password
+        username === PARENT_CREDENTIALS.username &&
+        password === PARENT_CREDENTIALS.password
       ) {
-        localStorage.setItem("userRole", "teacher");
-        toast.success("Welcome, Teacher!");
-        navigate("/teacher-dashboard");
-      } else if (
-        username === CREDENTIALS.student.username &&
-        password === CREDENTIALS.student.password
-      ) {
-        localStorage.setItem("userRole", "student");
-        toast.success("Welcome, Student!");
-        navigate("/student-dashboard");
+        localStorage.setItem("userRole", "parent");
+        toast.success("Welcome, Parent!");
+        navigate("/parent-dashboard");
       } else {
         toast.error("Invalid credentials. Please try again.");
       }
@@ -52,12 +45,12 @@ const Login = () => {
         <div className="text-center space-y-2">
           <div className="flex justify-center mb-4">
             <div className="p-3 bg-primary/10 rounded-full">
-              <BookOpen className="h-10 w-10 text-primary" />
+              <Users className="h-10 w-10 text-primary" />
             </div>
           </div>
-          <h1 className="text-2xl font-semibold text-foreground">Login to Ignite</h1>
+          <h1 className="text-2xl font-semibold text-foreground">Parent Portal</h1>
           <p className="text-muted-foreground">
-            Sign in to access your dashboard
+            Sign in to monitor your ward's progress
           </p>
         </div>
 
@@ -109,10 +102,7 @@ const Login = () => {
             <p className="font-semibold text-center mb-2">Demo Credentials:</p>
             <div className="space-y-1 text-xs">
               <p>
-                <span className="font-medium">Teacher:</span> teacher / teacher123
-              </p>
-              <p>
-                <span className="font-medium">Student:</span> student / student123
+                <span className="font-medium">Parent:</span> parent / parent123
               </p>
             </div>
           </div>
@@ -122,11 +112,11 @@ const Login = () => {
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => navigate("/parent-login")}
+            onClick={() => navigate("/")}
             className="text-muted-foreground hover:text-foreground"
           >
-            <Users className="h-4 w-4 mr-2" />
-            Parent Login
+            <BookOpen className="h-4 w-4 mr-2" />
+            Student/Teacher Login
           </Button>
         </div>
       </Card>
@@ -134,4 +124,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ParentLogin;

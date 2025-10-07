@@ -98,17 +98,36 @@ const StudentDashboard = () => {
   const [assessmentSubject, setAssessmentSubject] = useState("english");
   const [assessmentTypeFilter, setAssessmentTypeFilter] = useState<string>("all");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isParentView, setIsParentView] = useState(false);
 
   useEffect(() => {
     const userRole = localStorage.getItem("userRole");
-    if (userRole !== "student") {
+    const urlParams = new URLSearchParams(window.location.search);
+    const parentParam = urlParams.get("parent");
+    const viewParam = urlParams.get("view");
+    
+    if (parentParam === "true") {
+      setIsParentView(true);
+      if (viewParam) {
+        setActiveMenu(viewParam === "ebook" ? "dashboard" : viewParam);
+        if (viewParam === "ebook") {
+          // For ebook, we'll show the dashboard with subjects
+        }
+      }
+    } else if (userRole !== "student") {
       navigate("/");
     }
   }, [navigate]);
 
   const handleLogout = () => {
-    localStorage.removeItem("userRole");
-    navigate("/");
+    if (isParentView) {
+      localStorage.removeItem("parentViewingWard");
+      localStorage.removeItem("parentViewingResource");
+      navigate("/parent-dashboard");
+    } else {
+      localStorage.removeItem("userRole");
+      navigate("/");
+    }
   };
 
   const handleSubjectClick = (subjectId: string) => {
