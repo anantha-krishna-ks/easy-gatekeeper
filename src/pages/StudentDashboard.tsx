@@ -312,7 +312,7 @@ const StudentDashboard = () => {
               {/* Activities List */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Available Assessments</CardTitle>
+                  <CardTitle>Assigned Assessments</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
