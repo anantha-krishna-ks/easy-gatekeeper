@@ -233,14 +233,16 @@ const StudentDashboard = () => {
           )}
           {activeMenu === "dashboard" && (
             <div className="p-8">
-              <div className="mb-8">
-                <h2 className="text-[1.6rem] font-semibold text-foreground mb-2">
-                  Welcome Back, Student
-                </h2>
-                <p className="text-muted-foreground">
-                  Select a subject to start learning
-                </p>
-              </div>
+              {!isParentOnlyView && (
+                <div className="mb-8">
+                  <h2 className="text-[1.6rem] font-semibold text-foreground mb-2">
+                    Welcome Back, Student
+                  </h2>
+                  <p className="text-muted-foreground">
+                    Select a subject to start learning
+                  </p>
+                </div>
+              )}
 
               <div>
                 <h3 className="text-xl font-semibold text-foreground mb-6">
