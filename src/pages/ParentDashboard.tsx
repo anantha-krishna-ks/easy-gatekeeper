@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { BookOpen, FileText, Layers, BarChart3, User, LogOut, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -46,6 +47,7 @@ const resourceTiles = [
 const ParentDashboard = () => {
   const navigate = useNavigate();
   const [selectedWard, setSelectedWard] = useState<string | null>(null);
+  const [selectedSubject, setSelectedSubject] = useState<string>("english");
 
   useEffect(() => {
     const userRole = localStorage.getItem("userRole");
@@ -178,6 +180,20 @@ const ParentDashboard = () => {
                 {wards.find((w) => w.id === selectedWard)?.class} • Section{" "}
                 {wards.find((w) => w.id === selectedWard)?.section}
               </p>
+            </div>
+
+            <div className="flex justify-center">
+              <Select value={selectedSubject} onValueChange={setSelectedSubject}>
+                <SelectTrigger className="w-[280px]">
+                  <SelectValue placeholder="Select a subject" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="english">English</SelectItem>
+                  <SelectItem value="mathematics">Mathematics</SelectItem>
+                  <SelectItem value="hindi">Hindi</SelectItem>
+                  <SelectItem value="science">Science</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
 
             <div className="text-center mb-8">
