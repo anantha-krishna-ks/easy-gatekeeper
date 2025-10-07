@@ -133,47 +133,16 @@ const StudentDashboard = () => {
 
           {activeMenu === "reports" && (
             <div className="p-8">
-              <div className="flex flex-col items-center justify-center min-h-[70vh]">
-                {/* Animated background gradient */}
-                <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                  <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
-                  <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }}></div>
-                </div>
-
-                {/* Main content */}
-                <div className="relative z-10 flex flex-col items-center space-y-8 animate-fade-in">
-                  {/* Image with floating animation */}
-                  <div className="relative">
-                    <img 
-                      src={comingSoonImg} 
-                      alt="Coming Soon" 
-                      className="w-48 h-48 md:w-64 md:h-64 object-contain animate-scale-in"
-                      style={{ animation: "scale-in 0.6s ease-out, float 3s ease-in-out infinite" }}
-                    />
-                  </div>
-
-                  {/* Text content */}
-                  <div className="text-center space-y-4 max-w-lg px-4">
-                    <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-                      Progress Reports
-                    </h2>
-                    <div className="space-y-2">
-                      <p className="text-xl md:text-2xl font-semibold text-primary animate-fade-in" style={{ animationDelay: "0.2s" }}>
-                        Coming Soon
-                      </p>
-                      <p className="text-base md:text-lg text-muted-foreground animate-fade-in" style={{ animationDelay: "0.4s" }}>
-                        Track your learning journey with detailed insights and personalized progress analytics
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Animated dots */}
-                  <div className="flex gap-2 mt-8 animate-fade-in" style={{ animationDelay: "0.6s" }}>
-                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
-                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
-                    <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
-                  </div>
-                </div>
+              <h2 className="text-3xl font-bold text-foreground mb-6">My Progress</h2>
+              <div className="flex flex-col items-center justify-center py-12">
+                <img 
+                  src={comingSoonImg} 
+                  alt="Coming Soon" 
+                  className="w-64 h-64 object-contain mb-6"
+                />
+                <p className="text-xl text-muted-foreground">
+                  Progress reports coming soon!
+                </p>
               </div>
             </div>
           )}
