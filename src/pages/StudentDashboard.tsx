@@ -38,9 +38,14 @@ const studentSubjects = [
 ];
 
 const studentChapters = [
-  { value: "chapter1", label: "Chapter 1: Introduction" },
-  { value: "chapter2", label: "Chapter 2: Basics" },
-  { value: "chapter3", label: "Chapter 3: Advanced" },
+  { value: "chapter1", label: "Fun with Words" },
+  { value: "chapter2", label: "Jo Jo Laali (A jogula)" },
+  { value: "chapter3", label: "Kamala's First Day at School" },
+  { value: "chapter4", label: "Friends" },
+  { value: "chapter5", label: "A Little Clock" },
+  { value: "chapter6", label: "Let's Play Hide-and-Seek!" },
+  { value: "chapter7", label: "Healthy Habits" },
+  { value: "chapter8", label: "Four Seasons" },
 ];
 
 const studentResources = [
