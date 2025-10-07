@@ -92,6 +92,7 @@ const StudentDashboard = () => {
   const [resourceChapter, setResourceChapter] = useState("chapter1");
   const [assessmentClass, setAssessmentClass] = useState("grade1");
   const [assessmentSubject, setAssessmentSubject] = useState("english");
+  const [assessmentTypeFilter, setAssessmentTypeFilter] = useState<string>("all");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -264,7 +265,7 @@ const StudentDashboard = () => {
               </h2>
 
               {/* Dropdowns */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <div>
                   <label className="text-sm font-medium text-foreground mb-2 block">
                     Class
@@ -297,6 +298,22 @@ const StudentDashboard = () => {
                           {subj.label}
                         </SelectItem>
                       ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <label className="text-sm font-medium text-foreground mb-2 block">
+                    Filter by Type
+                  </label>
+                  <Select value={assessmentTypeFilter} onValueChange={setAssessmentTypeFilter}>
+                    <SelectTrigger className="w-full bg-white dark:bg-gray-800">
+                      <SelectValue placeholder="Filter by type" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white dark:bg-gray-800 z-50">
+                      <SelectItem value="all">All Types</SelectItem>
+                      <SelectItem value="Worksheet">Worksheets</SelectItem>
+                      <SelectItem value="Activity">Activities</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -340,7 +357,11 @@ const StudentDashboard = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
-                    {studentActivities.map((activity) => (
+                    {studentActivities
+                      .filter((activity) => 
+                        assessmentTypeFilter === "all" || activity.type === assessmentTypeFilter
+                      )
+                      .map((activity) => (
                       <div
                         key={activity.id}
                         className="group flex flex-col gap-4 p-4 md:p-5 rounded-xl bg-gradient-to-r from-background via-background to-muted/20 border border-border shadow-sm hover:shadow-md hover:shadow-primary/5 transition-all duration-300 hover:scale-[1.02] hover:border-primary/50"
@@ -408,6 +429,13 @@ const StudentDashboard = () => {
                         </div>
                       </div>
                     ))}
+                    {studentActivities.filter((activity) => 
+                      assessmentTypeFilter === "all" || activity.type === assessmentTypeFilter
+                    ).length === 0 && (
+                      <div className="text-center py-8 text-muted-foreground">
+                        No assessments found for the selected type.
+                      </div>
+                    )}
                   </div>
                 </CardContent>
               </Card>
