@@ -136,6 +136,7 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
   const [showLessonPlans, setShowLessonPlans] = useState(false);
   const [selectedChapter, setSelectedChapter] = useState<string>("1");
   const [selectedClass, setSelectedClass] = useState<string>("6");
+  const [filterType, setFilterType] = useState<string>("all");
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
@@ -376,84 +377,55 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
                 </Button>
               </div>
 
-              <Tabs defaultValue="worksheets" className="mt-4">
-                <TabsList className="grid w-full grid-cols-2 bg-muted">
-                  <TabsTrigger value="worksheets">Worksheets</TabsTrigger>
-                  <TabsTrigger value="answer-keys">Answer Keys</TabsTrigger>
-                </TabsList>
+              <div className="mt-4 space-y-4">
+                <div>
+                  <h4 className="text-base font-semibold text-foreground mb-3">Filter by Type</h4>
+                  <Select value={filterType} onValueChange={setFilterType}>
+                    <SelectTrigger className="w-full border-2 border-primary bg-background hover:bg-muted transition-colors">
+                      <SelectValue placeholder="All" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-background border-border">
+                      <SelectItem value="all">All</SelectItem>
+                      <SelectItem value="video">Videos</SelectItem>
+                      <SelectItem value="pdf">PDFs</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
 
-                <TabsContent value="worksheets" className="mt-4">
-                  <Accordion type="single" collapsible className="w-full">
-                    {chapters.map((chapter) => {
-                      const chapterWorksheets = mockWorksheets.filter(
-                        (w) => w.chapterId === chapter.id
-                      );
-                      if (chapterWorksheets.length === 0) return null;
-                      return (
-                        <AccordionItem key={chapter.id} value={`chapter-${chapter.id}`}>
-                          <AccordionTrigger className="text-sm hover:no-underline">
-                            Ch{chapter.id}: {chapter.name}
-                          </AccordionTrigger>
-                          <AccordionContent>
-                            <div className="space-y-2">
-                              {chapterWorksheets.map((worksheet) => (
-                                <div
-                                  key={worksheet.id}
-                                  onClick={() =>
-                                    setSelectedResource({ ...worksheet, type: "pdf" })
-                                  }
-                                  className="p-3 rounded-lg hover:bg-muted cursor-pointer transition-colors border border-border flex items-center gap-2"
-                                >
-                                  <FileText className="w-4 h-4 text-primary" />
-                                  <p className="text-sm text-foreground">
-                                    {worksheet.title}
-                                  </p>
-                                </div>
-                              ))}
+                <div className="space-y-3">
+                  {page?.resources
+                    ?.filter((resource: any) => 
+                      filterType === "all" || resource.type === filterType
+                    )
+                    .map((resource: any) => (
+                      <div
+                        key={resource.id}
+                        onClick={() => setSelectedResource(resource)}
+                        className="p-4 rounded-lg border border-border bg-card hover:bg-muted cursor-pointer transition-all hover:shadow-md"
+                      >
+                        <div className="flex items-start gap-3">
+                          {resource.type === "video" ? (
+                            <div className="p-2 bg-primary/10 rounded-lg">
+                              <Video className="w-5 h-5 text-primary" />
                             </div>
-                          </AccordionContent>
-                        </AccordionItem>
-                      );
-                    })}
-                  </Accordion>
-                </TabsContent>
-
-                <TabsContent value="answer-keys" className="mt-4">
-                  <Accordion type="single" collapsible className="w-full">
-                    {chapters.map((chapter) => {
-                      const chapterAnswerKeys = mockAnswerKeys.filter(
-                        (a) => a.chapterId === chapter.id
-                      );
-                      if (chapterAnswerKeys.length === 0) return null;
-                      return (
-                        <AccordionItem key={chapter.id} value={`chapter-${chapter.id}`}>
-                          <AccordionTrigger className="text-sm hover:no-underline">
-                            Ch{chapter.id}: {chapter.name}
-                          </AccordionTrigger>
-                          <AccordionContent>
-                            <div className="space-y-2">
-                              {chapterAnswerKeys.map((answerKey) => (
-                                <div
-                                  key={answerKey.id}
-                                  onClick={() =>
-                                    setSelectedResource({ ...answerKey, type: "pdf" })
-                                  }
-                                  className="p-3 rounded-lg hover:bg-muted cursor-pointer transition-colors border border-border flex items-center gap-2"
-                                >
-                                  <FileText className="w-4 h-4 text-primary" />
-                                  <p className="text-sm text-foreground">
-                                    {answerKey.title}
-                                  </p>
-                                </div>
-                              ))}
+                          ) : (
+                            <div className="p-2 bg-secondary/10 rounded-lg">
+                              <FileText className="w-5 h-5 text-secondary" />
                             </div>
-                          </AccordionContent>
-                        </AccordionItem>
-                      );
-                    })}
-                  </Accordion>
-                </TabsContent>
-              </Tabs>
+                          )}
+                          <div className="flex-1">
+                            <p className="text-sm font-medium text-foreground mb-1">
+                              {resource.title}
+                            </p>
+                            <p className="text-xs text-muted-foreground">
+                              Click to preview
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              </div>
             </div>
           </div>
         )}
