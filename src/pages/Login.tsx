@@ -114,21 +114,13 @@ const Login = () => {
               <p>
                 <span className="font-medium">Student:</span> student / student123
               </p>
+              <p>
+                <span className="font-medium">Parent:</span> parent / parent123
+              </p>
             </div>
           </div>
         </div>
 
-        <div className="flex items-center justify-center gap-2 pt-4">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => navigate("/parent-login")}
-            className="text-muted-foreground hover:text-foreground"
-          >
-            <Users className="h-4 w-4 mr-2" />
-            Parent Login
-          </Button>
-        </div>
       </Card>
     </div>
   );
