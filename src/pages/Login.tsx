@@ -11,6 +11,7 @@ import { toast } from "sonner";
 const CREDENTIALS = {
   teacher: { username: "teacher", password: "teacher123" },
   student: { username: "student", password: "student123" },
+  parent: { username: "parent", password: "parent123" },
 };
 
 const Login = () => {
@@ -39,6 +40,13 @@ const Login = () => {
         localStorage.setItem("userRole", "student");
         toast.success("Welcome, Student!");
         navigate("/student-dashboard");
+      } else if (
+        username === CREDENTIALS.parent.username &&
+        password === CREDENTIALS.parent.password
+      ) {
+        localStorage.setItem("userRole", "parent");
+        toast.success("Welcome, Parent!");
+        navigate("/parent-dashboard");
       } else {
         toast.error("Invalid credentials. Please try again.");
       }
