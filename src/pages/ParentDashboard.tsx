@@ -71,7 +71,7 @@ const ParentDashboard = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("userRole");
-    navigate("/parent-login");
+    navigate("/");
   };
 
   const handleResourceClick = (resourceId: string) => {
