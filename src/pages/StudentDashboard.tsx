@@ -8,7 +8,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Video, FileText, Layers, Download, Menu, LayoutDashboard, BookOpen, ClipboardList, BookMarked, Calendar, Clock, ArrowLeft } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Video, FileText, Layers, Download, Menu, LayoutDashboard, BookOpen, ClipboardList, BookMarked, Calendar, Clock, ArrowLeft, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import scienceImg from "@/assets/science-subject.png";
 import mathImg from "@/assets/mathematics-subject.png";
@@ -97,6 +98,9 @@ const StudentDashboard = () => {
   const [resourceChapter, setResourceChapter] = useState("chapter1");
   const [assessmentSubject, setAssessmentSubject] = useState("english");
   const [assessmentTypeFilter, setAssessmentTypeFilter] = useState<string>("all");
+  const [assessmentSearch, setAssessmentSearch] = useState("");
+  const [resourceSearch, setResourceSearch] = useState("");
+  const [subjectSearch, setSubjectSearch] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isParentView, setIsParentView] = useState(false);
   const [isParentOnlyView, setIsParentOnlyView] = useState(false);
@@ -249,22 +253,40 @@ const StudentDashboard = () => {
               )}
 
               <div>
-                <h3 className="text-xl font-semibold text-foreground mb-6">
-                  Your Subjects
-                </h3>
-                <p className="text-muted-foreground mb-6">
-                  Select a subject to know more
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {subjects.map((subject) => (
-                    <SubjectCard
-                      key={subject.id}
-                      title={subject.title}
-                      image={subject.image}
-                      color={subject.color}
-                      onClick={() => handleSubjectClick(subject.id)}
+                <div className="flex items-center justify-between mb-6">
+                  <div>
+                    <h3 className="text-xl font-semibold text-foreground">
+                      Your Subjects
+                    </h3>
+                    <p className="text-muted-foreground mt-1">
+                      Select a subject to know more
+                    </p>
+                  </div>
+                  <div className="search-container max-w-xs">
+                    <Search className="search-icon w-4 h-4" />
+                    <Input
+                      type="text"
+                      placeholder="Search subjects..."
+                      value={subjectSearch}
+                      onChange={(e) => setSubjectSearch(e.target.value)}
+                      className="search-input"
                     />
-                  ))}
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {subjects
+                    .filter((subject) =>
+                      subject.title.toLowerCase().includes(subjectSearch.toLowerCase())
+                    )
+                    .map((subject) => (
+                      <SubjectCard
+                        key={subject.id}
+                        title={subject.title}
+                        image={subject.image}
+                        color={subject.color}
+                        onClick={() => handleSubjectClick(subject.id)}
+                      />
+                    ))}
                 </div>
               </div>
             </div>
@@ -323,9 +345,9 @@ const StudentDashboard = () => {
                 Assessments
               </h2>
 
-              {/* Dropdowns */}
-              <div className="mb-6 max-w-md">
-                <div>
+              {/* Filters and Search */}
+              <div className="mb-6 flex flex-col sm:flex-row gap-4">
+                <div className="w-full sm:w-48">
                   <label className="text-sm font-medium text-foreground mb-2 block">
                     Subject
                   </label>
@@ -341,6 +363,21 @@ const StudentDashboard = () => {
                       ))}
                     </SelectContent>
                   </Select>
+                </div>
+                <div className="flex-1">
+                  <label className="text-sm font-medium text-foreground mb-2 block">
+                    Search Assessments
+                  </label>
+                  <div className="search-container">
+                    <Search className="search-icon w-4 h-4" />
+                    <Input
+                      type="text"
+                      placeholder="Search by name..."
+                      value={assessmentSearch}
+                      onChange={(e) => setAssessmentSearch(e.target.value)}
+                      className="search-input"
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -398,7 +435,8 @@ const StudentDashboard = () => {
                   <div className="space-y-3">
                     {studentActivities
                       .filter((activity) => 
-                        assessmentTypeFilter === "all" || activity.type === assessmentTypeFilter
+                        (assessmentTypeFilter === "all" || activity.type === assessmentTypeFilter) &&
+                        activity.name.toLowerCase().includes(assessmentSearch.toLowerCase())
                       )
                       .map((activity) => (
                       <div
@@ -487,7 +525,7 @@ const StudentDashboard = () => {
                 Learning Resources
               </h2>
 
-              {/* Dropdowns */}
+              {/* Filters and Search */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div>
                   <label className="text-sm font-medium text-foreground mb-2 block">
@@ -523,6 +561,22 @@ const StudentDashboard = () => {
                       ))}
                     </SelectContent>
                   </Select>
+                </div>
+                
+                <div className="md:col-span-2">
+                  <label className="text-sm font-medium text-foreground mb-2 block">
+                    Search Resources
+                  </label>
+                  <div className="search-container">
+                    <Search className="search-icon w-4 h-4" />
+                    <Input
+                      type="text"
+                      placeholder="Search by resource name..."
+                      value={resourceSearch}
+                      onChange={(e) => setResourceSearch(e.target.value)}
+                      className="search-input"
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -590,20 +644,24 @@ const StudentDashboard = () => {
                 <CardHeader>
                   <CardTitle>Available Resources</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                  {studentResources.map((resource) => {
-                    const IconComponent = resource.icon;
-                    return (
-                      <div
-                        key={resource.id}
-                        className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4 md:p-5 rounded-xl bg-gradient-to-r from-background via-background to-muted/20 border border-border shadow-sm hover:shadow-md hover:shadow-primary/5 transition-all duration-300 hover:scale-[1.02] hover:border-primary/50"
-                      >
-                        <div className="flex items-center gap-3">
-                          <IconComponent className="h-5 w-5 text-primary" />
-                          <span className="font-medium text-foreground group-hover:text-primary transition-colors text-sm md:text-base">
-                            {resource.name}
-                          </span>
+                 <CardContent>
+                   <div className="space-y-3">
+                   {studentResources
+                     .filter((resource) =>
+                       resource.name.toLowerCase().includes(resourceSearch.toLowerCase())
+                     )
+                     .map((resource) => {
+                     const IconComponent = resource.icon;
+                     return (
+                       <div
+                         key={resource.id}
+                         className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4 md:p-5 rounded-xl bg-gradient-to-r from-background via-background to-muted/20 border border-border shadow-sm hover:shadow-md hover:shadow-primary/5 transition-all duration-300 hover:scale-[1.02] hover:border-primary/50"
+                       >
+                         <div className="flex items-center gap-3">
+                           <IconComponent className="h-5 w-5 text-primary" />
+                           <span className="font-medium text-foreground group-hover:text-primary transition-colors text-sm md:text-base">
+                             {resource.name}
+                           </span>
                         </div>
                         <Button 
                           size="sm" 

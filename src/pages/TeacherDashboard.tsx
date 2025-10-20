@@ -7,7 +7,8 @@ import BookReader from "@/components/BookReader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Download, FileText, Activity, Calculator, Eye, Video, FileIcon, Layers, Menu, LayoutDashboard, BookOpen, ClipboardList, BookMarked } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Download, FileText, Activity, Calculator, Eye, Video, FileIcon, Layers, Menu, LayoutDashboard, BookOpen, ClipboardList, BookMarked, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   Select,
@@ -88,6 +89,9 @@ const TeacherDashboard = () => {
   const [lessonPlanDialog, setLessonPlanDialog] = useState(false);
   const [selectedLessonPlan, setSelectedLessonPlan] = useState<{ subject: string; number: string } | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [resourceSearch, setResourceSearch] = useState("");
+  const [assessmentSearch, setAssessmentSearch] = useState("");
+  const [lessonPlanSearch, setLessonPlanSearch] = useState("");
 
   useEffect(() => {
     const userRole = localStorage.getItem("userRole");
@@ -228,7 +232,7 @@ const TeacherDashboard = () => {
                 Learning Resources
               </h2>
 
-              {/* Dropdowns */}
+              {/* Filters and Search */}
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-6 md:mb-8">
                 <div className="w-full sm:w-48">
                   <label className="text-sm font-medium text-foreground mb-2 block">
@@ -282,6 +286,22 @@ const TeacherDashboard = () => {
                       ))}
                     </SelectContent>
                   </Select>
+                </div>
+                
+                <div className="flex-1">
+                  <label className="text-sm font-medium text-foreground mb-2 block">
+                    Search
+                  </label>
+                  <div className="search-container">
+                    <Search className="search-icon w-4 h-4" />
+                    <Input
+                      type="text"
+                      placeholder="Search resources..."
+                      value={resourceSearch}
+                      onChange={(e) => setResourceSearch(e.target.value)}
+                      className="search-input"
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -343,20 +363,24 @@ const TeacherDashboard = () => {
                 <CardHeader>
                   <CardTitle>Available Resources</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {learningResources.map((resource) => {
-                      const Icon = resource.icon;
-                      return (
-                        <div
-                          key={resource.id}
-                          className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4 md:p-5 rounded-xl bg-gradient-to-r from-background via-background to-muted/20 border border-border shadow-sm hover:shadow-md hover:shadow-primary/5 transition-all duration-300 hover:scale-[1.02] hover:border-primary/50"
-                        >
-                          <div className="flex items-center gap-3">
-                            <Icon className="h-5 w-5 text-primary" />
-                            <span className="font-medium text-foreground group-hover:text-primary transition-colors text-sm md:text-base">
-                              {resource.name}
-                            </span>
+                 <CardContent>
+                   <div className="space-y-3">
+                     {learningResources
+                       .filter((resource) =>
+                         resource.name.toLowerCase().includes(resourceSearch.toLowerCase())
+                       )
+                       .map((resource) => {
+                       const Icon = resource.icon;
+                       return (
+                         <div
+                           key={resource.id}
+                           className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4 md:p-5 rounded-xl bg-gradient-to-r from-background via-background to-muted/20 border border-border shadow-sm hover:shadow-md hover:shadow-primary/5 transition-all duration-300 hover:scale-[1.02] hover:border-primary/50"
+                         >
+                           <div className="flex items-center gap-3">
+                             <Icon className="h-5 w-5 text-primary" />
+                             <span className="font-medium text-foreground group-hover:text-primary transition-colors text-sm md:text-base">
+                               {resource.name}
+                             </span>
                           </div>
                           <Button 
                             size="sm" 
@@ -397,7 +421,7 @@ const TeacherDashboard = () => {
                 Assessments
               </h2>
 
-              {/* Dropdowns */}
+              {/* Filters and Search */}
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-6 md:mb-8">
                 <div className="w-full sm:w-48">
                   <label className="text-sm font-medium text-foreground mb-2 block">
@@ -433,6 +457,22 @@ const TeacherDashboard = () => {
                       ))}
                     </SelectContent>
                   </Select>
+                </div>
+                
+                <div className="flex-1">
+                  <label className="text-sm font-medium text-foreground mb-2 block">
+                    Search
+                  </label>
+                  <div className="search-container">
+                    <Search className="search-icon w-4 h-4" />
+                    <Input
+                      type="text"
+                      placeholder="Search assessments..."
+                      value={assessmentSearch}
+                      onChange={(e) => setAssessmentSearch(e.target.value)}
+                      className="search-input"
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -477,10 +517,14 @@ const TeacherDashboard = () => {
                 <CardHeader>
                   <CardTitle>Activities</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {activities.map((activity) => (
-                      <div
+                 <CardContent>
+                   <div className="space-y-3">
+                     {activities
+                       .filter((activity) =>
+                         activity.name.toLowerCase().includes(assessmentSearch.toLowerCase())
+                       )
+                       .map((activity) => (
+                       <div
                         key={activity.id}
                         className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4 md:p-5 rounded-xl bg-gradient-to-r from-background via-background to-muted/20 border border-border shadow-sm hover:shadow-md hover:shadow-primary/5 transition-all duration-300 hover:scale-[1.02] hover:border-primary/50"
                       >
@@ -503,7 +547,7 @@ const TeacherDashboard = () => {
                 Lesson Plans
               </h2>
 
-              {/* Dropdowns */}
+              {/* Filters and Search */}
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-6 md:mb-8">
                 <div className="w-full sm:w-48">
                   <label className="text-sm font-medium text-foreground mb-2 block">
@@ -540,6 +584,22 @@ const TeacherDashboard = () => {
                     </SelectContent>
                   </Select>
                 </div>
+                
+                <div className="flex-1">
+                  <label className="text-sm font-medium text-foreground mb-2 block">
+                    Search
+                  </label>
+                  <div className="search-container">
+                    <Search className="search-icon w-4 h-4" />
+                    <Input
+                      type="text"
+                      placeholder="Search lesson plans..."
+                      value={lessonPlanSearch}
+                      onChange={(e) => setLessonPlanSearch(e.target.value)}
+                      className="search-input"
+                    />
+                  </div>
+                </div>
               </div>
 
               {/* Total Lesson Plans Widget */}
@@ -559,11 +619,16 @@ const TeacherDashboard = () => {
                 <CardHeader>
                   <CardTitle>Lesson Plans</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {subjects.map((subject) => (
-                      <>
-                        {[1, 2, 3, 4].map((num) => (
+                 <CardContent>
+                   <div className="space-y-3">
+                     {subjects
+                       .filter((subject) => {
+                         const lessonPlanName = `${subject.title} - Lesson Plan`;
+                         return lessonPlanName.toLowerCase().includes(lessonPlanSearch.toLowerCase());
+                       })
+                       .map((subject) => (
+                       <>
+                         {[1, 2, 3, 4].map((num) => (
                           <div
                             key={`${subject.id}-${num}`}
                             className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4 md:p-5 rounded-xl bg-gradient-to-r from-background via-background to-muted/20 border border-border shadow-sm hover:shadow-md hover:shadow-primary/5 transition-all duration-300 hover:scale-[1.02] hover:border-primary/50"

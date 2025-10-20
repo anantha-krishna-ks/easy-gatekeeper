@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, X, FileText, Video, BookOpen, ZoomIn, ZoomOut } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, FileText, Video, BookOpen, ZoomIn, ZoomOut, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import ResourceViewer from "./ResourceViewer";
 import { Document, Page, pdfjs } from 'react-pdf';
@@ -137,6 +138,10 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
   const [selectedChapter, setSelectedChapter] = useState<string>("1");
   const [selectedClass, setSelectedClass] = useState<string>("6");
   const [filterType, setFilterType] = useState<string>("all");
+  const [worksheetSearch, setWorksheetSearch] = useState("");
+  const [answerKeySearch, setAnswerKeySearch] = useState("");
+  const [lessonPlanSearch, setLessonPlanSearch] = useState("");
+  const [assessmentSearch, setAssessmentSearch] = useState("");
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
@@ -453,10 +458,20 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
                 </TabsList>
 
                 <TabsContent value="worksheets" className="mt-4">
+                  <div className="search-container mb-4">
+                    <Search className="search-icon w-4 h-4" />
+                    <Input
+                      type="text"
+                      placeholder="Search worksheets..."
+                      value={worksheetSearch}
+                      onChange={(e) => setWorksheetSearch(e.target.value)}
+                      className="search-input"
+                    />
+                  </div>
                   <Accordion type="single" collapsible className="w-full">
                     {chapters.map((chapter) => {
                       const chapterWorksheets = mockWorksheets.filter(
-                        (w) => w.chapterId === chapter.id
+                        (w) => w.chapterId === chapter.id && w.title.toLowerCase().includes(worksheetSearch.toLowerCase())
                       );
                       return (
                         <AccordionItem key={chapter.id} value={`chapter-${chapter.id}`}>
@@ -490,10 +505,20 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
                 </TabsContent>
 
                 <TabsContent value="answer-keys" className="mt-4">
+                  <div className="search-container mb-4">
+                    <Search className="search-icon w-4 h-4" />
+                    <Input
+                      type="text"
+                      placeholder="Search answer keys..."
+                      value={answerKeySearch}
+                      onChange={(e) => setAnswerKeySearch(e.target.value)}
+                      className="search-input"
+                    />
+                  </div>
                   <Accordion type="single" collapsible className="w-full">
                     {chapters.map((chapter) => {
                       const chapterAnswerKeys = mockAnswerKeys.filter(
-                        (a) => a.chapterId === chapter.id
+                        (a) => a.chapterId === chapter.id && a.title.toLowerCase().includes(answerKeySearch.toLowerCase())
                       );
                       return (
                         <AccordionItem key={chapter.id} value={`chapter-${chapter.id}`}>
