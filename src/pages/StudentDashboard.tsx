@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import SubjectCard from "@/components/SubjectCard";
-import BookReader from "@/components/BookReader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -92,7 +91,6 @@ const studentActivities = [
 const StudentDashboard = () => {
   const navigate = useNavigate();
   const [activeMenu, setActiveMenu] = useState("dashboard");
-  const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
   const [resourceClass, setResourceClass] = useState("grade1");
   const [resourceSubject, setResourceSubject] = useState("english");
   const [resourceChapter, setResourceChapter] = useState("chapter1");
@@ -148,7 +146,7 @@ const StudentDashboard = () => {
   };
 
   const handleSubjectClick = (subjectId: string) => {
-    setSelectedSubject(subjectId);
+    navigate(`/book-reader?subject=${subjectId}`);
   };
 
   const handleMenuChange = (menu: string) => {
@@ -158,16 +156,6 @@ const StudentDashboard = () => {
       setActiveMenu(menu);
     }
   };
-
-  if (selectedSubject) {
-    const subject = subjects.find((s) => s.id === selectedSubject);
-    return (
-      <BookReader
-        subject={subject?.title || ""}
-        onClose={() => setSelectedSubject(null)}
-      />
-    );
-  }
 
   return (
     <div className="h-screen flex flex-col bg-background">

@@ -83,8 +83,13 @@ const ParentDashboard = () => {
       localStorage.setItem("parentSelectedSubject", selectedSubject);
     }
     
-    // Navigate to student dashboard with the resource pre-selected in parent-only mode
-    navigate(`/student-dashboard?view=${resourceId}&parent=true&parentOnly=true`);
+    // Navigate to book reader page instead of student dashboard
+    if (resourceId === "ebook") {
+      navigate(`/book-reader?subject=${selectedSubject}`);
+    } else {
+      // Navigate to student dashboard with the resource pre-selected in parent-only mode
+      navigate(`/student-dashboard?view=${resourceId}&parent=true&parentOnly=true`);
+    }
   };
 
   const handleBackToWards = () => {

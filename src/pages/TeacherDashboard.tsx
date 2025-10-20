@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import SubjectCard from "@/components/SubjectCard";
-import BookReader from "@/components/BookReader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -80,7 +79,6 @@ const TeacherDashboard = () => {
   const navigate = useNavigate();
   const [activeMenu, setActiveMenu] = useState("dashboard");
   const [selectedClass, setSelectedClass] = useState("class-1");
-  const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
   const [assessmentClass, setAssessmentClass] = useState("class-1");
   const [assessmentSubject, setAssessmentSubject] = useState("english");
   const [resourceClass, setResourceClass] = useState("class-1");
@@ -113,15 +111,9 @@ const TeacherDashboard = () => {
     }
   };
 
-  if (selectedSubject) {
-    const subject = subjects.find((s) => s.id === selectedSubject);
-    return (
-      <BookReader
-        subject={subject?.title || ""}
-        onClose={() => setSelectedSubject(null)}
-      />
-    );
-  }
+  const handleSubjectClick = (subjectId: string) => {
+    navigate(`/book-reader?subject=${subjectId}`);
+  };
 
   return (
     <div className="h-screen flex flex-col bg-background">
@@ -218,7 +210,7 @@ const TeacherDashboard = () => {
                       title={subject.title}
                       image={subject.image}
                       color={subject.color}
-                      onClick={() => setSelectedSubject(subject.id)}
+                      onClick={() => handleSubjectClick(subject.id)}
                     />
                   ))}
                 </div>
