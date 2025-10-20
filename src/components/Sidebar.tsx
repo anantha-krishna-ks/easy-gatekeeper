@@ -21,7 +21,7 @@ const Sidebar = ({ activeMenu, onMenuChange, role = "student" }: SidebarProps) =
     : menuItems.filter(item => item.id !== "lesson-plans");
 
   return (
-    <aside className="app-sidebar hidden md:flex">
+    <aside className="app-sidebar flex">
       <nav className="sidebar-nav">
         {filteredMenuItems.map((item) => {
           const Icon = item.icon;
