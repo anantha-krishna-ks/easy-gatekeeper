@@ -290,36 +290,36 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
       <div className="flex-1 flex overflow-hidden">
         {/* Main Content - PDF View */}
         <div className="flex-1 overflow-y-auto bg-muted/30">
-          <div className="w-full p-8">
+          <div className="w-full p-2 sm:p-4 md:p-8">
             {/* PDF Controls */}
-            <div className="flex justify-between items-center mb-6 bg-card p-4 rounded-lg border border-border">
-              <div className="flex items-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4 mb-4 sm:mb-6 bg-card p-3 sm:p-4 rounded-lg border border-border">
+              <div className="flex items-center gap-2 sm:gap-4 w-full sm:w-auto">
                 <Button
                   onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                   disabled={currentPage === 1}
                   size="sm"
                   variant="outline"
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-1 sm:gap-2"
                 >
                   <ChevronLeft className="w-4 h-4" />
-                  Previous
+                  <span className="hidden sm:inline">Previous</span>
                 </Button>
-                <span className="text-sm text-foreground font-medium">
-                  Page {currentPage} of {numPages}
+                <span className="text-xs sm:text-sm text-foreground font-medium">
+                  {currentPage} / {numPages}
                 </span>
                 <Button
                   onClick={() => setCurrentPage(Math.min(numPages, currentPage + 1))}
                   disabled={currentPage === numPages}
                   size="sm"
                   variant="outline"
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-1 sm:gap-2"
                 >
-                  Next
+                  <span className="hidden sm:inline">Next</span>
                   <ChevronRight className="w-4 h-4" />
                 </Button>
               </div>
               
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
                 <Button
                   onClick={() => setScale(Math.max(0.5, scale - 0.2))}
                   size="sm"
@@ -327,7 +327,7 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
                 >
                   <ZoomOut className="w-4 h-4" />
                 </Button>
-                <span className="text-sm text-muted-foreground min-w-[60px] text-center">
+                <span className="text-xs sm:text-sm text-muted-foreground min-w-[50px] sm:min-w-[60px] text-center">
                   {Math.round(scale * 100)}%
                 </span>
                 <Button
@@ -341,7 +341,7 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
             </div>
 
             {/* PDF Document */}
-            <div className="bg-card shadow-2xl rounded-lg border border-border p-8 flex justify-center">
+            <div className="bg-card shadow-2xl rounded-lg border border-border p-2 sm:p-4 md:p-8 flex justify-center overflow-x-auto">
               <Document
                 file="/english-grade1-chapter.pdf"
                 onLoadSuccess={onDocumentLoadSuccess}
@@ -369,8 +369,8 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
 
         {/* Right Panel - Learning Resources */}
         {showResources && (
-          <div className="w-96 bg-card border-l border-border overflow-y-auto">
-            <div className="p-6">
+          <div className="fixed md:relative inset-0 md:inset-auto z-40 md:z-0 w-full md:w-96 bg-card md:border-l border-border overflow-y-auto">
+            <div className="p-4 sm:p-6">
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-lg font-bold text-foreground">Resources</h3>
                 <Button
@@ -437,8 +437,8 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
 
         {/* Right Panel - Lesson Plans & Assessments */}
         {showLessonPlans && (
-          <div className="w-96 bg-card border-l border-border overflow-y-auto">
-            <div className="p-6">
+          <div className="fixed md:relative inset-0 md:inset-auto z-40 md:z-0 w-full md:w-96 bg-card md:border-l border-border overflow-y-auto">
+            <div className="p-4 sm:p-6">
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-lg font-bold text-foreground">Resources</h3>
                 <Button
@@ -452,9 +452,9 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
 
 
               <Tabs defaultValue="worksheets" className="mt-6">
-                <TabsList className="grid w-full grid-cols-2">
-                  <TabsTrigger value="worksheets">Worksheets</TabsTrigger>
-                  <TabsTrigger value="answer-keys">Answer Keys</TabsTrigger>
+                <TabsList className="grid w-full grid-cols-2 h-auto">
+                  <TabsTrigger value="worksheets" className="text-xs sm:text-sm">Worksheets</TabsTrigger>
+                  <TabsTrigger value="answer-keys" className="text-xs sm:text-sm">Answer Keys</TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="worksheets" className="mt-4">
@@ -558,7 +558,7 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
 
       {/* Resource Viewer Modal */}
       {selectedResource && (
-        <div className="fixed inset-0 bg-background/95 z-50 flex items-center justify-center p-8">
+        <div className="fixed inset-0 bg-background/95 z-50 flex items-center justify-center p-2 sm:p-4 md:p-8">
           <div className="w-full max-w-5xl max-h-[90vh] overflow-y-auto">
             <ResourceViewer
               resource={selectedResource}
