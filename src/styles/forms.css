@@ -1,0 +1,130 @@
+/* Form and Dropdown Styles */
+
+/* Form Labels */
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: hsl(var(--foreground));
+  margin-bottom: 0.5rem;
+}
+
+/* Dropdown Groups */
+.dropdowns-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.dropdown-wrapper {
+  width: 100%;
+}
+
+.dropdown-wrapper--medium {
+  max-width: 28rem;
+}
+
+.dropdown-wrapper--small {
+  width: 100%;
+}
+
+/* Select Trigger Variants */
+.select-trigger {
+  width: 100%;
+}
+
+.select-trigger--card {
+  background-color: hsl(var(--card));
+  border-color: hsl(var(--border));
+}
+
+.select-trigger--white {
+  background-color: hsl(0, 0%, 100%);
+  color: hsl(var(--foreground));
+  border: 2px solid hsl(var(--primary) / 0.2);
+  transition: border-color 0.2s;
+}
+
+.select-trigger--white:hover {
+  border-color: hsl(var(--primary) / 0.4);
+}
+
+.select-trigger--white-dark {
+  background-color: hsl(0, 0%, 100%);
+  color: hsl(var(--foreground));
+}
+
+/* Select Content */
+.select-content {
+  z-index: 50;
+}
+
+.select-content--popover {
+  background-color: hsl(var(--popover));
+  border-color: hsl(var(--border));
+}
+
+.select-content--white {
+  background-color: hsl(0, 0%, 100%);
+}
+
+.select-content--white-dark {
+  background-color: hsl(0, 0%, 100%);
+}
+
+/* Filter Section */
+.filter-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filter-wrapper {
+  width: 100%;
+}
+
+/* Parent Specific */
+.parent-subject-selector-wrapper {
+  width: 17.5rem;
+  background-color: hsl(0, 0%, 100%);
+  color: hsl(var(--foreground));
+  border: 2px solid hsl(var(--primary) / 0.2);
+  transition: border-color 0.2s;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.parent-subject-selector-wrapper:hover {
+  border-color: hsl(var(--primary) / 0.4);
+}
+
+/* Responsive Form Layouts */
+@media (min-width: 640px) {
+  .dropdowns-container {
+    flex-direction: row;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .dropdown-wrapper--small {
+    width: 12rem;
+  }
+  
+  .filter-section {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .filter-wrapper {
+    width: 12rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .dropdowns-container {
+    gap: 1rem;
+  }
+}

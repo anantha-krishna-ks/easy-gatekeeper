@@ -94,17 +94,16 @@ const ParentDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-secondary/5">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-card/80 backdrop-blur-sm border-b border-border shadow-sm">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-primary/10 rounded-lg">
-              <User className="h-6 w-6 text-primary" />
+    <div className="parent-dashboard-bg">
+      <header className="parent-header">
+        <div className="parent-header-container">
+          <div className="parent-header-brand">
+            <div className="parent-header-icon-wrapper">
+              <User className="parent-header-icon" />
             </div>
             <div>
-              <h1 className="text-lg font-semibold text-foreground">Parent Portal</h1>
-              <p className="text-xs text-muted-foreground">Monitor your ward's progress</p>
+              <h1 className="parent-header-title">Parent Portal</h1>
+              <p className="parent-header-subtitle">Monitor your ward's progress</p>
             </div>
           </div>
           <Button variant="outline" size="sm" onClick={handleLogout}>
@@ -114,47 +113,34 @@ const ParentDashboard = () => {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8 md:py-12">
+      <main className="parent-dashboard-main">
         {!selectedWard ? (
-          // Ward Selection View
           <div className="max-w-4xl mx-auto space-y-8">
-            <div className="text-center space-y-2">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-                Select Your Ward
-              </h2>
-              <p className="text-muted-foreground text-lg">
+            <div className="parent-section-header">
+              <h2 className="parent-section-title">Select Your Ward</h2>
+              <p className="parent-section-description">
                 Choose a student to view their academic information
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="wards-grid">
               {wards.map((ward) => (
-                <Card
-                  key={ward.id}
-                  className="group cursor-pointer transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:scale-[1.02] border-2 hover:border-primary/50"
-                  onClick={() => setSelectedWard(ward.id)}
-                >
-                  <CardContent className="p-8 space-y-4">
-                    <div className="flex items-center gap-4">
-                      <div className="p-4 bg-primary/10 rounded-full group-hover:bg-primary/20 transition-colors">
-                        <User className="h-8 w-8 text-primary" />
+                <Card key={ward.id} className="ward-card" onClick={() => setSelectedWard(ward.id)}>
+                  <CardContent className="ward-card-content">
+                    <div className="ward-card-header">
+                      <div className="ward-card-icon-wrapper">
+                        <User className="ward-card-icon" />
                       </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
-                          {ward.name}
-                        </h3>
-                        <div className="flex items-center gap-2 mt-1">
-                          <span className="text-sm font-medium text-muted-foreground">
-                            {ward.class}
-                          </span>
-                          <span className="text-muted-foreground">•</span>
-                          <span className="text-sm font-medium text-muted-foreground">
-                            Section {ward.section}
-                          </span>
+                      <div className="ward-card-info">
+                        <h3 className="ward-card-name">{ward.name}</h3>
+                        <div className="ward-card-details">
+                          <span className="ward-card-detail">{ward.class}</span>
+                          <span className="ward-card-separator">•</span>
+                          <span className="ward-card-detail">Section {ward.section}</span>
                         </div>
                       </div>
                     </div>
-                    <div className="pt-4 border-t border-border">
+                    <div className="ward-card-footer">
                       <Button 
                         className="w-full" 
                         variant="outline"
@@ -172,48 +158,42 @@ const ParentDashboard = () => {
             </div>
           </div>
         ) : (
-          // Resource Selection View
           <div className="max-w-5xl mx-auto space-y-8">
-            <div className="flex items-center gap-4">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleBackToWards}
-                className="gap-2"
-              >
+            <div className="parent-back-button-wrapper">
+              <Button variant="outline" size="sm" onClick={handleBackToWards} className="gap-2">
                 <ArrowLeft className="h-4 w-4" />
                 Back to Wards
               </Button>
             </div>
 
             <div className="text-center space-y-6">
-              <Card className="max-w-2xl mx-auto border-2 bg-gradient-to-br from-primary/5 to-primary/10">
-                <CardContent className="p-8">
-                  <div className="flex items-center justify-center gap-4 mb-4">
-                    <div className="p-4 bg-primary/10 rounded-full">
-                      <User className="h-8 w-8 text-primary" />
+              <Card className="ward-info-card">
+                <CardContent className="ward-info-card-content">
+                  <div className="ward-info-header">
+                    <div className="ward-info-icon-wrapper">
+                      <User className="ward-info-icon" />
                     </div>
                     <div>
-                      <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+                      <h2 className="ward-info-name">
                         {wards.find((w) => w.id === selectedWard)?.name}
                       </h2>
-                      <div className="flex items-center justify-center gap-2 mt-2">
-                        <span className="text-base font-semibold text-primary">
+                      <div className="ward-info-details">
+                        <span className="ward-info-detail">
                           {wards.find((w) => w.id === selectedWard)?.class}
                         </span>
-                        <span className="text-muted-foreground">•</span>
-                        <span className="text-base font-semibold text-primary">
+                        <span className="ward-card-separator">•</span>
+                        <span className="ward-info-detail">
                           Section {wards.find((w) => w.id === selectedWard)?.section}
                         </span>
                       </div>
                     </div>
                   </div>
                   
-                  <div className="mt-6 pt-6 border-t border-border">
-                    <div className="flex justify-center items-center gap-4">
-                      <label className="text-lg font-semibold text-foreground">Subject:</label>
+                  <div className="ward-info-divider">
+                    <div className="ward-info-subject-selector">
+                      <label className="ward-info-subject-label">Subject:</label>
                       <Select value={selectedSubject} onValueChange={setSelectedSubject}>
-                        <SelectTrigger className="w-[280px] bg-white dark:bg-white text-foreground border-2 border-primary/20 hover:border-primary/40 transition-colors shadow-sm">
+                        <SelectTrigger className="parent-subject-selector-wrapper">
                           <SelectValue placeholder="Select a subject" />
                         </SelectTrigger>
                         <SelectContent>
@@ -229,36 +209,28 @@ const ParentDashboard = () => {
               </Card>
             </div>
 
-            <div className="text-center mb-8">
-              <p className="text-lg font-medium text-foreground mb-2">
-                Select a Resource
-              </p>
-              <p className="text-muted-foreground">
+            <div className="parent-resource-header">
+              <p className="parent-resource-title">Select a Resource</p>
+              <p className="parent-resource-description">
                 Access your ward's learning materials and progress
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="resources-tiles-grid">
               {resourceTiles.map((resource) => {
                 const Icon = resource.icon;
                 return (
                   <Card
                     key={resource.id}
-                    className={cn(
-                      "group cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.03] border-2",
-                      "bg-gradient-to-br",
-                      resource.color
-                    )}
+                    className={cn("resource-tile-card", resource.color)}
                     onClick={() => handleResourceClick(resource.id)}
                   >
-                    <CardContent className="p-8 flex flex-col items-center justify-center text-center space-y-4 min-h-[200px]">
-                      <div className="p-6 bg-background/80 backdrop-blur-sm rounded-full shadow-lg group-hover:scale-110 transition-transform">
-                        <Icon className={cn("h-12 w-12", resource.iconColor)} />
+                    <CardContent className="resource-tile-content">
+                      <div className="resource-tile-icon-wrapper">
+                        <Icon className={cn("resource-tile-icon", resource.iconColor)} />
                       </div>
-                      <h3 className="text-xl font-semibold text-foreground">
-                        {resource.label}
-                      </h3>
-                      <p className="text-sm text-muted-foreground max-w-xs">
+                      <h3 className="resource-tile-title">{resource.label}</h3>
+                      <p className="resource-tile-description">
                         {resource.id === "ebook" && "Browse and read digital textbooks"}
                         {resource.id === "learning-resources" && "Access study materials and resources"}
                         {resource.id === "assessments" && "View assigned tests and worksheets"}

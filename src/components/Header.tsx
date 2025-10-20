@@ -11,26 +11,27 @@ interface HeaderProps {
 const Header = ({ onLogout, role = "teacher" }: HeaderProps) => {
   const navigate = useNavigate();
   
-  return <header className="h-16 bg-card border-b border-border flex items-center justify-between px-6 sticky top-0 z-50 shadow-sm">
-      <div className="flex items-center gap-3">
-        <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-          <BookOpen className="w-6 h-6 text-primary-foreground" />
+  return (
+    <header className="app-header">
+      <div className="header-brand">
+        <div className="header-logo">
+          <BookOpen className="header-logo-icon" />
         </div>
         <div>
-          <h1 className="text-xl font-bold text-foreground">Ignite</h1>
-          <p className="text-xs text-muted-foreground">{role === "teacher" ? "Teacher" : "Student"} Portal</p>
+          <h1 className="header-title">Ignite</h1>
+          <p className="header-subtitle">{role === "teacher" ? "Teacher" : "Student"} Portal</p>
         </div>
       </div>
 
       <DropdownMenu>
-        <DropdownMenuTrigger className="flex items-center gap-2 hover:bg-muted px-3 py-2 rounded-lg transition-colors">
+        <DropdownMenuTrigger className="header-user-trigger">
           <Avatar className="w-9 h-9">
             <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=teacher" />
             <AvatarFallback className="bg-primary text-primary-foreground">TC</AvatarFallback>
           </Avatar>
-          <div className="text-left hidden md:block">
-            <p className="text-sm font-medium text-foreground">Ms. Sarah Johnson</p>
-            <p className="text-xs text-muted-foreground">{role === "teacher" ? "Teacher" : "Class 6"}</p>
+          <div className="header-user-info hidden md:block">
+            <p className="header-user-name">Ms. Sarah Johnson</p>
+            <p className="header-user-role">{role === "teacher" ? "Teacher" : "Class 6"}</p>
           </div>
           <ChevronDown className="w-4 h-4 text-muted-foreground" />
         </DropdownMenuTrigger>
@@ -52,6 +53,7 @@ const Header = ({ onLogout, role = "teacher" }: HeaderProps) => {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-    </header>;
+    </header>
+  );
 };
 export default Header;

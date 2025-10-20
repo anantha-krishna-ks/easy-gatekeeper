@@ -35,9 +35,9 @@ const Layout = ({ children, role }: LayoutProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="dashboard-layout">
       <Header onLogout={handleLogout} />
-      <div className="flex h-[calc(100vh-4rem)]">
+      <div className="dashboard-container">
         {role !== "parent" && (
           <Sidebar
             activeMenu={getActiveMenu()}
@@ -45,7 +45,7 @@ const Layout = ({ children, role }: LayoutProps) => {
             role={role}
           />
         )}
-        <main className="flex-1 overflow-auto">
+        <main className="dashboard-main">
           {children}
         </main>
       </div>
