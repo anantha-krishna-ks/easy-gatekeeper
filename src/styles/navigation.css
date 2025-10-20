@@ -260,7 +260,7 @@
 
 @media (max-width: 767px) {
   .app-sidebar {
-    display: flex; /* Keep sidebar visible on mobile */
+    display: none;
   }
   
   .header-user-info {
