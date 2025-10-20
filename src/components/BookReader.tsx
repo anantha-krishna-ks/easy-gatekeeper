@@ -290,7 +290,7 @@ const BookReader = ({ subject, onClose, showNavigation = true }: BookReaderProps
       </div>
 
       {/* Body */}
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 min-h-0 flex overflow-hidden">
         {/* Main Content - PDF View */}
         <div className="flex-1 overflow-y-auto bg-muted/30">
           <div className="w-full p-8">

@@ -87,7 +87,7 @@ const BookReaderPage = () => {
     <div className="h-screen flex flex-col bg-background">
       <Header onLogout={handleLogout} role={userRole} />
 
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden min-h-0">
         {/* Mobile Menu */}
         <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
           <SheetTrigger asChild>
@@ -132,7 +132,7 @@ const BookReaderPage = () => {
         <Sidebar activeMenu={activeMenu} onMenuChange={handleMenuChange} role={userRole} />
 
         {/* Main Content with Breadcrumb */}
-        <div className="flex flex-col flex-1">
+        <div className="flex flex-col flex-1 min-h-0">
           <Breadcrumb subject={subject.title} userRole={userRole} />
           <BookReader subject={subject.title} />
         </div>
