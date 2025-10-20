@@ -134,7 +134,7 @@ const BookReaderPage = () => {
         {/* Main Content with Breadcrumb */}
         <div className="flex flex-col flex-1 overflow-hidden">
           <Breadcrumb subject={subject.title} userRole={userRole} />
-          <BookReader subject={subject.title} showNavigation={false} />
+          <BookReader subject={subject.title} />
         </div>
       </div>
     </div>

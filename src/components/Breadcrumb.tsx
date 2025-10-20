@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 interface BreadcrumbProps {
   subject: string;
-  userRole: "student" | "teacher";
+  userRole: "student" | "teacher" | "parent";
 }
 
 const Breadcrumb = ({ subject, userRole }: BreadcrumbProps) => {
@@ -15,6 +15,8 @@ const Breadcrumb = ({ subject, userRole }: BreadcrumbProps) => {
       navigate("/student-dashboard");
     } else if (userRole === "teacher") {
       navigate("/teacher-dashboard");
+    } else if (userRole === "parent") {
+      navigate("/parent-dashboard");
     }
   };
 
