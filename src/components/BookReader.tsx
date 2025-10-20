@@ -230,7 +230,7 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
             variant="ghost"
             size="icon"
             onClick={onClose}
-            className="hover:bg-muted shrink-0"
+            className="shrink-0 hover:bg-accent"
           >
             <ArrowLeft className="w-5 h-5" />
           </Button>
