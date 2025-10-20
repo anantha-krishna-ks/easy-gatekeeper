@@ -16,7 +16,8 @@ pdfjs.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@$
 
 interface BookReaderProps {
   subject: string;
-  onClose: () => void;
+  onClose?: () => void;
+  showNavigation?: boolean;
 }
 
 const mockPages = [
@@ -128,7 +129,7 @@ const mockAssessments = [
   { id: 4, title: "Mid-term Assessment", url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", chapterId: 1 },
 ];
 
-const BookReader = ({ subject, onClose }: BookReaderProps) => {
+const BookReader = ({ subject, onClose, showNavigation = true }: BookReaderProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [numPages, setNumPages] = useState<number>(0);
   const [scale, setScale] = useState(1.2);
@@ -222,18 +223,20 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-background z-50 flex flex-col">
+    <div className={showNavigation ? "flex-1 flex flex-col bg-background" : "fixed inset-0 bg-background z-50 flex flex-col"}>
       {/* Header */}
       <div className="h-auto md:h-16 bg-card border-b border-border flex flex-col md:flex-row items-start md:items-center justify-between px-4 md:px-6 py-3 md:py-0 gap-3 md:gap-4">
         <div className="flex items-center gap-2 md:gap-4 w-full md:w-auto">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={onClose}
-            className="hover:bg-muted shrink-0"
-          >
-            <X className="w-5 h-5" />
-          </Button>
+          {showNavigation && onClose && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onClose}
+              className="hover:bg-muted shrink-0"
+            >
+              <X className="w-5 h-5" />
+            </Button>
+          )}
           <h2 className="text-base md:text-xl font-bold text-foreground flex items-center gap-2 truncate">
             <BookOpen className="w-4 h-4 md:w-5 md:h-5 shrink-0" />
             <span className="truncate">{subject} - Book</span>
