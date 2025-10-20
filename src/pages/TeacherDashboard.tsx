@@ -7,7 +7,7 @@ import BookReader from "@/components/BookReader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Download, FileText, Activity, Calculator, Eye, Video, FileIcon, Layers, Menu, LayoutDashboard, BookOpen, ClipboardList, BookMarked, User } from "lucide-react";
+import { Download, FileText, Activity, Calculator, Eye, Video, FileIcon, Layers, Menu, LayoutDashboard, BookOpen, ClipboardList, BookMarked } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   Select,
@@ -143,7 +143,6 @@ const TeacherDashboard = () => {
                 { id: "assessments", label: "Assessments", icon: ClipboardList },
                 { id: "lesson-plans", label: "Lesson Plans", icon: BookMarked },
                 { id: "reports", label: "Reports", icon: FileText },
-                { id: "profile", label: "Profile", icon: User },
               ].map((item) => {
                 const Icon = item.icon;
                 const isActive = activeMenu === item.id;
@@ -152,11 +151,7 @@ const TeacherDashboard = () => {
                   <button
                     key={item.id}
                     onClick={() => {
-                      if (item.id === "profile") {
-                        navigate("/profile-settings");
-                      } else {
-                        setActiveMenu(item.id);
-                      }
+                      setActiveMenu(item.id);
                       setMobileMenuOpen(false);
                     }}
                     className={cn(

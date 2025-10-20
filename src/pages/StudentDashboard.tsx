@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Video, FileText, Layers, Download, Menu, LayoutDashboard, BookOpen, ClipboardList, BookMarked, Calendar, Clock, ArrowLeft, User } from "lucide-react";
+import { Video, FileText, Layers, Download, Menu, LayoutDashboard, BookOpen, ClipboardList, BookMarked, Calendar, Clock, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import scienceImg from "@/assets/science-subject.png";
 import mathImg from "@/assets/mathematics-subject.png";
@@ -189,7 +189,6 @@ const StudentDashboard = () => {
                 { id: "learning-resources", label: "Learning Resources", icon: BookOpen },
                 { id: "assessments", label: "Assessments", icon: ClipboardList },
                 { id: "reports", label: "Reports", icon: FileText },
-                { id: "profile", label: "Profile", icon: User },
               ].map((item) => {
                 const Icon = item.icon;
                 const isActive = activeMenu === item.id;
@@ -198,11 +197,7 @@ const StudentDashboard = () => {
                   <button
                     key={item.id}
                     onClick={() => {
-                      if (item.id === "profile") {
-                        navigate("/profile-settings");
-                      } else {
-                        setActiveMenu(item.id);
-                      }
+                      setActiveMenu(item.id);
                       setMobileMenuOpen(false);
                     }}
                     className={cn(

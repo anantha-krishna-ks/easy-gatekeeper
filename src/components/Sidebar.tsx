@@ -1,4 +1,4 @@
-import { FileText, ClipboardList, BookOpen, LayoutDashboard, BookMarked, User } from "lucide-react";
+import { FileText, ClipboardList, BookOpen, LayoutDashboard, BookMarked } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface SidebarProps {
@@ -13,7 +13,6 @@ const menuItems = [
   { id: "assessments", label: "Assessments", icon: ClipboardList },
   { id: "lesson-plans", label: "Lesson Plans", icon: BookMarked },
   { id: "reports", label: "Reports", icon: FileText },
-  { id: "profile", label: "Profile", icon: User },
 ];
 
 const Sidebar = ({ activeMenu, onMenuChange, role = "student" }: SidebarProps) => {
