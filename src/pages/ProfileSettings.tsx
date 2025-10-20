@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Camera, Mail, Phone, MapPin, Calendar } from "lucide-react";
+import { Camera, Mail, Phone, MapPin, Calendar } from "lucide-react";
+import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -12,11 +13,12 @@ import { toast } from "@/hooks/use-toast";
 const ProfileSettings = () => {
   const navigate = useNavigate();
   const userRole = localStorage.getItem("userRole");
-  
-  const handleBack = () => {
-    const dashboardRoute = userRole === "teacher" ? "/teacher-dashboard" : "/student-dashboard";
-    navigate(dashboardRoute);
-  };
+
+  useEffect(() => {
+    if (!userRole) {
+      navigate("/");
+    }
+  }, [userRole, navigate]);
   
   const [formData, setFormData] = useState({
     firstName: "Sarah",
@@ -46,24 +48,12 @@ const ProfileSettings = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="h-16 bg-card border-b border-border flex items-center px-6 sticky top-0 z-50 shadow-sm">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={handleBack}
-          className="mr-4"
-        >
-          <ArrowLeft className="h-5 w-5" />
-        </Button>
+    <Layout role={userRole as "student" | "teacher" | "parent"}>
+      <div className="container max-w-4xl mx-auto p-6 space-y-6">
         <div>
-          <h1 className="text-xl font-bold text-foreground">Profile Settings</h1>
-          <p className="text-xs text-muted-foreground">Manage your account information</p>
+          <h1 className="text-2xl font-bold text-foreground mb-1">Profile Settings</h1>
+          <p className="text-sm text-muted-foreground">Manage your account information</p>
         </div>
-      </header>
-
-      <main className="container max-w-4xl mx-auto p-6 space-y-6">
         {/* Profile Picture Section */}
         <Card>
           <CardHeader>
@@ -248,15 +238,12 @@ const ProfileSettings = () => {
 
         {/* Action Buttons */}
         <div className="flex justify-end gap-4">
-          <Button variant="outline" onClick={handleBack}>
-            Cancel
-          </Button>
           <Button onClick={handleSave}>
             Save Changes
           </Button>
         </div>
-      </main>
-    </div>
+      </div>
+    </Layout>
   );
 };
 

@@ -7,7 +7,7 @@ import BookReader from "@/components/BookReader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Download, FileText, Activity, Calculator, Eye, Video, FileIcon, Layers, Menu, LayoutDashboard, BookOpen, ClipboardList, BookMarked } from "lucide-react";
+import { Download, FileText, Activity, Calculator, Eye, Video, FileIcon, Layers, Menu, LayoutDashboard, BookOpen, ClipboardList, BookMarked, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   Select,
@@ -101,6 +101,14 @@ const TeacherDashboard = () => {
     navigate("/");
   };
 
+  const handleMenuChange = (menu: string) => {
+    if (menu === "profile") {
+      navigate("/profile-settings");
+    } else {
+      setActiveMenu(menu);
+    }
+  };
+
   if (selectedSubject) {
     const subject = subjects.find((s) => s.id === selectedSubject);
     return (
@@ -135,6 +143,7 @@ const TeacherDashboard = () => {
                 { id: "assessments", label: "Assessments", icon: ClipboardList },
                 { id: "lesson-plans", label: "Lesson Plans", icon: BookMarked },
                 { id: "reports", label: "Reports", icon: FileText },
+                { id: "profile", label: "Profile", icon: User },
               ].map((item) => {
                 const Icon = item.icon;
                 const isActive = activeMenu === item.id;
@@ -143,7 +152,11 @@ const TeacherDashboard = () => {
                   <button
                     key={item.id}
                     onClick={() => {
-                      setActiveMenu(item.id);
+                      if (item.id === "profile") {
+                        navigate("/profile-settings");
+                      } else {
+                        setActiveMenu(item.id);
+                      }
                       setMobileMenuOpen(false);
                     }}
                     className={cn(
@@ -163,7 +176,7 @@ const TeacherDashboard = () => {
         </Sheet>
 
         {/* Desktop Sidebar */}
-        <Sidebar activeMenu={activeMenu} onMenuChange={setActiveMenu} role="teacher" />
+        <Sidebar activeMenu={activeMenu} onMenuChange={handleMenuChange} role="teacher" />
 
         <main className="flex-1 overflow-y-auto">
           {activeMenu === "dashboard" && (
