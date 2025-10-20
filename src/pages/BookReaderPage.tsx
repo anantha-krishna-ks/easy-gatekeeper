@@ -132,7 +132,7 @@ const BookReaderPage = () => {
         <Sidebar activeMenu={activeMenu} onMenuChange={handleMenuChange} role={userRole} />
 
         {/* Main Content with Breadcrumb */}
-        <div className="flex flex-col flex-1 overflow-hidden">
+        <div className="flex flex-col flex-1">
           <Breadcrumb subject={subject.title} userRole={userRole} />
           <BookReader subject={subject.title} />
         </div>
