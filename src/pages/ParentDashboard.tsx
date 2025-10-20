@@ -18,28 +18,28 @@ const resourceTiles = [
     id: "ebook", 
     label: "eBook", 
     icon: BookOpen, 
-    color: "from-blue-500/10 to-blue-600/20 hover:from-blue-500/20 hover:to-blue-600/30 border-blue-500/30",
+    color: "bg-gradient-to-br from-blue-500/30 to-blue-600/40 hover:from-blue-500/40 hover:to-blue-600/50 border-blue-500/50",
     iconColor: "text-blue-600"
   },
   { 
     id: "learning-resources", 
     label: "Learning Resources", 
     icon: Layers, 
-    color: "from-green-500/10 to-green-600/20 hover:from-green-500/20 hover:to-green-600/30 border-green-500/30",
+    color: "bg-gradient-to-br from-green-500/30 to-green-600/40 hover:from-green-500/40 hover:to-green-600/50 border-green-500/50",
     iconColor: "text-green-600"
   },
   { 
     id: "assessments", 
     label: "Assessments", 
     icon: FileText, 
-    color: "from-purple-500/10 to-purple-600/20 hover:from-purple-500/20 hover:to-purple-600/30 border-purple-500/30",
+    color: "bg-gradient-to-br from-purple-500/30 to-purple-600/40 hover:from-purple-500/40 hover:to-purple-600/50 border-purple-500/50",
     iconColor: "text-purple-600"
   },
   { 
     id: "reports", 
     label: "Reports", 
     icon: BarChart3, 
-    color: "from-orange-500/10 to-orange-600/20 hover:from-orange-500/20 hover:to-orange-600/30 border-orange-500/30",
+    color: "bg-gradient-to-br from-orange-500/30 to-orange-600/40 hover:from-orange-500/40 hover:to-orange-600/50 border-orange-500/50",
     iconColor: "text-orange-600"
   },
 ];
