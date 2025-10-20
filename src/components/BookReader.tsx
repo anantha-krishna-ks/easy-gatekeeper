@@ -222,7 +222,7 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-background z-50 flex flex-col">
+    <div className="flex flex-col h-full bg-background">
       {/* Header */}
       <div className="h-auto md:h-16 bg-card border-b border-border flex flex-col md:flex-row items-start md:items-center justify-between px-4 md:px-6 py-3 md:py-0 gap-3 md:gap-4">
         <div className="flex items-center gap-2 md:gap-4 w-full md:w-auto">
