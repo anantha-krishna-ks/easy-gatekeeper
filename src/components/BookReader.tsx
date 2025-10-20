@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, X, FileText, Video, BookOpen, ZoomIn, ZoomOut, Search } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowLeft, FileText, Video, BookOpen, ZoomIn, ZoomOut, Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -232,7 +232,7 @@ const BookReader = ({ subject, onClose }: BookReaderProps) => {
             onClick={onClose}
             className="hover:bg-muted shrink-0"
           >
-            <X className="w-5 h-5" />
+            <ArrowLeft className="w-5 h-5" />
           </Button>
           <h2 className="text-base md:text-xl font-bold text-foreground flex items-center gap-2 truncate">
             <BookOpen className="w-4 h-4 md:w-5 md:h-5 shrink-0" />
