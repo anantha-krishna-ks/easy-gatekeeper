@@ -211,8 +211,9 @@
 .resource-tile-card {
   cursor: pointer;
   transition: all 0.3s;
-  border: 2px solid transparent;
-  background: linear-gradient(to bottom right, transparent, transparent);
+  border-width: 2px;
+  border-style: solid;
+  background-color: transparent;
 }
 
 .resource-tile-card:hover {
