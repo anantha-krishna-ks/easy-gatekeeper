@@ -100,7 +100,7 @@ const LearnerLogin = () => {
       <div className="relative z-10 w-full max-w-sm">
         {/* Oxford Advantage Logo */}
         <div className="flex justify-center mb-6 animate-fade-in">
-          <div className="flex items-center gap-3 bg-blue-800 px-6 py-3 rounded-xl shadow-lg">
+          <div className="w-full flex items-center justify-center gap-3 bg-blue-800 px-6 py-4 rounded-xl shadow-lg">
             {/* Colorful Book Icon */}
             <div className="relative">
               <div className="w-10 h-10 relative">
