@@ -56,9 +56,9 @@ const LearnerLogin = () => {
         🚀
       </div>
 
-      {/* Animated Character - Books */}
+      {/* Animated Character - Sparkles */}
       <div className="absolute top-32 right-12 text-5xl animate-float cursor-pointer hover:scale-110 transition-transform" style={{ animationDelay: '1.2s' }}>
-        📚
+        ✨
       </div>
 
       {/* Animated Character - Star */}
