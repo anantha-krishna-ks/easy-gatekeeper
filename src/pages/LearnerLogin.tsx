@@ -4,7 +4,8 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from 'sonner';
-import { Shield, Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
+import oxfordLogo from '@/assets/oxford-advantage-logo.png';
 
 const LearnerLogin = () => {
   const navigate = useNavigate();
@@ -58,11 +59,13 @@ const LearnerLogin = () => {
 
       {/* Main content - centered */}
       <div className="relative z-10 w-full max-w-sm">
-        {/* Shield Icon */}
+        {/* Oxford Advantage Logo */}
         <div className="flex justify-center mb-6 animate-fade-in">
-          <div className="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center shadow-lg">
-            <Shield className="w-8 h-8 text-white" />
-          </div>
+          <img 
+            src={oxfordLogo} 
+            alt="Oxford Advantage - Integrated Learning Solutions" 
+            className="h-16 w-auto object-contain"
+          />
         </div>
 
         {/* Login Card */}
