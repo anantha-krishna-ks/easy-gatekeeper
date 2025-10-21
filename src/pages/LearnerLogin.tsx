@@ -74,7 +74,7 @@ const LearnerLogin = () => {
           
           {/* Header */}
           <div className="mb-6">
-            <h1 className="text-2xl font-bold mb-2 bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 bg-clip-text text-transparent">Sign in to your Account</h1>
+            <h1 className="text-2xl font-bold mb-2 bg-gradient-to-r from-blue-600 via-purple-500 to-purple-600 bg-clip-text text-transparent">Sign in to your Account</h1>
             <p className="text-sm text-gray-500">Enter your email and password to log in</p>
           </div>
           
