@@ -128,11 +128,7 @@ const LearnerLogin = () => {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between pt-1">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" className="w-4 h-4 rounded border-gray-300 text-teal-500 focus:ring-teal-500 focus:ring-2" />
-                  <span className="text-sm text-gray-600">Remember me</span>
-                </label>
+              <div className="flex items-center justify-end pt-1">
                 <button
                   type="button"
                   onClick={handleForgotPassword}
