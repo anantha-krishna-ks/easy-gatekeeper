@@ -100,22 +100,22 @@ const LearnerLogin = () => {
       <div className="relative z-10 w-full max-w-sm">
         {/* Oxford Advantage Logo */}
         <div className="flex justify-center mb-6 animate-fade-in">
-          <div className="w-full flex items-center justify-center gap-3 bg-blue-800 px-6 py-4 rounded-xl shadow-lg">
+          <div className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-blue-50 to-sky-50 px-6 py-4 rounded-xl shadow-sm border border-blue-100/50">
             {/* Colorful Book Icon */}
             <div className="relative">
-              <div className="w-10 h-10 relative">
+              <div className="w-12 h-12 relative">
                 {/* Book pages with gradient colors */}
-                <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-l-md transform -rotate-12"></div>
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-500 rounded-md transform rotate-0 translate-x-1"></div>
-                <div className="absolute inset-0 bg-gradient-to-br from-teal-400 to-green-500 rounded-r-md transform rotate-12 translate-x-2"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-l-md transform -rotate-12 shadow-md"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-500 rounded-md transform rotate-0 translate-x-1 shadow-md"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-teal-400 to-green-500 rounded-r-md transform rotate-12 translate-x-2 shadow-md"></div>
               </div>
             </div>
             
             {/* Text Logo */}
             <div className="flex flex-col">
-              <span className="text-2xl font-bold text-white leading-tight">Oxford</span>
-              <span className="text-xl font-bold text-green-400 leading-tight">Advantage</span>
-              <span className="text-[8px] text-blue-200 uppercase tracking-widest mt-0.5">Integrated Learning Solutions</span>
+              <span className="text-2xl font-bold text-gray-800 leading-tight">Oxford</span>
+              <span className="text-xl font-bold bg-gradient-to-r from-green-600 to-teal-600 bg-clip-text text-transparent leading-tight">Advantage</span>
+              <span className="text-[8px] text-gray-500 uppercase tracking-widest mt-0.5">Integrated Learning Solutions</span>
             </div>
           </div>
         </div>
