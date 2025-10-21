@@ -46,11 +46,11 @@ const LearnerLogin = () => {
   return (
     <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-6">
       {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 animate-gradient-xy"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-100 via-sky-50 to-purple-100 animate-gradient-xy"></div>
       
       {/* Moving gradient overlay */}
-      <div className="absolute inset-0 opacity-50">
-        <div className="absolute inset-0 bg-gradient-to-tr from-teal-200/40 via-blue-200/40 to-purple-200/40 animate-gradient-slow"></div>
+      <div className="absolute inset-0 opacity-40">
+        <div className="absolute inset-0 bg-gradient-to-tr from-cyan-100/60 via-violet-100/60 to-rose-100/60 animate-gradient-slow"></div>
       </div>
       
       {/* Fun decorative shapes with gradients */}
