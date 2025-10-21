@@ -2,14 +2,17 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from 'sonner';
-import { Menu, User, Lock, ArrowRight, Sparkles } from 'lucide-react';
+import { Shield, Eye, EyeOff } from 'lucide-react';
 
 const LearnerLogin = () => {
   const navigate = useNavigate();
   const [loginName, setLoginName] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,192 +38,173 @@ const LearnerLogin = () => {
     }, 1000);
   };
 
-  const handleOTPLogin = () => {
-    toast.info('OTP login coming soon!');
-  };
-
   const handleForgotPassword = () => {
     toast.info('Password recovery coming soon!');
   };
 
+  const handleGoogleLogin = () => {
+    toast.info('Google login coming soon!');
+  };
+
+  const handleFacebookLogin = () => {
+    toast.info('Facebook login coming soon!');
+  };
+
   return (
-    <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-6">
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-100 via-sky-50 to-purple-100 animate-gradient-xy"></div>
+    <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-4">
+      {/* Animated gradient background - clean blue theme */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-sky-50 to-blue-100 animate-gradient-xy"></div>
       
       {/* Moving gradient overlay */}
-      <div className="absolute inset-0 opacity-40">
-        <div className="absolute inset-0 bg-gradient-to-tr from-cyan-100/60 via-violet-100/60 to-rose-100/60 animate-gradient-slow"></div>
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute inset-0 bg-gradient-to-tr from-blue-100/50 via-sky-100/50 to-indigo-100/50 animate-gradient-slow"></div>
       </div>
-      
-      {/* Fun decorative shapes with gradients */}
-      <div className="absolute top-20 left-16 w-32 h-32 rounded-full bg-gradient-to-br from-blue-400/20 to-purple-400/20 animate-float blur-xl"></div>
-      <div className="absolute top-40 right-20 w-24 h-24 rounded-full bg-gradient-to-br from-teal-400/20 to-green-400/20 animate-float blur-lg" style={{ animationDelay: '1s' }}></div>
-      <div className="absolute bottom-32 left-24 w-20 h-20 rounded-full bg-gradient-to-br from-orange-400/20 to-pink-400/20 animate-float blur-lg" style={{ animationDelay: '2s' }}></div>
-      <div className="absolute bottom-48 right-32 w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400/20 to-orange-400/20 animate-float blur-md" style={{ animationDelay: '1.5s' }}></div>
-
-      {/* Animated Character - Rocket */}
-      <div className="absolute bottom-20 left-12 text-6xl animate-float cursor-pointer hover:scale-110 transition-transform z-10" style={{ animationDelay: '0.5s' }}>
-        🚀
-      </div>
-
-      {/* Animated Character - Sparkles */}
-      <div className="absolute top-32 right-12 text-5xl animate-float cursor-pointer hover:scale-110 transition-transform z-10" style={{ animationDelay: '1.2s' }}>
-        ✨
-      </div>
-
-      {/* Animated Character - Star */}
-      <div className="absolute top-1/4 left-20 text-4xl animate-pulse cursor-pointer hover:rotate-12 transition-transform z-10">
-        ⭐
-      </div>
-
-      {/* Animated Character - Brain */}
-      <div className="absolute bottom-1/3 right-16 text-4xl animate-float cursor-pointer hover:scale-110 transition-transform z-10" style={{ animationDelay: '2.5s' }}>
-        🧠
-      </div>
-
-      {/* Animated Character - Trophy */}
-      <div className="absolute top-1/3 right-1/4 text-3xl animate-bounce cursor-pointer z-10" style={{ animationDelay: '3s' }}>
-        🏆
-      </div>
-
-      {/* Menu button */}
-      <button className="absolute top-6 right-6 text-gray-600 p-2 hover:bg-white/60 rounded-xl transition-all z-50">
-        <Menu size={24} />
-      </button>
 
       {/* Main content - centered */}
-      <div className="relative z-10 w-full max-w-md space-y-10">
-        {/* Logo */}
-        <div className="text-center animate-fade-in">
-          <div className="flex items-center justify-center gap-3 mb-2">
-            <div className="w-14 h-14 bg-teal-500 rounded-2xl flex items-center justify-center">
-              <span className="text-3xl">📚</span>
-            </div>
-            <div className="text-left">
-              <h1 className="text-3xl font-bold text-gray-800">Oxford</h1>
-              <h2 className="text-2xl font-bold text-teal-600">Advantage</h2>
-            </div>
+      <div className="relative z-10 w-full max-w-sm">
+        {/* Shield Icon */}
+        <div className="flex justify-center mb-6 animate-fade-in">
+          <div className="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center shadow-lg">
+            <Shield className="w-8 h-8 text-white" />
           </div>
-          <p className="text-xs text-gray-500 uppercase tracking-wider mt-2">Integrated Learning Solutions</p>
         </div>
 
         {/* Login Card */}
-        <div className="w-full bg-white/80 backdrop-blur-sm rounded-[2rem] shadow-sm border border-white/60 p-10 animate-fade-in relative overflow-hidden" style={{ animationDelay: '0.1s', fontFamily: 'Inter, sans-serif' }}>
-          {/* Decorative element */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-teal-100/30 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-24 h-24 bg-orange-100/30 rounded-full blur-2xl"></div>
+        <div className="w-full bg-white rounded-3xl shadow-lg p-8 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+          {/* Header */}
+          <div className="mb-6">
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">Sign in to your Account</h1>
+            <p className="text-sm text-gray-500">Enter your email and password to log in</p>
+          </div>
           
-          <div className="relative z-10">
-            {/* Header with sparkle */}
-            <div className="text-center mb-8">
-              <div className="inline-flex items-center justify-center gap-2 mb-3">
-                <Sparkles className="w-5 h-5 text-teal-500" />
-                <h2 className="text-3xl font-semibold text-gray-800" style={{ fontFamily: 'Outfit, sans-serif' }}>Welcome Back</h2>
-              </div>
-              <p className="text-sm text-gray-500">Enter your credentials to continue</p>
+          <form onSubmit={handleLogin} className="space-y-4">
+            {/* Email Input */}
+            <div className="space-y-2">
+              <Input
+                type="text"
+                placeholder="Loisbecket@gmail.com"
+                value={loginName}
+                onChange={(e) => setLoginName(e.target.value)}
+                className="w-full h-12 px-4 rounded-xl border-gray-200 bg-gray-50 focus:bg-white focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all text-gray-900 placeholder:text-gray-400"
+                required
+              />
             </div>
-            
-            <form onSubmit={handleLogin} className="space-y-4">
-              {/* Login Name Input with Icon */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700 ml-1">Login Name</label>
-                <div className="relative group">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-teal-500 transition-colors" />
-                  <Input
-                    type="text"
-                    placeholder="Enter your login name"
-                    value={loginName}
-                    onChange={(e) => setLoginName(e.target.value)}
-                    className="w-full h-14 pl-12 rounded-2xl border-gray-200 bg-gray-50/50 focus:bg-white focus:border-teal-400 focus:ring-2 focus:ring-teal-100 transition-all text-gray-700 placeholder:text-gray-400"
-                    required
-                  />
-                </div>
-              </div>
 
-              {/* Password Input with Icon */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700 ml-1">Password</label>
-                <div className="relative group">
-                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-teal-500 transition-colors" />
-                  <Input
-                    type="password"
-                    placeholder="Enter your password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="w-full h-14 pl-12 rounded-2xl border-gray-200 bg-gray-50/50 focus:bg-white focus:border-teal-400 focus:ring-2 focus:ring-teal-100 transition-all text-gray-700 placeholder:text-gray-400"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="flex items-center justify-end pt-1">
+            {/* Password Input */}
+            <div className="space-y-2">
+              <div className="relative">
+                <Input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full h-12 px-4 pr-12 rounded-xl border-gray-200 bg-gray-50 focus:bg-white focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all text-gray-900"
+                  required
+                />
                 <button
                   type="button"
-                  onClick={handleForgotPassword}
-                  className="text-sm text-teal-600 hover:text-teal-700 font-medium transition-colors"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                 >
-                  Forgot Password?
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
+            </div>
 
-              <Button
-                type="submit"
-                disabled={isLoading}
-                className="w-full h-14 bg-teal-500 hover:bg-teal-600 text-white text-base font-semibold rounded-2xl shadow-sm hover:shadow-md transition-all mt-6 group"
-              >
-                {isLoading ? (
-                  <span className="flex items-center gap-2">
-                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                    Signing in...
-                  </span>
-                ) : (
-                  <span className="flex items-center gap-2">
-                    Login
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                )}
-              </Button>
-
-              {/* Divider */}
-              <div className="relative my-6">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-200"></div>
-                </div>
-                <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-white px-3 text-gray-500">Or</span>
-                </div>
+            {/* Remember me & Forgot password */}
+            <div className="flex items-center justify-between pt-1">
+              <div className="flex items-center gap-2">
+                <Checkbox
+                  id="remember"
+                  checked={rememberMe}
+                  onCheckedChange={(checked) => setRememberMe(checked as boolean)}
+                  className="rounded border-gray-300"
+                />
+                <label htmlFor="remember" className="text-sm text-gray-600 cursor-pointer">
+                  Remember me
+                </label>
               </div>
+              <button
+                type="button"
+                onClick={handleForgotPassword}
+                className="text-sm text-blue-500 hover:text-blue-600 font-medium transition-colors"
+              >
+                Forgot Password?
+              </button>
+            </div>
+
+            {/* Login Button */}
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="w-full h-12 bg-blue-500 hover:bg-blue-600 text-white text-base font-semibold rounded-xl shadow-sm hover:shadow-md transition-all mt-6"
+            >
+              {isLoading ? (
+                <span className="flex items-center gap-2">
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  Signing in...
+                </span>
+              ) : (
+                "Log In"
+              )}
+            </Button>
+
+            {/* Divider */}
+            <div className="relative my-6">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-200"></div>
+              </div>
+              <div className="relative flex justify-center text-xs">
+                <span className="bg-white px-3 text-gray-500">Or</span>
+              </div>
+            </div>
+
+            {/* Social Login Buttons */}
+            <div className="space-y-3">
+              <button
+                type="button"
+                onClick={handleGoogleLogin}
+                className="w-full h-12 bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 font-medium rounded-xl transition-all flex items-center justify-center gap-3"
+              >
+                <svg className="w-5 h-5" viewBox="0 0 24 24">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                </svg>
+                Continue with Google
+              </button>
 
               <button
                 type="button"
-                onClick={handleOTPLogin}
-                className="w-full h-12 border-2 border-gray-200 hover:border-teal-300 hover:bg-teal-50/50 text-gray-700 font-medium rounded-2xl transition-all flex items-center justify-center gap-2"
+                onClick={handleFacebookLogin}
+                className="w-full h-12 bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 font-medium rounded-xl transition-all flex items-center justify-center gap-3"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                <svg className="w-5 h-5" fill="#1877F2" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                 </svg>
-                Login via OTP
+                Continue with Facebook
               </button>
-            </form>
+            </div>
+          </form>
 
-            {/* Demo credentials */}
-            <div className="mt-6 pt-5 border-t border-gray-200">
-              <div className="flex items-center justify-center gap-2 text-xs">
-                <div className="px-3 py-1.5 bg-teal-50 text-teal-700 rounded-full font-medium">
-                  Demo Access
-                </div>
-                <span className="text-gray-500">student / student123</span>
+          {/* Sign Up Link */}
+          <div className="mt-6 text-center text-sm text-gray-600">
+            Don't have an account?{' '}
+            <button className="text-blue-500 hover:text-blue-600 font-semibold transition-colors">
+              Sign Up
+            </button>
+          </div>
+
+          {/* Demo credentials */}
+          <div className="mt-4 pt-4 border-t border-gray-100">
+            <div className="flex items-center justify-center gap-2 text-xs">
+              <div className="px-2.5 py-1 bg-blue-50 text-blue-600 rounded-lg font-medium">
+                Demo
               </div>
+              <span className="text-gray-500">student / student123</span>
             </div>
           </div>
-        </div>
-
-        {/* Powered by */}
-        <div className="text-center animate-fade-in" style={{ animationDelay: '0.2s' }}>
-          <p className="text-xs text-gray-500 mb-1">Powered by:</p>
-          <p className="text-xl font-bold text-orange-500">LJSaras</p>
-          <p className="text-xs text-gray-500">from Excelsoft</p>
         </div>
       </div>
     </div>
