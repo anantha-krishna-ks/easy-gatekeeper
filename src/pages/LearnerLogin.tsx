@@ -66,7 +66,12 @@ const LearnerLogin = () => {
         </div>
 
         {/* Login Card */}
-        <div className="w-full bg-white rounded-3xl shadow-lg p-8 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+        <div className="w-full bg-white rounded-3xl shadow-lg p-8 animate-fade-in relative overflow-hidden" style={{ animationDelay: '0.1s' }}>
+          {/* Ribbon */}
+          <div className="absolute top-6 -right-10 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-12 py-1.5 rotate-45 shadow-lg">
+            <span className="text-xs font-semibold tracking-wide">SECURE LOGIN</span>
+          </div>
+          
           {/* Header */}
           <div className="mb-6">
             <h1 className="text-2xl font-bold text-gray-900 mb-2">Sign in to your Account</h1>
