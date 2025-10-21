@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from 'sonner';
 import { Eye, EyeOff } from 'lucide-react';
-import oxfordLogo from '@/assets/oxford-advantage-logo.png';
 
 const LearnerLogin = () => {
   const navigate = useNavigate();
@@ -61,11 +60,24 @@ const LearnerLogin = () => {
       <div className="relative z-10 w-full max-w-sm">
         {/* Oxford Advantage Logo */}
         <div className="flex justify-center mb-6 animate-fade-in">
-          <img 
-            src={oxfordLogo} 
-            alt="Oxford Advantage - Integrated Learning Solutions" 
-            className="h-16 w-auto object-contain"
-          />
+          <div className="flex items-center gap-3 bg-blue-800 px-6 py-3 rounded-xl shadow-lg">
+            {/* Colorful Book Icon */}
+            <div className="relative">
+              <div className="w-10 h-10 relative">
+                {/* Book pages with gradient colors */}
+                <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-l-md transform -rotate-12"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-500 rounded-md transform rotate-0 translate-x-1"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-teal-400 to-green-500 rounded-r-md transform rotate-12 translate-x-2"></div>
+              </div>
+            </div>
+            
+            {/* Text Logo */}
+            <div className="flex flex-col">
+              <span className="text-2xl font-bold text-white leading-tight">Oxford</span>
+              <span className="text-xl font-bold text-green-400 leading-tight">Advantage</span>
+              <span className="text-[8px] text-blue-200 uppercase tracking-widest mt-0.5">Integrated Learning Solutions</span>
+            </div>
+          </div>
         </div>
 
         {/* Login Card */}
