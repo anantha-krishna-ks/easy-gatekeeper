@@ -48,11 +48,13 @@ const LearnerLogin = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-4">
-      {/* Animated gradient background - clean blue theme */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-sky-50 to-blue-100 animate-gradient-xy"></div>
+      {/* Animated gradient background with multiple layers */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-sky-50 to-blue-100"></div>
+      <div className="absolute inset-0 bg-gradient-to-tr from-indigo-100/40 via-transparent to-purple-100/40 animate-gradient-xy"></div>
+      <div className="absolute inset-0 bg-gradient-to-bl from-cyan-100/30 via-transparent to-blue-100/30 animate-gradient-slow"></div>
       
       {/* WhatsApp-style doodle pattern background */}
-      <div className="absolute inset-0 opacity-20">
+      <div className="absolute inset-0 opacity-40">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="doodle-pattern" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
