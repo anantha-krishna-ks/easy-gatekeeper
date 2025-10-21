@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
-import { Menu } from 'lucide-react';
+import { Menu, User, Lock, ArrowRight, Sparkles } from 'lucide-react';
 
 const LearnerLogin = () => {
   const navigate = useNavigate();
@@ -80,66 +80,117 @@ const LearnerLogin = () => {
         </div>
 
         {/* Login Card */}
-        <div className="w-full bg-white rounded-3xl shadow-sm border border-gray-100 p-8 animate-fade-in" style={{ animationDelay: '0.1s' }}>
-          <h2 className="text-2xl font-semibold text-gray-800 text-center mb-8">Login</h2>
+        <div className="w-full bg-white/80 backdrop-blur-sm rounded-[2rem] shadow-sm border border-white/60 p-10 animate-fade-in relative overflow-hidden" style={{ animationDelay: '0.1s', fontFamily: 'Inter, sans-serif' }}>
+          {/* Decorative element */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-teal-100/30 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-24 h-24 bg-orange-100/30 rounded-full blur-2xl"></div>
           
-          <form onSubmit={handleLogin} className="space-y-5">
-            <div className="space-y-2">
-              <Input
-                type="text"
-                placeholder="Login Name"
-                value={loginName}
-                onChange={(e) => setLoginName(e.target.value)}
-                className="w-full h-12 rounded-xl border-gray-200 bg-gray-50 focus:bg-white focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all text-gray-700 placeholder:text-gray-400"
-                required
-              />
+          <div className="relative z-10">
+            {/* Header with sparkle */}
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center justify-center gap-2 mb-3">
+                <Sparkles className="w-5 h-5 text-teal-500" />
+                <h2 className="text-3xl font-semibold text-gray-800" style={{ fontFamily: 'Outfit, sans-serif' }}>Welcome Back</h2>
+              </div>
+              <p className="text-sm text-gray-500">Enter your credentials to continue</p>
             </div>
+            
+            <form onSubmit={handleLogin} className="space-y-4">
+              {/* Login Name Input with Icon */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700 ml-1">Login Name</label>
+                <div className="relative group">
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-teal-500 transition-colors" />
+                  <Input
+                    type="text"
+                    placeholder="Enter your login name"
+                    value={loginName}
+                    onChange={(e) => setLoginName(e.target.value)}
+                    className="w-full h-14 pl-12 rounded-2xl border-gray-200 bg-gray-50/50 focus:bg-white focus:border-teal-400 focus:ring-2 focus:ring-teal-100 transition-all text-gray-700 placeholder:text-gray-400"
+                    required
+                  />
+                </div>
+              </div>
 
-            <div className="space-y-2">
-              <Input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full h-12 rounded-xl border-gray-200 bg-gray-50 focus:bg-white focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all text-gray-700 placeholder:text-gray-400"
-                required
-              />
-            </div>
+              {/* Password Input with Icon */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700 ml-1">Password</label>
+                <div className="relative group">
+                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-teal-500 transition-colors" />
+                  <Input
+                    type="password"
+                    placeholder="Enter your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full h-14 pl-12 rounded-2xl border-gray-200 bg-gray-50/50 focus:bg-white focus:border-teal-400 focus:ring-2 focus:ring-teal-100 transition-all text-gray-700 placeholder:text-gray-400"
+                    required
+                  />
+                </div>
+              </div>
 
-            <div className="text-right">
-              <button
-                type="button"
-                onClick={handleForgotPassword}
-                className="text-sm text-teal-600 hover:text-teal-700 font-medium transition-colors"
+              <div className="flex items-center justify-between pt-1">
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" className="w-4 h-4 rounded border-gray-300 text-teal-500 focus:ring-teal-500 focus:ring-2" />
+                  <span className="text-sm text-gray-600">Remember me</span>
+                </label>
+                <button
+                  type="button"
+                  onClick={handleForgotPassword}
+                  className="text-sm text-teal-600 hover:text-teal-700 font-medium transition-colors"
+                >
+                  Forgot Password?
+                </button>
+              </div>
+
+              <Button
+                type="submit"
+                disabled={isLoading}
+                className="w-full h-14 bg-teal-500 hover:bg-teal-600 text-white text-base font-semibold rounded-2xl shadow-sm hover:shadow-md transition-all mt-6 group"
               >
-                Forgot Password?
-              </button>
-            </div>
+                {isLoading ? (
+                  <span className="flex items-center gap-2">
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    Signing in...
+                  </span>
+                ) : (
+                  <span className="flex items-center gap-2">
+                    Login
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                )}
+              </Button>
 
-            <Button
-              type="submit"
-              disabled={isLoading}
-              className="w-full h-12 bg-orange-500 hover:bg-orange-600 text-white text-base font-semibold rounded-xl shadow-sm transition-all"
-            >
-              {isLoading ? 'Signing in...' : 'Login'}
-            </Button>
+              {/* Divider */}
+              <div className="relative my-6">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-200"></div>
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-white px-3 text-gray-500">Or</span>
+                </div>
+              </div>
 
-            <div className="text-center pt-2">
               <button
                 type="button"
                 onClick={handleOTPLogin}
-                className="text-sm text-teal-600 hover:text-teal-700 font-medium transition-colors"
+                className="w-full h-12 border-2 border-gray-200 hover:border-teal-300 hover:bg-teal-50/50 text-gray-700 font-medium rounded-2xl transition-all flex items-center justify-center gap-2"
               >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
                 Login via OTP
               </button>
-            </div>
-          </form>
+            </form>
 
-          {/* Demo credentials inside card */}
-          <div className="mt-6 pt-4 border-t border-gray-100">
-            <p className="text-xs text-gray-500 text-center">
-              Demo: <span className="font-semibold text-gray-700">student</span> / <span className="font-semibold text-gray-700">student123</span>
-            </p>
+            {/* Demo credentials */}
+            <div className="mt-6 pt-5 border-t border-gray-200">
+              <div className="flex items-center justify-center gap-2 text-xs">
+                <div className="px-3 py-1.5 bg-teal-50 text-teal-700 rounded-full font-medium">
+                  Demo Access
+                </div>
+                <span className="text-gray-500">student / student123</span>
+              </div>
+            </div>
           </div>
         </div>
 
