@@ -100,7 +100,7 @@ const LearnerLogin = () => {
       <div className="relative z-10 w-full max-w-sm">
         {/* Oxford Advantage Logo */}
         <div className="flex justify-center mb-6 animate-fade-in">
-          <div className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-blue-50 to-sky-50 px-6 py-4 rounded-xl shadow-sm border border-blue-100/50">
+          <div className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 px-6 py-4 rounded-xl shadow-lg border border-blue-400/30">
             {/* Colorful Book Icon */}
             <div className="relative">
               <div className="w-12 h-12 relative">
@@ -113,9 +113,9 @@ const LearnerLogin = () => {
             
             {/* Text Logo */}
             <div className="flex flex-col">
-              <span className="text-2xl font-bold text-gray-800 leading-tight">Oxford</span>
-              <span className="text-xl font-bold bg-gradient-to-r from-green-600 to-teal-600 bg-clip-text text-transparent leading-tight">Advantage</span>
-              <span className="text-[8px] text-gray-500 uppercase tracking-widest mt-0.5">Integrated Learning Solutions</span>
+              <span className="text-2xl font-bold text-white leading-tight">Oxford</span>
+              <span className="text-xl font-bold text-yellow-300 leading-tight">Advantage</span>
+              <span className="text-[8px] text-blue-100 uppercase tracking-widest mt-0.5">Integrated Learning Solutions</span>
             </div>
           </div>
         </div>
