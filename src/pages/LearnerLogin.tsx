@@ -57,7 +57,7 @@ const LearnerLogin = () => {
       </button>
 
       {/* Main content - centered */}
-      <div className="relative z-10 w-full max-w-md space-y-8">
+      <div className="relative z-10 w-full max-w-md space-y-10">
         {/* Logo */}
         <div className="text-center animate-fade-in">
           <div className="flex items-center justify-center gap-3 mb-2">
@@ -70,13 +70,6 @@ const LearnerLogin = () => {
             </div>
           </div>
           <p className="text-xs text-gray-500 uppercase tracking-wider mt-2">Integrated Learning Solutions</p>
-        </div>
-
-        {/* Avatar */}
-        <div className="flex justify-center animate-scale-in">
-          <div className="w-20 h-20 bg-orange-400 rounded-full flex items-center justify-center text-4xl shadow-sm">
-            😊
-          </div>
         </div>
 
         {/* Login Card */}
