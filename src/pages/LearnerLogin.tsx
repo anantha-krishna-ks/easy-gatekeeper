@@ -51,9 +51,47 @@ const LearnerLogin = () => {
       {/* Animated gradient background - clean blue theme */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-sky-50 to-blue-100 animate-gradient-xy"></div>
       
-      {/* Moving gradient overlay */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute inset-0 bg-gradient-to-tr from-blue-100/50 via-sky-100/50 to-indigo-100/50 animate-gradient-slow"></div>
+      {/* WhatsApp-style doodle pattern background */}
+      <div className="absolute inset-0 opacity-20">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="doodle-pattern" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
+              {/* Book */}
+              <path d="M20,30 L35,30 L35,45 L20,45 Z" fill="none" stroke="#4F46E5" strokeWidth="1.5" opacity="0.3"/>
+              <line x1="20" y1="35" x2="35" y2="35" stroke="#4F46E5" strokeWidth="1.5" opacity="0.3"/>
+              
+              {/* Star */}
+              <path d="M150,20 L153,28 L162,28 L155,33 L158,42 L150,36 L142,42 L145,33 L138,28 L147,28 Z" fill="none" stroke="#8B5CF6" strokeWidth="1.5" opacity="0.3"/>
+              
+              {/* Pencil */}
+              <path d="M70,80 L75,75 L78,78 L73,83 Z M75,75 L80,70" fill="none" stroke="#EC4899" strokeWidth="1.5" opacity="0.3"/>
+              <rect x="73" y="83" width="3" height="8" fill="none" stroke="#EC4899" strokeWidth="1.5" opacity="0.3"/>
+              
+              {/* Light bulb */}
+              <circle cx="170" cy="100" r="8" fill="none" stroke="#F59E0B" strokeWidth="1.5" opacity="0.3"/>
+              <path d="M165,108 L175,108" stroke="#F59E0B" strokeWidth="1.5" opacity="0.3"/>
+              
+              {/* Trophy */}
+              <path d="M40,150 L40,145 L35,145 L35,140 L45,140 L45,145 L50,145 L50,150 Z M38,150 L42,150 L42,155 L38,155 Z" fill="none" stroke="#10B981" strokeWidth="1.5" opacity="0.3"/>
+              
+              {/* Graduation cap */}
+              <path d="M100,160 L90,155 L100,150 L110,155 Z M100,155 L100,165" fill="none" stroke="#3B82F6" strokeWidth="1.5" opacity="0.3"/>
+              
+              {/* Apple */}
+              <circle cx="180" cy="170" r="8" fill="none" stroke="#EF4444" strokeWidth="1.5" opacity="0.3"/>
+              <path d="M180,162 L180,158" stroke="#10B981" strokeWidth="1.5" opacity="0.3"/>
+              
+              {/* Music note */}
+              <path d="M25,100 L25,115 M25,100 L32,98 L32,113" fill="none" stroke="#6366F1" strokeWidth="1.5" opacity="0.3"/>
+              <circle cx="25" cy="115" r="3" fill="none" stroke="#6366F1" strokeWidth="1.5" opacity="0.3"/>
+              
+              {/* Calculator */}
+              <rect x="140" y="140" width="20" height="25" rx="2" fill="none" stroke="#06B6D4" strokeWidth="1.5" opacity="0.3"/>
+              <line x1="143" y1="145" x2="157" y2="145" stroke="#06B6D4" strokeWidth="1" opacity="0.3"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#doodle-pattern)"/>
+        </svg>
       </div>
 
       {/* Main content - centered */}
