@@ -103,6 +103,36 @@ All colors MUST be HSL.
     --sidebar-border: 217 33% 18%;
     --sidebar-ring: 217 91% 60%;
   }
+  
+  @keyframes gradient-xy {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+  
+  @keyframes gradient-slow {
+    0%, 100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    33% {
+      transform: translate(10%, -10%) rotate(120deg);
+    }
+    66% {
+      transform: translate(-10%, 10%) rotate(240deg);
+    }
+  }
+  
+  .animate-gradient-xy {
+    background-size: 400% 400%;
+    animation: gradient-xy 15s ease infinite;
+  }
+  
+  .animate-gradient-slow {
+    animation: gradient-slow 20s ease-in-out infinite;
+  }
 }
 
 @layer base {

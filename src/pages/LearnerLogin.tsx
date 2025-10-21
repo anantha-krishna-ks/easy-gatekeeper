@@ -44,7 +44,15 @@ const LearnerLogin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative overflow-hidden flex items-center justify-center p-6">
+    <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-6">
+      {/* Animated gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 animate-gradient-xy"></div>
+      
+      {/* Moving gradient overlay */}
+      <div className="absolute inset-0 opacity-50">
+        <div className="absolute inset-0 bg-gradient-to-tr from-teal-200/40 via-blue-200/40 to-purple-200/40 animate-gradient-slow"></div>
+      </div>
+      
       {/* Fun decorative shapes with gradients */}
       <div className="absolute top-20 left-16 w-32 h-32 rounded-full bg-gradient-to-br from-blue-400/20 to-purple-400/20 animate-float blur-xl"></div>
       <div className="absolute top-40 right-20 w-24 h-24 rounded-full bg-gradient-to-br from-teal-400/20 to-green-400/20 animate-float blur-lg" style={{ animationDelay: '1s' }}></div>
@@ -52,27 +60,27 @@ const LearnerLogin = () => {
       <div className="absolute bottom-48 right-32 w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400/20 to-orange-400/20 animate-float blur-md" style={{ animationDelay: '1.5s' }}></div>
 
       {/* Animated Character - Rocket */}
-      <div className="absolute bottom-20 left-12 text-6xl animate-float cursor-pointer hover:scale-110 transition-transform" style={{ animationDelay: '0.5s' }}>
+      <div className="absolute bottom-20 left-12 text-6xl animate-float cursor-pointer hover:scale-110 transition-transform z-10" style={{ animationDelay: '0.5s' }}>
         🚀
       </div>
 
       {/* Animated Character - Sparkles */}
-      <div className="absolute top-32 right-12 text-5xl animate-float cursor-pointer hover:scale-110 transition-transform" style={{ animationDelay: '1.2s' }}>
+      <div className="absolute top-32 right-12 text-5xl animate-float cursor-pointer hover:scale-110 transition-transform z-10" style={{ animationDelay: '1.2s' }}>
         ✨
       </div>
 
       {/* Animated Character - Star */}
-      <div className="absolute top-1/4 left-20 text-4xl animate-pulse cursor-pointer hover:rotate-12 transition-transform">
+      <div className="absolute top-1/4 left-20 text-4xl animate-pulse cursor-pointer hover:rotate-12 transition-transform z-10">
         ⭐
       </div>
 
       {/* Animated Character - Brain */}
-      <div className="absolute bottom-1/3 right-16 text-4xl animate-float cursor-pointer hover:scale-110 transition-transform" style={{ animationDelay: '2.5s' }}>
+      <div className="absolute bottom-1/3 right-16 text-4xl animate-float cursor-pointer hover:scale-110 transition-transform z-10" style={{ animationDelay: '2.5s' }}>
         🧠
       </div>
 
       {/* Animated Character - Trophy */}
-      <div className="absolute top-1/3 right-1/4 text-3xl animate-bounce cursor-pointer" style={{ animationDelay: '3s' }}>
+      <div className="absolute top-1/3 right-1/4 text-3xl animate-bounce cursor-pointer z-10" style={{ animationDelay: '3s' }}>
         🏆
       </div>
 
