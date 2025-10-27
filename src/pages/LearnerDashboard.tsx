@@ -150,23 +150,23 @@ const LearnerDashboard = () => {
                 <p className="text-sm text-gray-600">Select a subject to start learning</p>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-5">
                 {subjects.map((subject) => (
                   <Card 
                     key={subject.id}
-                    className="cursor-pointer hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden bg-white border-0 shadow-md group"
+                    className="cursor-pointer hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 overflow-hidden bg-white border border-gray-100 shadow-lg group rounded-2xl"
                     onClick={() => handleSubjectClick(subject.id)}
                   >
                     <CardContent className="p-0">
-                      <div className="overflow-hidden">
+                      <div className="overflow-hidden rounded-t-2xl">
                         <img 
                           src={subject.image} 
                           alt={subject.title}
-                          className="w-full h-40 object-cover transition-transform duration-300 group-hover:scale-110"
+                          className="w-full h-44 object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-105"
                         />
                       </div>
-                      <div className="p-4">
-                        <h3 className="text-gray-800 text-lg font-semibold text-center">
+                      <div className="px-4 py-5 bg-gradient-to-b from-white to-gray-50">
+                        <h3 className="text-gray-800 text-base font-heading font-semibold text-center tracking-wide">
                           {subject.title}
                         </h3>
                       </div>
