@@ -12,6 +12,7 @@ import ProfileSettings from "./pages/ProfileSettings";
 import BookReaderPage from "./pages/BookReaderPage";
 import SplashScreen from "./pages/SplashScreen";
 import LearnerLogin from "./pages/LearnerLogin";
+import LearnerDashboard from "./pages/LearnerDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/" element={<Login />} />
           <Route path="/splash" element={<SplashScreen />} />
           <Route path="/learner-login" element={<LearnerLogin />} />
+          <Route path="/learner-dashboard" element={<LearnerDashboard />} />
           <Route path="/parent-login" element={<ParentLogin />} />
           <Route path="/parent-dashboard" element={<ParentDashboard />} />
           <Route path="/teacher-dashboard" element={<TeacherDashboard />} />

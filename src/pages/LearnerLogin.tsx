@@ -30,7 +30,7 @@ const LearnerLogin = () => {
       if (loginName === 'student' && password === 'student123') {
         localStorage.setItem('userRole', 'student');
         toast.success('Login successful!');
-        navigate('/student-dashboard');
+        navigate('/learner-dashboard');
       } else {
         toast.error('Invalid credentials. Try: student / student123');
       }
