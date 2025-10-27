@@ -157,19 +157,13 @@ const LearnerDashboard = () => {
                     className="cursor-pointer hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden bg-white border-0 shadow-md group"
                     onClick={() => handleSubjectClick(subject.id)}
                   >
-                    <CardContent className="p-0 relative">
-                      <div className="relative overflow-hidden">
+                    <CardContent className="p-0">
+                      <div className="overflow-hidden">
                         <img 
                           src={subject.image} 
                           alt={subject.title}
                           className="w-full h-40 object-cover transition-transform duration-300 group-hover:scale-110"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                      </div>
-                      <div className="absolute bottom-0 left-0 right-0 p-4">
-                        <h3 className="text-white text-lg font-semibold drop-shadow-lg">
-                          {subject.title}
-                        </h3>
                       </div>
                     </CardContent>
                   </Card>
