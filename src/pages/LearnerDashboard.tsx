@@ -7,12 +7,16 @@ import { Input } from '@/components/ui/input';
 import { Menu, Home, BookOpen, ClipboardList, BookMarked, Search, FileText, Layers, Video } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import englishImg from '@/assets/english-subject.png';
+import mathImg from '@/assets/mathematics-subject.png';
+import scienceImg from '@/assets/science-subject.png';
+import hindiImg from '@/assets/hindi-subject.png';
 
 const subjects = [
-  { id: "english", title: "English", color: "from-green-400 to-green-600" },
-  { id: "mathematics", title: "Mathematics", color: "from-purple-400 to-purple-600" },
-  { id: "science", title: "Science", color: "from-blue-400 to-blue-600" },
-  { id: "hindi", title: "Hindi", color: "from-orange-400 to-orange-600" },
+  { id: "english", title: "English", image: englishImg, color: "from-green-400 to-green-600" },
+  { id: "mathematics", title: "Mathematics", image: mathImg, color: "from-purple-400 to-purple-600" },
+  { id: "science", title: "Science", image: scienceImg, color: "from-blue-400 to-blue-600" },
+  { id: "hindi", title: "Hindi", image: hindiImg, color: "from-orange-400 to-orange-600" },
 ];
 
 const learningResources = [
@@ -150,12 +154,22 @@ const LearnerDashboard = () => {
                 {subjects.map((subject) => (
                   <Card 
                     key={subject.id}
-                    className="cursor-pointer hover:shadow-lg transition-all hover:scale-105 overflow-hidden"
+                    className="cursor-pointer hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden bg-white border-0 shadow-md group"
                     onClick={() => handleSubjectClick(subject.id)}
                   >
-                    <CardContent className="p-0">
-                      <div className={cn("h-32 bg-gradient-to-br", subject.color, "flex items-center justify-center")}>
-                        <h3 className="text-white text-xl font-semibold text-center px-4">{subject.title}</h3>
+                    <CardContent className="p-0 relative">
+                      <div className="relative overflow-hidden">
+                        <img 
+                          src={subject.image} 
+                          alt={subject.title}
+                          className="w-full h-40 object-cover transition-transform duration-300 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                      </div>
+                      <div className="absolute bottom-0 left-0 right-0 p-4">
+                        <h3 className="text-white text-lg font-semibold drop-shadow-lg">
+                          {subject.title}
+                        </h3>
                       </div>
                     </CardContent>
                   </Card>
