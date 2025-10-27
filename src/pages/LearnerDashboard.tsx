@@ -165,6 +165,11 @@ const LearnerDashboard = () => {
                           className="w-full h-40 object-cover transition-transform duration-300 group-hover:scale-110"
                         />
                       </div>
+                      <div className="p-4">
+                        <h3 className="text-gray-800 text-lg font-semibold text-center">
+                          {subject.title}
+                        </h3>
+                      </div>
                     </CardContent>
                   </Card>
                 ))}
