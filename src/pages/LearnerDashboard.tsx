@@ -289,70 +289,192 @@ const LearnerDashboard = () => {
         </div>
 
         {/* Bottom Navigation */}
-        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-20">
-          <div className="flex items-center justify-around px-2 py-3">
-            <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
-              <SheetTrigger asChild>
-                <button className="flex flex-col items-center gap-1 px-3 py-1">
-                  <Menu className="w-6 h-6 text-gray-600" />
-                  <span className="text-xs text-gray-600">Menu</span>
-                </button>
-              </SheetTrigger>
-              <SheetContent side="left" className="w-64">
-                <div className="flex flex-col gap-4 mt-8">
-                  <h3 className="font-semibold text-lg">Menu</h3>
-                  <Button variant="outline" onClick={() => navigate('/profile-settings')}>
-                    Profile Settings
-                  </Button>
-                  <Button variant="outline" onClick={handleLogout}>
-                    Logout
-                  </Button>
+        <div className="fixed bottom-0 left-0 right-0 z-20">
+          {/* Gradient overlay for depth */}
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-white to-transparent pointer-events-none"></div>
+          
+          <div className="relative bg-white/95 backdrop-blur-xl border-t border-gray-200/50 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] rounded-t-3xl">
+            <div className="flex items-end justify-around px-4 pt-3 pb-safe">
+              {/* Menu Button */}
+              <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+                <SheetTrigger asChild>
+                  <button 
+                    className={cn(
+                      "flex flex-col items-center gap-1.5 px-3 py-2 rounded-2xl transition-all duration-300 relative group min-w-[64px]",
+                      "hover:bg-blue-50/80 active:scale-95"
+                    )}
+                  >
+                    <div className={cn(
+                      "p-2 rounded-xl transition-all duration-300",
+                      "group-hover:bg-blue-100/50"
+                    )}>
+                      <Menu className="w-5 h-5 text-gray-600 group-hover:text-blue-600 transition-colors duration-300" />
+                    </div>
+                    <span className="text-[10px] font-medium text-gray-600 group-hover:text-blue-600 transition-colors duration-300">
+                      Menu
+                    </span>
+                  </button>
+                </SheetTrigger>
+                <SheetContent side="left" className="w-72 rounded-r-3xl">
+                  <div className="flex flex-col gap-4 mt-8">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                        <span className="text-white font-bold text-lg">S</span>
+                      </div>
+                      <div>
+                        <h3 className="font-heading font-semibold text-lg text-gray-800">Student</h3>
+                        <p className="text-xs text-gray-500">Welcome back!</p>
+                      </div>
+                    </div>
+                    <Button 
+                      variant="outline" 
+                      onClick={() => navigate('/profile-settings')}
+                      className="justify-start h-12 rounded-xl border-gray-200 hover:bg-blue-50 hover:border-blue-200 transition-all"
+                    >
+                      Profile Settings
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      onClick={handleLogout}
+                      className="justify-start h-12 rounded-xl border-gray-200 hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition-all"
+                    >
+                      Logout
+                    </Button>
+                  </div>
+                </SheetContent>
+              </Sheet>
+
+              {/* Resources Button */}
+              <button 
+                onClick={() => setActiveTab('resources')}
+                className={cn(
+                  "flex flex-col items-center gap-1.5 px-3 py-2 rounded-2xl transition-all duration-300 relative group min-w-[64px]",
+                  activeTab === 'resources' 
+                    ? "bg-blue-50" 
+                    : "hover:bg-blue-50/50 active:scale-95"
+                )}
+              >
+                <div className={cn(
+                  "p-2 rounded-xl transition-all duration-300",
+                  activeTab === 'resources' 
+                    ? "bg-blue-500 shadow-lg shadow-blue-500/30" 
+                    : "group-hover:bg-blue-100/50"
+                )}>
+                  <BookOpen className={cn(
+                    "w-5 h-5 transition-colors duration-300",
+                    activeTab === 'resources' 
+                      ? "text-white" 
+                      : "text-gray-600 group-hover:text-blue-600"
+                  )} />
                 </div>
-              </SheetContent>
-            </Sheet>
+                <span className={cn(
+                  "text-[10px] font-medium transition-colors duration-300",
+                  activeTab === 'resources' 
+                    ? "text-blue-600" 
+                    : "text-gray-600 group-hover:text-blue-600"
+                )}>
+                  Resources
+                </span>
+                {activeTab === 'resources' && (
+                  <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-8 h-1 bg-blue-500 rounded-full" />
+                )}
+              </button>
 
-            <button 
-              onClick={() => setActiveTab('resources')}
-              className={cn(
-                "flex flex-col items-center gap-1 px-3 py-1 transition-colors",
-                activeTab === 'resources' ? "text-blue-500" : "text-gray-600"
-              )}
-            >
-              <BookOpen className="w-6 h-6" />
-              <span className="text-xs">Resources</span>
-            </button>
+              {/* Home Button - Elevated */}
+              <button 
+                onClick={() => setActiveTab('home')}
+                className="flex flex-col items-center gap-0 -mt-6 transition-all duration-300 active:scale-95"
+              >
+                <div className={cn(
+                  "w-16 h-16 rounded-2xl shadow-2xl transition-all duration-300 flex items-center justify-center relative overflow-hidden",
+                  activeTab === 'home'
+                    ? "bg-gradient-to-br from-blue-500 via-blue-600 to-purple-600 scale-110 shadow-blue-500/40"
+                    : "bg-gradient-to-br from-blue-400 to-blue-500 hover:scale-105 shadow-blue-500/30"
+                )}>
+                  {/* Shine effect */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  <Home className="w-7 h-7 text-white relative z-10" />
+                </div>
+                <span className={cn(
+                  "text-[10px] font-medium mt-1 transition-colors duration-300",
+                  activeTab === 'home' ? "text-blue-600" : "text-gray-600"
+                )}>
+                  Home
+                </span>
+              </button>
 
-            <button 
-              onClick={() => setActiveTab('home')}
-              className={cn(
-                "flex flex-col items-center gap-1 px-4 py-2 -mt-6 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full shadow-lg transition-transform hover:scale-105",
-                activeTab === 'home' ? "scale-110" : ""
-              )}
-            >
-              <Home className="w-7 h-7 text-white" />
-            </button>
+              {/* Assessments Button */}
+              <button 
+                onClick={() => setActiveTab('assessments')}
+                className={cn(
+                  "flex flex-col items-center gap-1.5 px-3 py-2 rounded-2xl transition-all duration-300 relative group min-w-[64px]",
+                  activeTab === 'assessments' 
+                    ? "bg-blue-50" 
+                    : "hover:bg-blue-50/50 active:scale-95"
+                )}
+              >
+                <div className={cn(
+                  "p-2 rounded-xl transition-all duration-300",
+                  activeTab === 'assessments' 
+                    ? "bg-blue-500 shadow-lg shadow-blue-500/30" 
+                    : "group-hover:bg-blue-100/50"
+                )}>
+                  <ClipboardList className={cn(
+                    "w-5 h-5 transition-colors duration-300",
+                    activeTab === 'assessments' 
+                      ? "text-white" 
+                      : "text-gray-600 group-hover:text-blue-600"
+                  )} />
+                </div>
+                <span className={cn(
+                  "text-[10px] font-medium transition-colors duration-300",
+                  activeTab === 'assessments' 
+                    ? "text-blue-600" 
+                    : "text-gray-600 group-hover:text-blue-600"
+                )}>
+                  Assessments
+                </span>
+                {activeTab === 'assessments' && (
+                  <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-8 h-1 bg-blue-500 rounded-full" />
+                )}
+              </button>
 
-            <button 
-              onClick={() => setActiveTab('assessments')}
-              className={cn(
-                "flex flex-col items-center gap-1 px-3 py-1 transition-colors",
-                activeTab === 'assessments' ? "text-blue-500" : "text-gray-600"
-              )}
-            >
-              <ClipboardList className="w-6 h-6" />
-              <span className="text-xs">Assessments</span>
-            </button>
-
-            <button 
-              onClick={() => setActiveTab('lessons')}
-              className={cn(
-                "flex flex-col items-center gap-1 px-3 py-1 transition-colors",
-                activeTab === 'lessons' ? "text-blue-500" : "text-gray-600"
-              )}
-            >
-              <BookMarked className="w-6 h-6" />
-              <span className="text-xs">Lessons</span>
-            </button>
+              {/* Lessons Button */}
+              <button 
+                onClick={() => setActiveTab('lessons')}
+                className={cn(
+                  "flex flex-col items-center gap-1.5 px-3 py-2 rounded-2xl transition-all duration-300 relative group min-w-[64px]",
+                  activeTab === 'lessons' 
+                    ? "bg-blue-50" 
+                    : "hover:bg-blue-50/50 active:scale-95"
+                )}
+              >
+                <div className={cn(
+                  "p-2 rounded-xl transition-all duration-300",
+                  activeTab === 'lessons' 
+                    ? "bg-blue-500 shadow-lg shadow-blue-500/30" 
+                    : "group-hover:bg-blue-100/50"
+                )}>
+                  <BookMarked className={cn(
+                    "w-5 h-5 transition-colors duration-300",
+                    activeTab === 'lessons' 
+                      ? "text-white" 
+                      : "text-gray-600 group-hover:text-blue-600"
+                  )} />
+                </div>
+                <span className={cn(
+                  "text-[10px] font-medium transition-colors duration-300",
+                  activeTab === 'lessons' 
+                    ? "text-blue-600" 
+                    : "text-gray-600 group-hover:text-blue-600"
+                )}>
+                  Lessons
+                </span>
+                {activeTab === 'lessons' && (
+                  <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-8 h-1 bg-blue-500 rounded-full" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </div>
