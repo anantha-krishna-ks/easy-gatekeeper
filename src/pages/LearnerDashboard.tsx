@@ -44,9 +44,13 @@ const assessments = [
 ];
 
 const lessonPlans = [
-  { id: "1", title: "Fun with Numbers", subject: "Mathematics" },
-  { id: "2", title: "Science of Plants", subject: "Science" },
-  { id: "3", title: "Reading Stories", subject: "English" },
+  { id: "1", title: "Fun with Numbers", subject: "mathematics", chapter: "Chapter 1: Numbers", duration: "30 min", date: "Oct 30, 2025" },
+  { id: "2", title: "Addition Basics", subject: "mathematics", chapter: "Chapter 2: Addition", duration: "35 min", date: "Oct 31, 2025" },
+  { id: "3", title: "Science of Plants", subject: "science", chapter: "Chapter 1: Plants", duration: "40 min", date: "Nov 1, 2025" },
+  { id: "4", title: "Animal Kingdom", subject: "science", chapter: "Chapter 2: Animals", duration: "35 min", date: "Nov 2, 2025" },
+  { id: "5", title: "Reading Stories", subject: "english", chapter: "Chapter 3: Sentences", duration: "25 min", date: "Nov 3, 2025" },
+  { id: "6", title: "Word Building", subject: "english", chapter: "Chapter 2: Words", duration: "30 min", date: "Nov 4, 2025" },
+  { id: "7", title: "Hindi Basics", subject: "hindi", chapter: "Chapter 1: वर्णमाला", duration: "30 min", date: "Nov 5, 2025" },
 ];
 
 const LearnerDashboard = () => {
@@ -56,6 +60,9 @@ const LearnerDashboard = () => {
   const [selectedSubject, setSelectedSubject] = useState('all');
   const [selectedChapter, setSelectedChapter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [lessonSubject, setLessonSubject] = useState('all');
+  const [lessonChapter, setLessonChapter] = useState('all');
+  const [lessonSearch, setLessonSearch] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleSubjectClick = (subjectId: string) => {
@@ -368,24 +375,146 @@ const LearnerDashboard = () => {
 
           {/* Lesson Plans Tab */}
           {activeTab === 'lessons' && (
-            <div className="space-y-6 animate-fade-in">
+            <div className="space-y-5 animate-fade-in">
               <div>
-                <h2 className="text-2xl font-heading font-semibold mb-2 bg-gradient-to-r from-blue-600 via-purple-500 to-purple-600 bg-clip-text text-transparent">
+                <h2 className="text-2xl font-heading font-semibold mb-1 bg-gradient-to-r from-blue-600 via-purple-500 to-purple-600 bg-clip-text text-transparent">
                   Lesson Plans
                 </h2>
-                <p className="text-sm text-gray-600">View your lesson schedule</p>
+                <p className="text-sm text-gray-600">View your scheduled lessons and topics</p>
               </div>
 
-              <div className="grid grid-cols-1 gap-3">
-                {lessonPlans.map((lesson) => (
-                  <Card key={lesson.id} className="hover:shadow-md transition-shadow">
-                    <CardContent className="p-4">
-                      <h3 className="font-medium text-gray-800 mb-1">{lesson.title}</h3>
-                      <p className="text-sm text-gray-500">{lesson.subject}</p>
-                    </CardContent>
-                  </Card>
-                ))}
+              {/* Filters Section */}
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 border border-gray-100 shadow-sm">
+                <div className="flex flex-col gap-3">
+                  {/* Subject and Chapter Dropdowns */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="text-xs font-medium text-gray-600 mb-1.5 block">Subject</label>
+                      <Select 
+                        value={lessonSubject} 
+                        onValueChange={(value) => {
+                          setLessonSubject(value);
+                          setLessonChapter('all');
+                        }}
+                      >
+                        <SelectTrigger className="w-full bg-white border-gray-200 h-10">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Subjects</SelectItem>
+                          <SelectItem value="english">English</SelectItem>
+                          <SelectItem value="mathematics">Mathematics</SelectItem>
+                          <SelectItem value="science">Science</SelectItem>
+                          <SelectItem value="hindi">Hindi</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    
+                    <div>
+                      <label className="text-xs font-medium text-gray-600 mb-1.5 block">Chapter</label>
+                      <Select 
+                        value={lessonChapter} 
+                        onValueChange={setLessonChapter}
+                        disabled={lessonSubject === 'all'}
+                      >
+                        <SelectTrigger className="w-full bg-white border-gray-200 h-10">
+                          <SelectValue placeholder="All Chapters" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Chapters</SelectItem>
+                          {lessonSubject !== 'all' && chapters[lessonSubject as keyof typeof chapters]?.map((chapter, idx) => (
+                            <SelectItem key={idx} value={chapter}>{chapter}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  
+                  {/* Search Bar */}
+                  <div>
+                    <label className="text-xs font-medium text-gray-600 mb-1.5 block">Search</label>
+                    <div className="relative">
+                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                      <Input
+                        type="text"
+                        placeholder="Search lessons..."
+                        value={lessonSearch}
+                        onChange={(e) => setLessonSearch(e.target.value)}
+                        className="pl-10 bg-white border-gray-200 h-10"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
+
+              {/* Lesson Plans Grid */}
+              <div className="grid grid-cols-1 gap-3">
+                {lessonPlans
+                  .filter((lesson) => {
+                    const matchesSubject = lessonSubject === 'all' || lesson.subject === lessonSubject;
+                    const matchesChapter = lessonChapter === 'all' || lesson.chapter === lessonChapter;
+                    const matchesSearch = lesson.title.toLowerCase().includes(lessonSearch.toLowerCase());
+                    return matchesSubject && matchesChapter && matchesSearch;
+                  })
+                  .map((lesson) => {
+                    const subjectColors = {
+                      english: { bg: 'bg-green-50', text: 'text-green-600', border: 'border-green-100' },
+                      mathematics: { bg: 'bg-purple-50', text: 'text-purple-600', border: 'border-purple-100' },
+                      science: { bg: 'bg-blue-50', text: 'text-blue-600', border: 'border-blue-100' },
+                      hindi: { bg: 'bg-orange-50', text: 'text-orange-600', border: 'border-orange-100' }
+                    };
+                    const colors = subjectColors[lesson.subject as keyof typeof subjectColors];
+                    
+                    return (
+                      <Card key={lesson.id} className="hover:shadow-lg transition-all duration-300 border border-gray-100 bg-white group cursor-pointer overflow-hidden rounded-xl">
+                        <CardContent className="p-4">
+                          <div className="flex items-start gap-4">
+                            {/* Icon */}
+                            <div className={cn("p-3 rounded-xl transition-all duration-300 group-hover:scale-110", colors.bg)}>
+                              <BookMarked className={cn("w-6 h-6", colors.text)} />
+                            </div>
+                            
+                            {/* Content */}
+                            <div className="flex-1 min-w-0">
+                              <h3 className="font-semibold text-gray-800 mb-1 group-hover:text-blue-600 transition-colors line-clamp-1">
+                                {lesson.title}
+                              </h3>
+                              <p className="text-xs text-gray-500 mb-2 line-clamp-1">{lesson.chapter}</p>
+                              
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <span className={cn("text-xs px-2.5 py-1 rounded-full font-medium border capitalize", colors.bg, colors.text, colors.border)}>
+                                  {lesson.subject}
+                                </span>
+                                <span className="text-xs text-gray-500 flex items-center gap-1">
+                                  <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
+                                  {lesson.duration}
+                                </span>
+                                <span className="text-xs text-gray-500 flex items-center gap-1">
+                                  <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
+                                  {lesson.date}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+              </div>
+
+              {/* Empty State */}
+              {lessonPlans.filter((lesson) => {
+                const matchesSubject = lessonSubject === 'all' || lesson.subject === lessonSubject;
+                const matchesChapter = lessonChapter === 'all' || lesson.chapter === lessonChapter;
+                const matchesSearch = lesson.title.toLowerCase().includes(lessonSearch.toLowerCase());
+                return matchesSubject && matchesChapter && matchesSearch;
+              }).length === 0 && (
+                <div className="text-center py-12">
+                  <BookMarked className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+                  <p className="text-gray-500 text-sm">No lesson plans found</p>
+                  <p className="text-gray-400 text-xs mt-1">Try adjusting your filters</p>
+                </div>
+              )}
             </div>
           )}
         </div>
