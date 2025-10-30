@@ -19,13 +19,22 @@ const subjects = [
   { id: "hindi", title: "Hindi", image: hindiImg, color: "from-orange-400 to-orange-600" },
 ];
 
+const chapters = {
+  english: ["Chapter 1: Alphabet", "Chapter 2: Words", "Chapter 3: Sentences"],
+  mathematics: ["Chapter 1: Numbers", "Chapter 2: Addition", "Chapter 3: Subtraction"],
+  science: ["Chapter 1: Plants", "Chapter 2: Animals", "Chapter 3: Water"],
+  hindi: ["Chapter 1: वर्णमाला", "Chapter 2: शब्द", "Chapter 3: वाक्य"],
+};
+
 const learningResources = [
-  { id: "1", name: "Introduction to Numbers", type: "video", icon: Video },
-  { id: "2", name: "Basic Arithmetic Worksheet", type: "pdf", icon: FileText },
-  { id: "3", name: "Math Games", type: "interactive", icon: Layers },
-  { id: "4", name: "Science Experiments", type: "video", icon: Video },
-  { id: "5", name: "English Grammar Guide", type: "pdf", icon: FileText },
-  { id: "6", name: "Language Practice", type: "interactive", icon: Layers },
+  { id: "1", name: "Introduction to Numbers", subject: "mathematics", chapter: "Chapter 1: Numbers", type: "video", icon: Video, duration: "12 min" },
+  { id: "2", name: "Basic Arithmetic Worksheet", subject: "mathematics", chapter: "Chapter 2: Addition", type: "pdf", icon: FileText, pages: "5 pages" },
+  { id: "3", name: "Math Games", subject: "mathematics", chapter: "Chapter 2: Addition", type: "interactive", icon: Layers, duration: "15 min" },
+  { id: "4", name: "Science Experiments", subject: "science", chapter: "Chapter 2: Animals", type: "video", icon: Video, duration: "18 min" },
+  { id: "5", name: "English Grammar Guide", subject: "english", chapter: "Chapter 3: Sentences", type: "pdf", icon: FileText, pages: "8 pages" },
+  { id: "6", name: "Language Practice", subject: "english", chapter: "Chapter 2: Words", type: "interactive", icon: Layers, duration: "10 min" },
+  { id: "7", name: "Plant Life Cycle", subject: "science", chapter: "Chapter 1: Plants", type: "video", icon: Video, duration: "14 min" },
+  { id: "8", name: "Hindi Alphabets", subject: "hindi", chapter: "Chapter 1: वर्णमाला", type: "interactive", icon: Layers, duration: "12 min" },
 ];
 
 const assessments = [
@@ -45,6 +54,7 @@ const LearnerDashboard = () => {
   const [activeTab, setActiveTab] = useState<'home' | 'resources' | 'assessments' | 'lessons'>('home');
   const [selectedClass, setSelectedClass] = useState('grade1');
   const [selectedSubject, setSelectedSubject] = useState('all');
+  const [selectedChapter, setSelectedChapter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -179,58 +189,150 @@ const LearnerDashboard = () => {
 
           {/* Learning Resources Tab */}
           {activeTab === 'resources' && (
-            <div className="space-y-6 animate-fade-in">
+            <div className="space-y-5 animate-fade-in">
               <div>
-                <h2 className="text-2xl font-heading font-semibold mb-2 bg-gradient-to-r from-blue-600 via-purple-500 to-purple-600 bg-clip-text text-transparent">
+                <h2 className="text-2xl font-heading font-semibold mb-1 bg-gradient-to-r from-blue-600 via-purple-500 to-purple-600 bg-clip-text text-transparent">
                   Learning Resources
                 </h2>
-                <p className="text-sm text-gray-600">Access your study materials</p>
+                <p className="text-sm text-gray-600">Access your study materials and practice content</p>
               </div>
 
-              <div className="flex gap-3 mb-4">
-                <Select value={selectedSubject} onValueChange={setSelectedSubject}>
-                  <SelectTrigger className="w-40 bg-white">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Subjects</SelectItem>
-                    <SelectItem value="english">English</SelectItem>
-                    <SelectItem value="mathematics">Mathematics</SelectItem>
-                    <SelectItem value="science">Science</SelectItem>
-                    <SelectItem value="hindi">Hindi</SelectItem>
-                  </SelectContent>
-                </Select>
-                
-                <div className="relative flex-1">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                  <Input
-                    type="text"
-                    placeholder="Search resources..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10 bg-white"
-                  />
+              {/* Filters Section */}
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 border border-gray-100 shadow-sm">
+                <div className="flex flex-col gap-3">
+                  {/* Subject and Chapter Dropdowns */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="text-xs font-medium text-gray-600 mb-1.5 block">Subject</label>
+                      <Select 
+                        value={selectedSubject} 
+                        onValueChange={(value) => {
+                          setSelectedSubject(value);
+                          setSelectedChapter('all');
+                        }}
+                      >
+                        <SelectTrigger className="w-full bg-white border-gray-200 h-10">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Subjects</SelectItem>
+                          <SelectItem value="english">English</SelectItem>
+                          <SelectItem value="mathematics">Mathematics</SelectItem>
+                          <SelectItem value="science">Science</SelectItem>
+                          <SelectItem value="hindi">Hindi</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    
+                    <div>
+                      <label className="text-xs font-medium text-gray-600 mb-1.5 block">Chapter</label>
+                      <Select 
+                        value={selectedChapter} 
+                        onValueChange={setSelectedChapter}
+                        disabled={selectedSubject === 'all'}
+                      >
+                        <SelectTrigger className="w-full bg-white border-gray-200 h-10">
+                          <SelectValue placeholder="All Chapters" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Chapters</SelectItem>
+                          {selectedSubject !== 'all' && chapters[selectedSubject as keyof typeof chapters]?.map((chapter, idx) => (
+                            <SelectItem key={idx} value={chapter}>{chapter}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  
+                  {/* Search Bar */}
+                  <div>
+                    <label className="text-xs font-medium text-gray-600 mb-1.5 block">Search</label>
+                    <div className="relative">
+                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                      <Input
+                        type="text"
+                        placeholder="Search resources..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="pl-10 bg-white border-gray-200 h-10"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
 
+              {/* Resources Grid */}
               <div className="grid grid-cols-1 gap-3">
-                {learningResources.map((resource) => {
-                  const Icon = resource.icon;
-                  return (
-                    <Card key={resource.id} className="hover:shadow-md transition-shadow">
-                      <CardContent className="p-4 flex items-center gap-3">
-                        <div className="p-2 bg-blue-50 rounded-lg">
-                          <Icon className="w-5 h-5 text-blue-500" />
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="font-medium text-gray-800">{resource.name}</h3>
-                          <p className="text-xs text-gray-500 capitalize">{resource.type}</p>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
+                {learningResources
+                  .filter((resource) => {
+                    const matchesSubject = selectedSubject === 'all' || resource.subject === selectedSubject;
+                    const matchesChapter = selectedChapter === 'all' || resource.chapter === selectedChapter;
+                    const matchesSearch = resource.name.toLowerCase().includes(searchQuery.toLowerCase());
+                    return matchesSubject && matchesChapter && matchesSearch;
+                  })
+                  .map((resource) => {
+                    const Icon = resource.icon;
+                    const typeColors = {
+                      video: { bg: 'bg-red-50', text: 'text-red-600', border: 'border-red-100' },
+                      pdf: { bg: 'bg-blue-50', text: 'text-blue-600', border: 'border-blue-100' },
+                      interactive: { bg: 'bg-purple-50', text: 'text-purple-600', border: 'border-purple-100' }
+                    };
+                    const colors = typeColors[resource.type as keyof typeof typeColors];
+                    
+                    return (
+                      <Card key={resource.id} className="hover:shadow-lg transition-all duration-300 border border-gray-100 bg-white group cursor-pointer overflow-hidden rounded-xl">
+                        <CardContent className="p-4">
+                          <div className="flex items-start gap-4">
+                            {/* Icon */}
+                            <div className={cn("p-3 rounded-xl transition-all duration-300 group-hover:scale-110", colors.bg)}>
+                              <Icon className={cn("w-6 h-6", colors.text)} />
+                            </div>
+                            
+                            {/* Content */}
+                            <div className="flex-1 min-w-0">
+                              <h3 className="font-semibold text-gray-800 mb-1 group-hover:text-blue-600 transition-colors line-clamp-1">
+                                {resource.name}
+                              </h3>
+                              <p className="text-xs text-gray-500 mb-2 line-clamp-1">{resource.chapter}</p>
+                              
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <span className={cn("text-xs px-2.5 py-1 rounded-full font-medium border capitalize", colors.bg, colors.text, colors.border)}>
+                                  {resource.type}
+                                </span>
+                                {'duration' in resource && (
+                                  <span className="text-xs text-gray-500 flex items-center gap-1">
+                                    <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
+                                    {resource.duration}
+                                  </span>
+                                )}
+                                {'pages' in resource && (
+                                  <span className="text-xs text-gray-500 flex items-center gap-1">
+                                    <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
+                                    {resource.pages}
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
               </div>
+
+              {/* Empty State */}
+              {learningResources.filter((resource) => {
+                const matchesSubject = selectedSubject === 'all' || resource.subject === selectedSubject;
+                const matchesChapter = selectedChapter === 'all' || resource.chapter === selectedChapter;
+                const matchesSearch = resource.name.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesSubject && matchesChapter && matchesSearch;
+              }).length === 0 && (
+                <div className="text-center py-12">
+                  <BookOpen className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+                  <p className="text-gray-500 text-sm">No resources found</p>
+                  <p className="text-gray-400 text-xs mt-1">Try adjusting your filters</p>
+                </div>
+              )}
             </div>
           )}
 
